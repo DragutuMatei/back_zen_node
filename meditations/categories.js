@@ -99,4 +99,5 @@ const deleteMedCatById = async (req, res) => {
     res.status(500).json({ ok: false, error });
   }
 };
+
 export { addMedCat, getAllMedCats, getMedCatById, deleteMedCatById };

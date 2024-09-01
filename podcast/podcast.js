@@ -18,22 +18,21 @@ import {
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 
-const addMedToCat = async (req, res) => {
+const addpodcastToCat = async (req, res) => {
   const data = {
     category: req.body.category,
     background: "",
     title: req.body.title,
     isLocked: req.body.isLocked === "true",
     duration: req.body.duration,
-    meditationLink: "",
+    podcastLink: "",
   };
-  //console.log(req.body.isLocked)
   const uid = req.body.uid;
   //console.log(req.files["background"]);
   try {
     const storageRef = ref(
       storage,
-      `/meditations/med/${req.files["background"].name}`
+      `/podcast/pod/${req.files["background"].name}`
     );
 
     await uploadBytes(storageRef, req.files["background"].data);
@@ -42,21 +41,21 @@ const addMedToCat = async (req, res) => {
 
     const storageRef2 = ref(
       storage,
-      `/meditations/med/${req.files["meditationLink"].name}`
+      `/podcast/pod/${req.files["podcastLink"].name}`
     );
 
-    await uploadBytes(storageRef2, req.files["meditationLink"].data);
+    await uploadBytes(storageRef2, req.files["podcastLink"].data);
 
     const url2 = await getDownloadURL(storageRef2);
 
-    data["meditationLink"] = url2;
+    data["podcastLink"] = url2;
     data["background"] = url;
     data["id"] = uuid();
 
-    const cat_ref = doc(db, "categorie_meditati", uid);
-    const medcat = await getDoc(cat_ref);
-    const cat = medcat.data();
-    cat.meditationRoutines.push(data);
+    const cat_ref = doc(db, "categorie_podcast", uid);
+    const podcastcat = await getDoc(cat_ref);
+    const cat = podcastcat.data();
+    cat.podcastRoutines.push(data);
 
     await updateDoc(cat_ref, cat);
     res.status(200).json({ ok: true });
@@ -66,16 +65,13 @@ const addMedToCat = async (req, res) => {
   }
 };
 
-const deleteMedFromCat = async (req, res) => {
+const deletepodcastFromCat = async (req, res) => {
   try {
-    const cat_ref = doc(db, "categorie_meditati", req.body.uid);
-    const medcat = await getDoc(cat_ref);
-    let cat = medcat.data();
+    const cat_ref = doc(db, "categorie_podcast", req.body.uid);
+    const podcastcat = await getDoc(cat_ref);
+    let cat = podcastcat.data();
     const id = req.body.id;
-    cat.meditationRoutines = cat.meditationRoutines.filter(
-      (obj) => obj.id !== id
-    );
-    // cat.meditationRoutines.push(data);
+    cat.podcastRoutines = cat.podcastRoutines.filter((obj) => obj.id !== id);
     //console.log(cat);
     await updateDoc(cat_ref, cat);
     res.status(200).json({ ok: true });
@@ -85,14 +81,14 @@ const deleteMedFromCat = async (req, res) => {
   }
 };
 
-const getMedFromCatById = async (req, res) => {
+const getpodcastFromCatById = async (req, res) => {
   try {
     //console.log(req.params.uid);
-    const cat_ref = doc(db, "categorie_meditati", req.params.uid);
-    const medcat = await getDoc(cat_ref);
-    let cat = medcat.data();
+    const cat_ref = doc(db, "categorie_podcast", req.params.uid);
+    const podcastcat = await getDoc(cat_ref);
+    let cat = podcastcat.data();
     const id = req.params.id;
-    const rez = cat.meditationRoutines.filter((obj) => obj.id === id);
+    const rez = cat.podcastRoutines.filter((obj) => obj.id === id);
     res.status(200).json({ ok: true, data: rez });
   } catch (error) {
     //console.log(error);
@@ -100,4 +96,4 @@ const getMedFromCatById = async (req, res) => {
   }
 };
 
-export { addMedToCat, deleteMedFromCat, getMedFromCatById };
+export { addpodcastToCat, deletepodcastFromCat, getpodcastFromCatById };

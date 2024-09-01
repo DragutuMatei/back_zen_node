@@ -17,18 +17,18 @@ import {
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 
-const addMedCat = async (req, res) => {
+const addpodcastCat = async (req, res) => {
   const data = {
     categoryTitle: req.body.categoryTitle,
     backgroundImage: "",
-    meditationRoutines: [],
+    podcastRoutines: [],
   };
   //console.log(req.files["backgroundImage"]);
 
   try {
     const storageRef = ref(
       storage,
-      `/meditations/cat/${req.files["backgroundImage"].name}`
+      `/podcast/cat/${req.files["backgroundImage"].name}`
     );
     // var reader = new window.FileReader();
     // reader.onload = function () {
@@ -46,7 +46,7 @@ const addMedCat = async (req, res) => {
     const url = await getDownloadURL(storageRef);
     data["backgroundImage"] = url;
     data["id"] = uuid();
-    const document = await addDoc(collection(db, "categorie_meditati"), data);
+    const document = await addDoc(collection(db, "categorie_podcast"), data);
     res.status(200).json({ ok: true, id: document.id });
   } catch (error) {
     //console.log(error);
@@ -54,28 +54,27 @@ const addMedCat = async (req, res) => {
   }
 };
 
-const getAllMedCats = async (req, res) => {
+const getAllpodcastCats = async (req, res) => {
   const data = [];
   try {
-    const medCats = await getDocs(collection(db, "categorie_meditati"));
-    medCats.forEach((doc) => {
+    const podcastCats = await getDocs(collection(db, "categorie_podcast"));
+    podcastCats.forEach((doc) => {
       data.push({ uid: doc.id, ...doc.data() });
     });
-    //console.log(data);
     res.status(200).json({ data });
   } catch (error) {
     res.status(500).json({ ok: false, error });
   }
 };
 
-const getMedCatById = async (req, res) => {
+const getpodcastCatById = async (req, res) => {
   //console.log(req.params.id);
   try {
-    const ref = doc(db, "categorie_meditati", req.params.id);
-    const medcat = await getDoc(ref);
+    const ref = doc(db, "categorie_podcast", req.params.id);
+    const podcastcat = await getDoc(ref);
     res.status(200).json({
       ok: true,
-      data: { uid: medcat.id, ...medcat.data() },
+      data: { uid: podcastcat.id, ...podcastcat.data() },
     });
   } catch (error) {
     //console.log(error);
@@ -83,10 +82,10 @@ const getMedCatById = async (req, res) => {
   }
 };
 
-const deleteMedCatById = async (req, res) => {
+const deletepodcastCatById = async (req, res) => {
   try {
     //console.log(req.body);
-    const ref = doc(db, "categorie_meditati", req.body.id);
+    const ref = doc(db, "categorie_podcast", req.body.id);
 
     deleteDoc(ref)
       .then((r) => {
@@ -101,4 +100,9 @@ const deleteMedCatById = async (req, res) => {
   }
 };
 
-export { addMedCat, getAllMedCats, getMedCatById, deleteMedCatById };
+export {
+  addpodcastCat,
+  getAllpodcastCats,
+  getpodcastCatById,
+  deletepodcastCatById,
+};

@@ -20,12 +20,12 @@ import { v4 as uuid } from "uuid";
 
 const addMessage = async (req, res) => {
   const data = { ...req.body, uid: uuid() };
-  console.log(data);
+  //console.log(data);
   try {
     const document = await addDoc(collection(db, "mesaje"), data);
     res.status(200).json({ ok: true, id: document.id });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };
@@ -37,9 +37,9 @@ const getAllMessages = async (req, res) => {
     messages.forEach((mes) => {
       data.push({ ...mes.data(), id: mes.id });
     });
-    res.status(200).json({ ok: true, data: data });
+    res.status(200).json({ data });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };
@@ -50,14 +50,14 @@ const deleteMessage = async (req, res) => {
     const reff = doc(db, "mesaje", id);
     deleteDoc(reff)
       .then((r) => {
-        console.log(r);
+        //console.log(r);
         res.status(200).json({ ok: true });
       })
       .catch((error) => {
         res.status(500).json({ ok: false, error });
       });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };
@@ -71,7 +71,7 @@ const getMessageById = async (req, res) => {
       .status(200)
       .json({ ok: true, data: { id: message.id, ...message.data() } });
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };

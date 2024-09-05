@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs,
   query,
+  Timestamp,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -20,14 +21,17 @@ import { v4 as uuid } from "uuid";
 
 const addMedToCat = async (req, res) => {
   const data = {
+    time: new Date().getTime() / 1000,
     category: req.body.category,
     background: "",
     title: req.body.title,
     isLocked: req.body.isLocked === "true",
     duration: req.body.duration,
     meditationLink: "",
+    tags: JSON.parse(req.body.tags),
   };
-  //console.log(req.body.isLocked)
+
+  console.log(req.body.tags);
   const uid = req.body.uid;
   //console.log(req.files["background"]);
   try {

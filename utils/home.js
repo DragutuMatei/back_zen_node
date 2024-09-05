@@ -6,6 +6,8 @@ import {
   doc,
   getDoc,
   getDocs,
+  limit,
+  orderBy,
   query,
   updateDoc,
   where,
@@ -18,14 +20,19 @@ import {
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 
-const getIt = async (colection, routines, title, isBig) => {
+const getIt = async (colection, routines, title, isBig, isOrderd) => {
   try {
     const cats = await getDocs(collection(db, colection));
 
-    const items = [];
-    cats.forEach((doc, index) => {
+    let items = [];
+    let i = 0;
+    cats.forEach((doc) => {
       doc.data()[routines].map((e) => {
-        if (items.length < 7)
+        if (
+          i < 7
+          // todo: for production
+          // && !e.isLocked
+        ) {
           items.push({
             title: e.title,
             background: e.background,
@@ -33,9 +40,15 @@ const getIt = async (colection, routines, title, isBig) => {
             linkInfo: null,
             totalTime: Number(e.duration),
             isLocked: e.isLocked,
+            time: e.time,
           });
+        }
+        i++;
       });
     });
+    if (isOrderd) {
+      items = items.sort((a, b) => b.time - a.time);
+    }
 
     return {
       title: title,
@@ -52,32 +65,36 @@ const getHome = async (req, res) => {
     "categorie_meditati",
     "meditationRoutines",
     "Colectii de meditatii",
-    true
+    true,
+    false
   );
   const listens_data = await getIt(
     "categorie_listen",
     "listenRoutines",
     "Colectii de sunete",
+    true,
     false
   );
-  const yoga_data = await getIt(
-    "categorie_yoga",
-    "yogaRoutines",
-    "Colectii de yoga",
+  const last_meditations = await getIt(
+    "categorie_meditati",
+    "meditationRoutines",
+    "Ultimile meditatii",
+    false,
     true
   );
-  const podcast_data = await getIt(
-    "categorie_podcast",
-    "podcastRoutines",
-    "Colectii de podcast",
+  const last_listens = await getIt(
+    "categorie_listen",
+    "listenRoutines",
+    "Ultimile sunete ascultate",
+    false,
     true
   );
 
   const data = [
     meditations_data != false && meditations_data,
+    last_meditations != false && last_meditations,
     listens_data != false && listens_data,
-    yoga_data != false && yoga_data,
-    podcast_data != false && podcast_data,
+    last_listens != false && last_listens,
   ];
 
   if (data.length > 0) {

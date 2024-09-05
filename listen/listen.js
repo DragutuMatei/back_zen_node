@@ -20,6 +20,7 @@ import { v4 as uuid } from "uuid";
 
 const addListenToCat = async (req, res) => {
   const data = {
+    time: new Date().getTime() / 1000,
     category: req.body.category,
     background: "",
     title: req.body.title,

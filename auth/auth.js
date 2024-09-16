@@ -4,10 +4,11 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth } from "../config_fire";
+import { auth, db } from "../config_fire";
+import { addDoc, collection } from "firebase/firestore";
 
 const register = async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, platform } = req.body;
   if (!email || !password) {
     return res.status(422).json({
       email: "Email is required",
@@ -17,7 +18,18 @@ const register = async (req, res) => {
   createUserWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       sendEmailVerification(auth.currentUser)
-        .then(() => {
+        .then(async () => {
+          await addDoc(collection(db, "users"), {
+            email: email,
+            time: new Date().getTime() / 1000,
+            med_time: 0,
+            resp_time: 0,
+            carduri_alese: 0,
+            abonament: "",
+            platform: platform,
+            lasts: [],
+          });
+
           res.status(201).json({
             message: "Verification email sent! User created successfully!",
           });

@@ -144,7 +144,7 @@ app.post("/login", login);
 app.post("/register", register);
 app.post("/logout", logout);
 app.post("/updateUserStats", updateUserStats);
-app.get("/checkLogged", checkLogged);
+app.get("/user", checkLogged);
 // async (req, res) => {
 //   (req, res);
 //   res.json({ status: true, message: "Our node.js app works" });

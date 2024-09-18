@@ -49,6 +49,7 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   res.header("Access-Control-Allow-Credentials", true);
   const { email, password } = req.body;
+  console.log(email, password);
   if (!email || !password) {
     return res.status(422).json({
       email: "Email is required",
@@ -82,7 +83,7 @@ const checkLogged = async (req, res) => {
   const user = auth.currentUser;
   let ok = false;
   if (user) ok = true;
-  res.status(200).json({ ok, user });
+  res.status(200).json({ user });
 };
 
 const logout = async (res, req) => {

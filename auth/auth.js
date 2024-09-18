@@ -78,7 +78,12 @@ const login = async (req, res) => {
     });
 };
 
-const checkLogged = async (req, res) => {};
+const checkLogged = async (req, res) => {
+  const user = auth.currentUser;
+  let ok = false;
+  if (user) ok = true;
+  res.status(200).json({ ok, user });
+};
 
 const logout = async (res, req) => {
   signOut(auth)
@@ -92,4 +97,28 @@ const logout = async (res, req) => {
     });
 };
 
-export { login, logout, register };
+const updateUserStats = async (res, req) => {
+  const { key, value, id } = req.body;
+  try {
+    const user_ref = doc(db, "users", id);
+    const user = await getDoc(user_ref);
+    if (key === "lasts") {
+      user[key].push(value);
+    } else if (
+      key === "med_time" ||
+      key === "carduri_alese" ||
+      key === "resp_time"
+    ) {
+      user[key] += Number(value);
+    } else if (key === "abonament") {
+      user[key] = value;
+    }
+    await updateDoc(user_ref, user);
+    res.status(200).json({ ok: true });
+  } catch (error) {
+    //console.log(error);
+    res.status(500).json({ ok: false, error });
+  }
+};
+
+export { login, logout, register, updateUserStats, checkLogged };

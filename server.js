@@ -18,13 +18,46 @@ import {
   getAllMessages,
   getMessageById,
 } from "./messages/messages";
-import { login, logout, register } from "./auth/auth";
-import { addListenCat, deleteListenCatById, getAllListenCats, getListenCatById } from "./listen/categories";
-import { addListenToCat, deleteListenFromCat, getListenFromCatById } from "./listen/listen";
-import { addpodcastCat, deletepodcastCatById, getAllpodcastCats, getpodcastCatById } from "./podcast/categories";
-import { addpodcastToCat, deletepodcastFromCat, getpodcastFromCatById } from "./podcast/podcast";
-import { addyogaCat, deleteyogaCatById, getAllyogaCats, getyogaCatById } from "./yoga/categories";
-import { addyogaToCat, deleteyogaFromCat, getyogaFromCatById } from "./yoga/yoga";
+import {
+  checkLogged,
+  login,
+  logout,
+  register,
+  updateUserStats,
+} from "./auth/auth";
+import {
+  addListenCat,
+  deleteListenCatById,
+  getAllListenCats,
+  getListenCatById,
+} from "./listen/categories";
+import {
+  addListenToCat,
+  deleteListenFromCat,
+  getListenFromCatById,
+} from "./listen/listen";
+import {
+  addpodcastCat,
+  deletepodcastCatById,
+  getAllpodcastCats,
+  getpodcastCatById,
+} from "./podcast/categories";
+import {
+  addpodcastToCat,
+  deletepodcastFromCat,
+  getpodcastFromCatById,
+} from "./podcast/podcast";
+import {
+  addyogaCat,
+  deleteyogaCatById,
+  getAllyogaCats,
+  getyogaCatById,
+} from "./yoga/categories";
+import {
+  addyogaToCat,
+  deleteyogaFromCat,
+  getyogaFromCatById,
+} from "./yoga/yoga";
 import { getHome } from "./utils/home";
 const app = express();
 
@@ -40,19 +73,24 @@ app.use(json());
 // );
 
 app.use(function (req, res, next) {
-
   // Website you wish to allow to connect
-  res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000');
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
   // Request methods you wish to allow
-  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader(
+    "Access-Control-Allow-Methods",
+    "GET, POST, OPTIONS, PUT, PATCH, DELETE"
+  );
 
   // Request headers you wish to allow
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+  res.setHeader(
+    "Access-Control-Allow-Headers",
+    "X-Requested-With,content-type"
+  );
 
   // Set to true if you need the website to include cookies in the requests sent
   // to the API (e.g. in case you use sessions)
-  res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader("Access-Control-Allow-Credentials", true);
 
   // Pass to next layer of middleware
   next();
@@ -100,13 +138,13 @@ app.post("/addyogaToCat", addyogaToCat);
 app.post("/deleteyogaFromCat", deleteyogaFromCat);
 app.get("/getyogaFromCatById/:uid/:id", getyogaFromCatById);
 
-
 app.get("/getHome", getHome);
 
 app.post("/login", login);
 app.post("/register", register);
 app.post("/logout", logout);
-
+app.post("/updateUserStats", updateUserStats);
+app.get("/checkLogged", checkLogged);
 // async (req, res) => {
 //   (req, res);
 //   res.json({ status: true, message: "Our node.js app works" });

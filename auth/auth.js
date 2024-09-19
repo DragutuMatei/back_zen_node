@@ -4,8 +4,17 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth, db } from "../config_fire";
-import { addDoc, collection } from "firebase/firestore";
+import { auth, auth_admin, db } from "../config_fire";
+import {
+  addDoc,
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  query,
+  updateDoc,
+  where,
+} from "firebase/firestore";
 
 const register = async (req, res) => {
   const { email, password, platform } = req.body;
@@ -27,7 +36,8 @@ const register = async (req, res) => {
             carduri_alese: 0,
             abonament: "",
             platform: platform,
-            lasts: [],
+            lasts: {},
+            imgUrl: "",
           });
 
           res.status(201).json({
@@ -61,12 +71,12 @@ const login = async (req, res) => {
       const idToken = userCredential._tokenResponse.idToken;
       //console.log(idToken);
       if (idToken) {
-        res.cookie("access_token", idToken, {
+        res.cookie("accessToken", idToken, {
           httpOnly: true,
         });
-        res
-          .status(200)
-          .json({ message: "User logged in successfully", userCredential });
+        res.status(200).json({
+          accessToken: idToken,
+        });
       } else {
         res.status(500).json({ error: "Internal Server Error" });
       }
@@ -80,10 +90,48 @@ const login = async (req, res) => {
 };
 
 const checkLogged = async (req, res) => {
-  const user = auth.currentUser;
-  let ok = false;
-  if (user) ok = true;
-  res.status(200).json({ user });
+  // const user = auth.currentUser;
+  // let ok = false;
+  // if (user) ok = true;
+  // res.status(200).json({ user });
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
+    return res.status(401).send({ error: "Unauthorized" });
+  }
+
+  const token = authHeader.split("Bearer ")[1]; // Extract the token
+
+  try {
+    // Verify the token using Firebase Admin SDK
+    const decodedToken = await auth_admin.verifyIdToken(token);
+    const userId = decodedToken.uid; // Get the user ID from the decoded token
+    console.log(userId);
+    const email = decodedToken["email"];
+    const user_ref = collection(db, "users");
+    const q = query(user_ref, where("email", "==", email));
+    const querySnapshot = await getDocs(q);
+
+    // Fetch user data from Firestore collection 'users'
+    // const userDoc = await db.collection('users').doc(userId).get();
+
+    // if (!userDoc.exists) {
+    //   return res.status(404).send({ error: 'User not found' });
+    // }
+
+    // const userData = userDoc.data();
+
+    // Return the user's data
+    res.status(200).send({
+      userId: userId,
+      decodedToken: decodedToken["email"],
+      data: { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
+      // userData: userData,
+    });
+  } catch (error) {
+    console.error("Error verifying token or fetching user data:", error);
+    res.status(500).send({ error: "Internal Server Error" });
+  }
 };
 
 const logout = async (res, req) => {
@@ -98,11 +146,13 @@ const logout = async (res, req) => {
     });
 };
 
-const updateUserStats = async (res, req) => {
+const updateUserStats = async (req, res) => {
+  console.log(req.body);
   const { key, value, id } = req.body;
   try {
     const user_ref = doc(db, "users", id);
-    const user = await getDoc(user_ref);
+    let user = await getDoc(user_ref);
+    user = user.data();
     if (key === "lasts") {
       user[key].push(value);
     } else if (
@@ -113,12 +163,27 @@ const updateUserStats = async (res, req) => {
       user[key] += Number(value);
     } else if (key === "abonament") {
       user[key] = value;
+    } else if (key === "imgUrl") {
+      try {
+        const storageRef = ref(storage, `/users/${req.files[key].name}`);
+
+        await uploadBytes(storageRef, req.files[key].data);
+
+        const url = await getDownloadURL(storageRef);
+        user["imgUrl"] = url;
+        await updateDoc(user_ref, user);
+
+        res.status(200).json({ ok: true });
+      } catch (error) {
+        //console.log(error);
+        res.status(500).json({ ok: false, error });
+      }
     }
     await updateDoc(user_ref, user);
     res.status(200).json({ ok: true });
   } catch (error) {
-    //console.log(error);
-    res.status(500).json({ ok: false, error });
+    console.log(error);
+    res.status(500).json({ ok: false, error: "plm" });
   }
 };
 

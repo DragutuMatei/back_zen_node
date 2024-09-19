@@ -145,9 +145,6 @@ app.post("/register", register);
 app.post("/logout", logout);
 app.post("/updateUserStats", updateUserStats);
 app.get("/user", checkLogged);
-// async (req, res) => {
-//   (req, res);
-//   res.json({ status: true, message: "Our node.js app works" });
-// });
+ 
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

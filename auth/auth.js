@@ -137,7 +137,7 @@ const checkLogged = async (req, res) => {
 const logout = async (res, req) => {
   signOut(auth)
     .then(() => {
-      res.clearCookie("access_token");
+      res.clearCookie("accessToken");
       res.status(200).json({ message: "User logged out successfully" });
     })
     .catch((error) => {

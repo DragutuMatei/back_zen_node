@@ -37,7 +37,7 @@ const register = async (req, res) => {
             carduri_alese: 0,
             abonament: "",
             platform: platform,
-            lasts: {},
+            lasts: [],
             imgUrl: "",
           });
 
@@ -202,8 +202,8 @@ const updateUserStats = async (req, res) => {
         const blob = new Blob([uint8Array], { type: "image/jpg" });
 
         // const file = decodeBase64ToBuffer(value);
-        console.log(blob);
-        const storageRef = ref(storage, `/users/${id}.jpg`);
+        //console.log(blob);
+        const storageRef = ref(storage, `/users/${id}.png`);
 
         await uploadBytes(storageRef, blob);
 
@@ -214,15 +214,17 @@ const updateUserStats = async (req, res) => {
         // res.status(200).json({ ok: true });
       } catch (error) {
         console.log(error);
-        res.status(500).json({ ok: false, error:"pula mea coaie" });
+        res.status(500).json({ ok: false, error: "pula mea coaie" });
       }
     } else if (key === "lasts") {
-      let obj = user[key];
-      obj = addField(obj, Object.keys(value)[0], Object.values(value)[0]);
-      console.log(obj);
-      user[key] = obj;
+      // let obj = user[key];
+      user[key].unshift(value);
+      const length = 3;
+      if (user[key].length > length) {
+        user[key].length = length;
+      }
     }
-    console.log(user);
+    //console.log(user);
     await updateDoc(user_ref, user);
     res.status(200).json({ ok: true });
   } catch (error) {

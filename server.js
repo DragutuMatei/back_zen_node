@@ -7,6 +7,7 @@ import {
   deleteMedCatById,
 } from "./meditations/categories";
 import fileUpload from "express-fileupload";
+import bodyParser from "body-parser";
 import {
   addMedToCat,
   deleteMedFromCat,
@@ -59,9 +60,20 @@ import {
   getyogaFromCatById,
 } from "./yoga/yoga";
 import { getHome } from "./utils/home";
+
 const app = express();
 
 app.use(fileUpload());
+app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "50mb",
+    extended: true,
+    parameterLimit: 500000,
+  })
+);
+app.use(bodyParser.text({ limit: "200mb" }));
+
 app.use(json());
 // app.use(
 //   cors({
@@ -145,6 +157,5 @@ app.post("/register", register);
 app.post("/logout", logout);
 app.post("/updateUserStats", updateUserStats);
 app.get("/user", checkLogged);
- 
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

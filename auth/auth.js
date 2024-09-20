@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth, auth_admin, db } from "../config_fire";
+import { auth, auth_admin, db, storage } from "../config_fire";
 import {
   addDoc,
   collection,
@@ -15,6 +15,7 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
+import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
 
 const register = async (req, res) => {
   const { email, password, platform } = req.body;
@@ -145,50 +146,83 @@ const logout = async (res, req) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 };
+
 function decodeBase64ToBuffer(base64String) {
   // Remove the Base64 metadata if present (e.g., "data:image/png;base64,")
-  const base64Data = base64String.replace(/^data:.+;base64,/, '');
+  const base64Data = base64String.replace(/^data:.+;base64,/, "");
 
   // Convert Base64 string to a buffer
-  const fileBuffer = Buffer.from(base64Data, 'base64');
+  const fileBuffer = Buffer.from(base64Data, "base64");
 
   return fileBuffer; // Return the buffer
 }
+
+function addField(obj, newKey, newValue) {
+  // Get existing entries (key-value pairs) from the object
+  const entries = Object.entries(obj);
+
+  // Insert the new entry at the beginning of the array
+  entries.unshift([newKey, newValue]);
+
+  // Ensure that only up to 3 fields remain
+  const updatedEntries = entries.slice(0, 3);
+
+  const updatedObj = {};
+  for (const [key, value] of updatedEntries) {
+    updatedObj[key] = value;
+  }
+
+  return updatedObj;
+}
+
 const updateUserStats = async (req, res) => {
-  console.log(req.body);
   const { key, value, id } = req.body;
   try {
     const user_ref = doc(db, "users", id);
     let user = await getDoc(user_ref);
     user = user.data();
-    if (key === "lasts") {
-      user[key].push(value);
-    } else if (
-      key === "med_time" ||
-      key === "carduri_alese" ||
-      key === "resp_time"
-    ) {
+    if (key === "med_time" || key === "carduri_alese" || key === "resp_time") {
       user[key] += Number(value);
     } else if (key === "abonament") {
       user[key] = value;
     } else if (key === "imgUrl") {
       try {
-        const file = decodeBase64ToBuffer(req.files[key])
-        console.log(file)
-        const storageRef = ref(storage, `/users/${file.name}`);
+        const byteString = atob(value.split(",")[1]);
 
-        await uploadBytes(storageRef, file.data);
+        // Create an ArrayBuffer
+        const arrayBuffer = new ArrayBuffer(byteString.length);
+        const uint8Array = new Uint8Array(arrayBuffer);
+
+        // Convert each character to a byte
+        for (let i = 0; i < byteString.length; i++) {
+          uint8Array[i] = byteString.charCodeAt(i);
+        }
+
+        // Create a Blob (or use File if necessary)
+        const blob = new Blob([uint8Array], { type: "image/jpg" });
+
+        // const file = decodeBase64ToBuffer(value);
+        console.log(blob);
+        const storageRef = ref(storage, `/users/${id}.jpg`);
+
+        await uploadBytes(storageRef, blob);
 
         const url = await getDownloadURL(storageRef);
         user["imgUrl"] = url;
-        await updateDoc(user_ref, user);
+        // await updateDoc(user_ref, user);
 
-        res.status(200).json({ ok: true });
+        // res.status(200).json({ ok: true });
       } catch (error) {
-        //console.log(error);
-        res.status(500).json({ ok: false, error });
+        console.log(error);
+        res.status(500).json({ ok: false, error:"pula mea coaie" });
       }
+    } else if (key === "lasts") {
+      let obj = user[key];
+      obj = addField(obj, Object.keys(value)[0], Object.values(value)[0]);
+      console.log(obj);
+      user[key] = obj;
     }
+    console.log(user);
     await updateDoc(user_ref, user);
     res.status(200).json({ ok: true });
   } catch (error) {

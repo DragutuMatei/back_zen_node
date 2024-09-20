@@ -89,12 +89,7 @@ const login = async (req, res) => {
       res.status(500).json({ error: errorMessage });
     });
 };
-
-const checkLogged = async (req, res) => {
-  // const user = auth.currentUser;
-  // let ok = false;
-  // if (user) ok = true;
-  // res.status(200).json({ user });
+async function check(req) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
@@ -105,32 +100,43 @@ const checkLogged = async (req, res) => {
 
   try {
     // Verify the token using Firebase Admin SDK
-    const decodedToken = await auth_admin.verifyIdToken(token);
-    const userId = decodedToken.uid; // Get the user ID from the decoded token
+    var decodedToken = await auth_admin.verifyIdToken(token);
+    var userId = decodedToken.uid; // Get the user ID from the decoded token
     console.log(userId);
     const email = decodedToken["email"];
     const user_ref = collection(db, "users");
     const q = query(user_ref, where("email", "==", email));
-    const querySnapshot = await getDocs(q);
+    var querySnapshot = await getDocs(q);
 
-    // Fetch user data from Firestore collection 'users'
-    // const userDoc = await db.collection('users').doc(userId).get();
-
-    // if (!userDoc.exists) {
-    //   return res.status(404).send({ error: 'User not found' });
-    // }
-
-    // const userData = userDoc.data();
-
-    // Return the user's data
+    return [
+      decodedToken,
+      userId,
+      { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
+    ];
+  } catch (error) {
+    console.error("Error verifying token or fetching user data:", error);
+    return false;
+    // res.status(500).send({ error: "Internal Server Error" });
+  }
+}
+const checkLogged = async (req, res) => {
+  // const user = auth.currentUser;
+  // let ok = false;
+  // if (user) ok = true;
+  // res.status(200).json({ user });
+  try {
+    const [decodedToken, userId, data] = await check(req);
+    console.log(data);
     res.status(200).send({
       userId: userId,
       decodedToken: decodedToken["email"],
-      data: { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
+      data: { ...data },
+      // data: { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
       // userData: userData,
     });
   } catch (error) {
     console.error("Error verifying token or fetching user data:", error);
+     
     res.status(500).send({ error: "Internal Server Error" });
   }
 };
@@ -233,4 +239,4 @@ const updateUserStats = async (req, res) => {
   }
 };
 
-export { login, logout, register, updateUserStats, checkLogged };
+export {check, login, logout, register, updateUserStats, checkLogged };

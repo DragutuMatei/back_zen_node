@@ -145,7 +145,15 @@ const logout = async (res, req) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 };
+function decodeBase64ToBuffer(base64String) {
+  // Remove the Base64 metadata if present (e.g., "data:image/png;base64,")
+  const base64Data = base64String.replace(/^data:.+;base64,/, '');
 
+  // Convert Base64 string to a buffer
+  const fileBuffer = Buffer.from(base64Data, 'base64');
+
+  return fileBuffer; // Return the buffer
+}
 const updateUserStats = async (req, res) => {
   console.log(req.body);
   const { key, value, id } = req.body;
@@ -165,9 +173,11 @@ const updateUserStats = async (req, res) => {
       user[key] = value;
     } else if (key === "imgUrl") {
       try {
-        const storageRef = ref(storage, `/users/${req.files[key].name}`);
+        const file = decodeBase64ToBuffer(req.files[key])
+        console.log(file)
+        const storageRef = ref(storage, `/users/${file.name}`);
 
-        await uploadBytes(storageRef, req.files[key].data);
+        await uploadBytes(storageRef, file.data);
 
         const url = await getDownloadURL(storageRef);
         user["imgUrl"] = url;

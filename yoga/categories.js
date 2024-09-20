@@ -16,6 +16,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
+import { check } from "../auth/auth";
 
 const addyogaCat = async (req, res) => {
   const data = {

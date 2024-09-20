@@ -152,35 +152,7 @@ const logout = async (res, req) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 };
-
-function decodeBase64ToBuffer(base64String) {
-  // Remove the Base64 metadata if present (e.g., "data:image/png;base64,")
-  const base64Data = base64String.replace(/^data:.+;base64,/, "");
-
-  // Convert Base64 string to a buffer
-  const fileBuffer = Buffer.from(base64Data, "base64");
-
-  return fileBuffer; // Return the buffer
-}
-
-function addField(obj, newKey, newValue) {
-  // Get existing entries (key-value pairs) from the object
-  const entries = Object.entries(obj);
-
-  // Insert the new entry at the beginning of the array
-  entries.unshift([newKey, newValue]);
-
-  // Ensure that only up to 3 fields remain
-  const updatedEntries = entries.slice(0, 3);
-
-  const updatedObj = {};
-  for (const [key, value] of updatedEntries) {
-    updatedObj[key] = value;
-  }
-
-  return updatedObj;
-}
-
+ 
 const updateUserStats = async (req, res) => {
   const { key, value, id } = req.body;
   try {

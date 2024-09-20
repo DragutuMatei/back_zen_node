@@ -16,6 +16,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
+import { check } from "../auth/auth";
 
 const addpodcastCat = async (req, res) => {
   const data = {
@@ -56,11 +57,27 @@ const addpodcastCat = async (req, res) => {
 
 const getAllpodcastCats = async (req, res) => {
   const data = [];
+  let abonament = "";
+  try {
+    const [decodedToken, userId, user] = await check(req);
+    abonament = user.abonament;
+  } catch (error) {
+    abonament = false;
+  }
   try {
     const podcastCats = await getDocs(collection(db, "categorie_podcast"));
     podcastCats.forEach((doc) => {
       data.push({ uid: doc.id, ...doc.data() });
     });
+    if (abonament != false && abonament != "") {
+      for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < data[i].podcastRoutines.length; j++) {
+          data[i].podcastRoutines[j].isLocked = false;
+        }
+      }
+    }
+    console.log(abonament);
+    
     res.status(200).json({ data });
   } catch (error) {
     res.status(500).json({ ok: false, error });

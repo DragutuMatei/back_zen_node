@@ -114,7 +114,7 @@ async function check(req) {
       { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
     ];
   } catch (error) {
-    console.error("Error verifying token or fetching user data:", error);
+    // console.error("Error verifying token or fetching user data:", error);
     return false;
     // res.status(500).send({ error: "Internal Server Error" });
   }
@@ -135,9 +135,9 @@ const checkLogged = async (req, res) => {
       // userData: userData,
     });
   } catch (error) {
-    console.error("Error verifying token or fetching user data:", error);
-     
-    res.status(500).send({ error: "Internal Server Error" });
+    // console.error("Error verifying token or fetching user data:", error);
+
+    res.status(200).send({ logged: false });
   }
 };
 
@@ -239,4 +239,4 @@ const updateUserStats = async (req, res) => {
   }
 };
 
-export {check, login, logout, register, updateUserStats, checkLogged };
+export { check, login, logout, register, updateUserStats, checkLogged };

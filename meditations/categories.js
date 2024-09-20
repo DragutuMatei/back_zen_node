@@ -57,32 +57,31 @@ const addMedCat = async (req, res) => {
 
 const getAllMedCats = async (req, res) => {
   const data = [];
+  let abonament = "";
   try {
     const [decodedToken, userId, user] = await check(req);
-    const abonament = user.abonament;
+    abonament = user.abonament;
+  } catch (error) {
+    abonament = false;
+  }
+  try {
+    const medCats = await getDocs(collection(db, "categorie_meditati"));
+    medCats.forEach((doc) => {
+      data.push({ uid: doc.id, ...doc.data() });
+    });
 
-    try {
-      const medCats = await getDocs(collection(db, "categorie_meditati"));
-      medCats.forEach((doc) => {
-        data.push({ uid: doc.id, ...doc.data() });
-      });
-
-      if (abonament != "") {
-        for (let i = 0; i < data.length; i++) {
-          for (let j = 0; j < data[i].meditationRoutines.length; j++) {
-            data[i].meditationRoutines[j].isLocked = false;
-          }
+    if (abonament != false && abonament != "") {
+      for (let i = 0; i < data.length; i++) {
+        for (let j = 0; j < data[i].meditationRoutines.length; j++) {
+          data[i].meditationRoutines[j].isLocked = false;
         }
       }
-
-      console.log(data);
-      res.status(200).json({ data });
-    } catch (error) {
-      res.status(500).json({ ok: false, error });
     }
+    console.log(abonament);
+    // console.log(data);
+    res.status(200).json({ data });
   } catch (error) {
-    console.error("Error verifying token or fetching user data:", error);
-    res.status(500).send({ error: "Internal Server Error" });
+    res.status(500).json({ ok: false, error });
   }
 };
 

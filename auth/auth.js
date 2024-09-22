@@ -60,7 +60,6 @@ const register = async (req, res) => {
 const login = async (req, res) => {
   res.header("Access-Control-Allow-Credentials", true);
   const { email, password } = req.body;
-  console.log(email, password);
   if (!email || !password) {
     return res.status(422).json({
       email: "Email is required",
@@ -70,13 +69,14 @@ const login = async (req, res) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       const idToken = userCredential._tokenResponse.idToken;
-      //console.log(idToken);
+
       if (idToken) {
         res.cookie("accessToken", idToken, {
           httpOnly: true,
         });
         res.status(200).json({
           accessToken: idToken,
+          refreshToken: userCredential._tokenResponse.refreshToken,
         });
       } else {
         res.status(500).json({ error: "Internal Server Error" });
@@ -106,14 +106,13 @@ async function check(req) {
     const user_ref = collection(db, "users");
     const q = query(user_ref, where("email", "==", email));
     var querySnapshot = await getDocs(q);
-
     return [
       decodedToken,
       userId,
       { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
     ];
   } catch (error) {
-    console.error("data:", error);
+    // console.error("data:", error);
     return false;
     // res.status(500).send({ error: "Internal Server Error" });
   }
@@ -125,25 +124,17 @@ const checkLogged = async (req, res) => {
   // res.status(200).json({ user });
   try {
     const [decodedToken, userId, data] = await check(req);
-    console.log({
-      userId: userId,
-      decodedToken: decodedToken["email"],
-      data: { ...data },
-      // data: { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
-      // userData: userData,
-    });
     res.status(200).send({
       userId: userId,
       decodedToken: decodedToken["email"],
       data: { ...data },
     });
   } catch (error) {
-    console.log("error: ", error);
     res.status(200).send({});
   }
 };
 
-const logout = async (res, req) => {
+const logout = async (req, res) => {
   signOut(auth)
     .then(() => {
       res.clearCookie("accessToken");
@@ -202,31 +193,17 @@ const updateUserStats = async (req, res) => {
       user[key] = value;
     } else if (key === "imgUrl") {
       try {
-        console.log(value.slice(0, 20));
         const byteString = atob(value);
-
-        // Create an ArrayBuffer
         const arrayBuffer = new ArrayBuffer(byteString.length);
         const uint8Array = new Uint8Array(arrayBuffer);
-
-        // Convert each character to a byte
         for (let i = 0; i < byteString.length; i++) {
           uint8Array[i] = byteString.charCodeAt(i);
         }
-
-        // Create a Blob (use the appropriate MIME type)
         const blob = new Blob([uint8Array], {
           type: `image/${getBase64ImageExtension(value)}`,
         });
-
-        // const file = decodeBase64ToBuffer(value);
-        //console.log(blob);
         const storageRef = ref(
           storage,
-          `/users/${id}-${user.email}.${getBase64ImageExtension(value)}`
-        );
-
-        console.log(
           `/users/${id}-${user.email}.${getBase64ImageExtension(value)}`
         );
 
@@ -234,22 +211,17 @@ const updateUserStats = async (req, res) => {
 
         const url = await getDownloadURL(storageRef);
         user["imgUrl"] = url;
-        // await updateDoc(user_ref, user);
-
-        // res.status(200).json({ ok: true });
       } catch (error) {
         console.log(error);
         res.status(500).json({ ok: false, error: "pula mea coaie" });
       }
     } else if (key === "lasts") {
-      // let obj = user[key];
       user[key].unshift(value);
       const length = 3;
       if (user[key].length > length) {
         user[key].length = length;
       }
     }
-    //console.log(user);
     await updateDoc(user_ref, user);
     res.status(200).json({ ok: true });
   } catch (error) {
@@ -258,4 +230,49 @@ const updateUserStats = async (req, res) => {
   }
 };
 
-export { check, login, logout, register, updateUserStats, checkLogged };
+const refreshToken = async (req, res) => {
+  try {
+    const response = await fetch(
+      `https://securetoken.googleapis.com/v1/token?key=${process.env.apiKey}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          grant_type: "refresh_token",
+          refresh_token: req.body.refreshToken, // Pass the refresh token here
+        }),
+      }
+    );
+
+    if (!response.ok) {
+      throw new Error("Failed to refresh ID token");
+    }
+
+    const data = await response.json();
+
+    const newIdToken = data.id_token; // New ID token
+    const newRefreshToken = data.refresh_token; // Updated refresh token (save it)
+    const expiresIn = data.expires_in; // Expiry time in seconds
+    res
+      .status(200)
+      .json({ accessToken: newIdToken, refreshToken: newRefreshToken });
+  } catch (error) {
+    console.error("Error refreshing ID token:", error);
+    res
+      .status(500)
+      .json({ ok:false });
+
+  }
+};
+
+export {
+  check,
+  login,
+  logout,
+  register,
+  updateUserStats,
+  checkLogged,
+  refreshToken,
+};

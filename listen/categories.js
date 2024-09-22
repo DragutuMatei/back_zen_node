@@ -75,7 +75,7 @@ const getAllListenCats = async (req, res) => {
         }
       }
     }
-    console.log(abonament);
+    //console.log(abonament);
     res.status(200).json({ ok: true, data });
   } catch (error) {
     res.status(500).json({ ok: false, error });

@@ -25,6 +25,7 @@ import {
   logout,
   register,
   updateUserStats,
+  refreshToken
 } from "./auth/auth";
 import {
   addListenCat,
@@ -59,6 +60,7 @@ import {
   deleteyogaFromCat,
   getyogaFromCatById,
 } from "./yoga/yoga";
+
 import { getHome } from "./utils/home";
 
 const app = express();
@@ -157,5 +159,6 @@ app.post("/register", register);
 app.post("/logout", logout);
 app.post("/updateUserStats", updateUserStats);
 app.get("/user", checkLogged);
+app.post("/refreshToken", refreshToken)
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

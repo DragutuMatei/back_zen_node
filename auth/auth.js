@@ -102,7 +102,6 @@ async function check(req) {
     // Verify the token using Firebase Admin SDK
     var decodedToken = await auth_admin.verifyIdToken(token);
     var userId = decodedToken.uid; // Get the user ID from the decoded token
-    console.log(userId);
     const email = decodedToken["email"];
     const user_ref = collection(db, "users");
     const q = query(user_ref, where("email", "==", email));
@@ -114,7 +113,7 @@ async function check(req) {
       { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
     ];
   } catch (error) {
-    // console.error("Error verifying token or fetching user data:", error);
+    console.error("data:", error);
     return false;
     // res.status(500).send({ error: "Internal Server Error" });
   }
@@ -126,18 +125,21 @@ const checkLogged = async (req, res) => {
   // res.status(200).json({ user });
   try {
     const [decodedToken, userId, data] = await check(req);
-    console.log(data);
-    res.status(200).send({
+    console.log({
       userId: userId,
       decodedToken: decodedToken["email"],
       data: { ...data },
       // data: { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
       // userData: userData,
     });
+    res.status(200).send({
+      userId: userId,
+      decodedToken: decodedToken["email"],
+      data: { ...data },
+    });
   } catch (error) {
-    // console.error("Error verifying token or fetching user data:", error);
-
-    res.status(200).send({ logged: false });
+    console.log("error: ", error);
+    res.status(200).send({});
   }
 };
 
@@ -152,7 +154,42 @@ const logout = async (res, req) => {
       res.status(500).json({ error: "Internal Server Error" });
     });
 };
- 
+function getBase64ImageExtension(base64Image) {
+  // Ensure base64 image is not empty
+  if (!base64Image) {
+    return null;
+  }
+
+  // Decode the first few characters of the base64 string
+  const byteString = atob(base64Image.slice(0, 30)); // Decode the first 30 characters
+  const magicNumbers = byteString
+    .substr(0, 4)
+    .split("")
+    .map((c) => c.charCodeAt(0)); // Get the first 4 byte values
+
+  // Check for magic numbers to determine the image format
+  if (magicNumbers[0] === 0xff && magicNumbers[1] === 0xd8) {
+    return "jpg"; // JPEG
+  } else if (magicNumbers[0] === 0x89 && magicNumbers[1] === 0x50) {
+    return "png"; // PNG
+  } else if (magicNumbers[0] === 0x47 && magicNumbers[1] === 0x49) {
+    return "gif"; // GIF
+  } else if (magicNumbers[0] === 0x52 && magicNumbers[1] === 0x49) {
+    return "tiff"; // TIFF
+  } else if (magicNumbers[0] === 0x42 && magicNumbers[1] === 0x4d) {
+    return "bmp"; // BMP
+  } else if (
+    magicNumbers[0] === 0x52 &&
+    magicNumbers[1] === 0x49 &&
+    magicNumbers[2] === 0x46 &&
+    magicNumbers[3] === 0x38
+  ) {
+    return "webp"; // WEBP
+  }
+
+  return null; // Return null if format is unrecognized
+}
+
 const updateUserStats = async (req, res) => {
   const { key, value, id } = req.body;
   try {
@@ -165,7 +202,8 @@ const updateUserStats = async (req, res) => {
       user[key] = value;
     } else if (key === "imgUrl") {
       try {
-        const byteString = atob(value.split(",")[1]);
+        console.log(value.slice(0, 20));
+        const byteString = atob(value);
 
         // Create an ArrayBuffer
         const arrayBuffer = new ArrayBuffer(byteString.length);
@@ -176,12 +214,21 @@ const updateUserStats = async (req, res) => {
           uint8Array[i] = byteString.charCodeAt(i);
         }
 
-        // Create a Blob (or use File if necessary)
-        const blob = new Blob([uint8Array], { type: "image/jpg" });
+        // Create a Blob (use the appropriate MIME type)
+        const blob = new Blob([uint8Array], {
+          type: `image/${getBase64ImageExtension(value)}`,
+        });
 
         // const file = decodeBase64ToBuffer(value);
         //console.log(blob);
-        const storageRef = ref(storage, `/users/${id}.png`);
+        const storageRef = ref(
+          storage,
+          `/users/${id}-${user.email}.${getBase64ImageExtension(value)}`
+        );
+
+        console.log(
+          `/users/${id}-${user.email}.${getBase64ImageExtension(value)}`
+        );
 
         await uploadBytes(storageRef, blob);
 

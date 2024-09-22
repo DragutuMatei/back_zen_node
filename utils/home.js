@@ -19,11 +19,18 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
+import { check } from "../auth/auth";
 
-const getIt = async (colection, routines, title, isBig, isOrderd) => {
+const getIt = async (req, colection, routines, title, isBig, isOrderd) => {
   try {
     const cats = await getDocs(collection(db, colection));
-
+    let abonament = "";
+    try {
+      const [decodedToken, userId, user] = await check(req);
+      abonament = user.abonament;
+    } catch (error) {
+      abonament = false;
+    }
     let items = [];
     let i = 0;
     cats.forEach((doc) => {
@@ -39,7 +46,8 @@ const getIt = async (colection, routines, title, isBig, isOrderd) => {
             linkTo: "/player",
             linkInfo: null,
             totalTime: Number(e.duration),
-            isLocked: e.isLocked,
+            isLocked:
+              abonament != false && abonament != "" ? false : e.isLocked,
             time: e.time,
           });
         }
@@ -49,6 +57,15 @@ const getIt = async (colection, routines, title, isBig, isOrderd) => {
     if (isOrderd) {
       items = items.sort((a, b) => b.time - a.time);
     }
+
+    // if (abonament != false && abonament != "") {
+    //   for (let i = 0; i < items.length; i++) {
+    //     for (let j = 0; j < items[i][routines].length; j++) {
+    //       items[i][routines][j].isLocked = false;
+    //     }
+    //   }
+    // }
+
 
     return {
       title: title,
@@ -62,6 +79,7 @@ const getIt = async (colection, routines, title, isBig, isOrderd) => {
 
 const getHome = async (req, res) => {
   const meditations_data = await getIt(
+    req,
     "categorie_meditati",
     "meditationRoutines",
     "Colectii de meditatii",
@@ -69,6 +87,7 @@ const getHome = async (req, res) => {
     false
   );
   const listens_data = await getIt(
+    req,
     "categorie_listen",
     "listenRoutines",
     "Colectii de sunete",
@@ -76,6 +95,7 @@ const getHome = async (req, res) => {
     false
   );
   const last_meditations = await getIt(
+    req,
     "categorie_meditati",
     "meditationRoutines",
     "Ultimile meditatii",
@@ -83,6 +103,7 @@ const getHome = async (req, res) => {
     true
   );
   const last_listens = await getIt(
+    req,
     "categorie_listen",
     "listenRoutines",
     "Ultimile sunete ascultate",

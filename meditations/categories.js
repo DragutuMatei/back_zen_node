@@ -118,15 +118,55 @@ const deleteMedCatById = async (req, res) => {
   }
 };
 
-export { addMedCat, getAllMedCats, getMedCatById, deleteMedCatById };
+const getOthers = async (req, res) => {
+  const { id_cat, tag } = req.params;
+  const data = [];
+  let abonament = "";
+  try {
+    const [decodedToken, userId, user] = await check(req);
+    abonament = user.abonament;
+  } catch (error) {
+    abonament = false;
+  }
+  try {
+    const medCats = await getDocs(collection(db, "categorie_meditati"));
+    medCats.forEach((doc) => {
+      if (doc.id !== id_cat) {
+        data.push({ uid: doc.id, ...doc.data() });
+      }
+    });
+
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data[i].meditationRoutines.length; j++) {
+        // if (data[i].meditationRoutines.length > 0)
+          if (data[i].meditationRoutines[j].tags.includes(tag)) {
+            if (abonament != false && abonament != "") {
+              data[i].meditationRoutines[j].isLocked = false;
+            }
+          } else {
+            data[i].meditationRoutines.splice(j, 1);
+            j--;
+          }
+      }
+    }
+    //console.log(abonament);
+    // console.log(data);
+    res.status(200).json({ data });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ ok: false, error });
+  }
+};
+
+export { addMedCat, getAllMedCats, getMedCatById, deleteMedCatById, getOthers };
 
 // id categorie si tag
 // => sa nu aiba id categorie
 
 // => [
 // {nume categorie, meditationroutines:[toate cu tagul respectiv]},
-// {nume categorie, meditationroutines:[toate cu tagul respectiv]}  
+// {nume categorie, meditationroutines:[toate cu tagul respectiv]}
 // ]
-// 
-// 
-// 
+//
+//
+//

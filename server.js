@@ -5,6 +5,7 @@ import {
   getAllMedCats,
   getMedCatById,
   deleteMedCatById,
+  getOthers,
 } from "./meditations/categories";
 import fileUpload from "express-fileupload";
 import bodyParser from "body-parser";
@@ -115,6 +116,7 @@ app.post("/addMedCat", addMedCat);
 app.get("/getAllMedCats", getAllMedCats);
 app.get("/getMedCatById/:id", getMedCatById);
 app.post("/deleteMedCatById", deleteMedCatById);
+app.get("/getOthers/:id_cat/:tag", getOthers);
 
 app.post("/addMedToCat", addMedToCat);
 app.post("/deleteMedFromCat", deleteMedFromCat);

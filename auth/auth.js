@@ -189,6 +189,7 @@ const updateUserStats = async (req, res) => {
     user = user.data();
     if (key === "med_time" || key === "carduri_alese" || key === "resp_time") {
       user[key] += Number(value);
+      // value reprezinta minutele ascultate / cardurile alese
     } else if (key === "abonament") {
       user[key] = value;
     } else if (key === "imgUrl") {

@@ -119,3 +119,14 @@ const deleteMedCatById = async (req, res) => {
 };
 
 export { addMedCat, getAllMedCats, getMedCatById, deleteMedCatById };
+
+// id categorie si tag
+// => sa nu aiba id categorie
+
+// => [
+// {nume categorie, meditationroutines:[toate cu tagul respectiv]},
+// {nume categorie, meditationroutines:[toate cu tagul respectiv]}  
+// ]
+// 
+// 
+// 

@@ -21,7 +21,7 @@ import {
 import { v4 as uuid } from "uuid";
 import { check } from "../auth/auth";
 
-const getIt = async (req, colection, routines, title, isBig, isOrderd) => {
+const getIt = async (req, colection, routines, title,link, isBig, isOrderd) => {
   try {
     const cats = await getDocs(collection(db, colection));
     let abonament = "";
@@ -43,7 +43,7 @@ const getIt = async (req, colection, routines, title, isBig, isOrderd) => {
           items.push({
             title: e.title,
             background: e.background,
-            linkTo: "/player",
+            linkTo: e[link],
             linkInfo: null,
             totalTime: Number(e.duration),
             isLocked:
@@ -83,6 +83,7 @@ const getHome = async (req, res) => {
     "categorie_meditati",
     "meditationRoutines",
     "Colectii de meditatii",
+    'meditationLink',
     true,
     false
   );
@@ -91,6 +92,7 @@ const getHome = async (req, res) => {
     "categorie_listen",
     "listenRoutines",
     "Colectii de sunete",
+    'listenLink',
     true,
     false
   );
@@ -99,6 +101,7 @@ const getHome = async (req, res) => {
     "categorie_meditati",
     "meditationRoutines",
     "Ultimile meditatii",
+    'meditationLink',
     false,
     true
   );
@@ -107,6 +110,7 @@ const getHome = async (req, res) => {
     "categorie_listen",
     "listenRoutines",
     "Ultimile sunete ascultate",
+    'listenLink',
     false,
     true
   );
@@ -117,6 +121,7 @@ const getHome = async (req, res) => {
     listens_data != false && listens_data,
     last_listens != false && last_listens,
   ];
+  
 
   if (data.length > 0) {
     res.status(200).json({ data });

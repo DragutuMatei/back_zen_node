@@ -6,6 +6,7 @@ import {
   getMedCatById,
   deleteMedCatById,
   getOthers,
+  getOthers2,
 } from "./meditations/categories";
 import fileUpload from "express-fileupload";
 import bodyParser from "body-parser";
@@ -32,6 +33,7 @@ import {
   addListenCat,
   deleteListenCatById,
   getAllListenCats,
+  getbyid,
   getListenCatById,
 } from "./listen/categories";
 import {
@@ -117,6 +119,7 @@ app.get("/getAllMedCats", getAllMedCats);
 app.get("/getMedCatById/:id", getMedCatById);
 app.post("/deleteMedCatById", deleteMedCatById);
 app.get("/getOthers/:id_cat/:tag", getOthers);
+app.get("/getOthers2/:id", getOthers2);
 
 app.post("/addMedToCat", addMedToCat);
 app.post("/deleteMedFromCat", deleteMedFromCat);
@@ -131,6 +134,7 @@ app.post("/addListenCat", addListenCat);
 app.get("/getAllListenCats", getAllListenCats);
 app.get("/getListenCatById/:id", getListenCatById);
 app.post("/deleteListenCatById", deleteListenCatById);
+app.get("/getbyid/:id", getbyid);
 
 app.post("/addListenToCat", addListenToCat);
 app.post("/deleteListenFromCat", deleteListenFromCat);

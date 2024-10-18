@@ -139,14 +139,14 @@ const getOthers = async (req, res) => {
     for (let i = 0; i < data.length; i++) {
       for (let j = 0; j < data[i].meditationRoutines.length; j++) {
         // if (data[i].meditationRoutines.length > 0)
-          if (data[i].meditationRoutines[j].tags.includes(tag)) {
-            if (abonament != false && abonament != "") {
-              data[i].meditationRoutines[j].isLocked = false;
-            }
-          } else {
-            data[i].meditationRoutines.splice(j, 1);
-            j--;
+        if (data[i].meditationRoutines[j].tags.includes(tag)) {
+          if (abonament != false && abonament != "") {
+            data[i].meditationRoutines[j].isLocked = false;
           }
+        } else {
+          data[i].meditationRoutines.splice(j, 1);
+          j--;
+        }
       }
     }
     //console.log(abonament);
@@ -158,7 +158,55 @@ const getOthers = async (req, res) => {
   }
 };
 
-export { addMedCat, getAllMedCats, getMedCatById, deleteMedCatById, getOthers };
+const getOthers2 = async (req, res) => {
+  const { id } = req.params;
+  let final;
+  const data = [];
+  let abonament = "";
+  try {
+    const [decodedToken, userId, user] = await check(req);
+    abonament = user.abonament;
+  } catch (error) {
+    abonament = false;
+  }
+  try {
+    const medCats = await getDocs(collection(db, "categorie_meditati"));
+    medCats.forEach((doc) => {
+      data.push({ uid: doc.id, ...doc.data() });
+    });
+
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data[i].meditationRoutines.length; j++) {
+        // if (data[i].meditationRoutines.length > 0)
+        if (data[i].meditationRoutines[j].id == id) {
+          if (abonament != false && abonament != "") {
+            data[i].meditationRoutines[j].isLocked = false;
+          }
+          final = data[i].meditationRoutines[j];
+          break;
+        } else {
+          data[i].meditationRoutines.splice(j, 1);
+          j--;
+        }
+      }
+    }
+    //console.log(abonament);
+    // console.log(data);
+    console.log(final);
+    res.status(200).json({ data:{...final} });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ ok: false, error });
+  }
+};
+export {
+  addMedCat,
+  getAllMedCats,
+  getMedCatById,
+  deleteMedCatById,
+  getOthers,
+  getOthers2,
+};
 
 // id categorie si tag
 // => sa nu aiba id categorie

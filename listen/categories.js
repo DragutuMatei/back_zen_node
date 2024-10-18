@@ -115,9 +115,52 @@ const deleteListenCatById = async (req, res) => {
   }
 };
 
+const getbyid = async (req, res) => {
+  const { id } = req.params;
+  console.log(id);
+  let final;
+  const data = [];
+  let abonament = "";
+  try {
+    const [decodedToken, userId, user] = await check(req);
+    abonament = user.abonament;
+  } catch (error) {
+    abonament = false;
+  }
+  try {
+    const medCats = await getDocs(collection(db, "categorie_listen"));
+    medCats.forEach((doc) => {
+      data.push({ uid: doc.id, ...doc.data() });
+    });
+
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data[i].listenRoutines.length; j++) {
+        // if (data[i].listenRoutines.length > 0)
+        if (data[i].listenRoutines[j].id == id) {
+          if (abonament != false && abonament != "") {
+            data[i].listenRoutines[j].isLocked = false;
+          }
+          final = data[i].listenRoutines[j];
+          break;
+        } else {
+          data[i].listenRoutines.splice(j, 1);
+          j--;
+        }
+      }
+    }
+    //console.log(abonament);
+    // console.log(data);
+    console.log(final);
+    res.status(200).json({ data: { ...final } });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ ok: false, error });
+  }
+};
 export {
   addListenCat,
   getAllListenCats,
   getListenCatById,
   deleteListenCatById,
+  getbyid,
 };

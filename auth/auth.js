@@ -124,6 +124,11 @@ const checkLogged = async (req, res) => {
   // res.status(200).json({ user });
   try {
     const [decodedToken, userId, data] = await check(req);
+    // console.log({
+    //   userId: userId,
+    //   decodedToken: decodedToken["email"],
+    //   data: { ...data },
+    // });
     res.status(200).send({
       userId: userId,
       decodedToken: decodedToken["email"],
@@ -183,6 +188,7 @@ function getBase64ImageExtension(base64Image) {
 
 const updateUserStats = async (req, res) => {
   const { key, value, id } = req.body;
+  console.log(key);
   try {
     const user_ref = doc(db, "users", id);
     let user = await getDoc(user_ref);
@@ -217,12 +223,15 @@ const updateUserStats = async (req, res) => {
         res.status(500).json({ ok: false, error: "pula mea coaie" });
       }
     } else if (key === "lasts") {
+      console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
       user[key].unshift(value);
       const length = 3;
       if (user[key].length > length) {
         user[key].length = length;
       }
-    }
+      console.log(user[key]);
+    await updateDoc(user_ref, {lasts: user[key]});
+  }
     await updateDoc(user_ref, user);
     res.status(200).json({ ok: true });
   } catch (error) {
@@ -261,10 +270,7 @@ const refreshToken = async (req, res) => {
       .json({ accessToken: newIdToken, refreshToken: newRefreshToken });
   } catch (error) {
     console.error("Error refreshing ID token:", error);
-    res
-      .status(500)
-      .json({ ok:false });
-
+    res.status(500).json({ ok: false });
   }
 };
 

@@ -124,11 +124,11 @@ const checkLogged = async (req, res) => {
   // res.status(200).json({ user });
   try {
     const [decodedToken, userId, data] = await check(req);
-    // console.log({
-    //   userId: userId,
-    //   decodedToken: decodedToken["email"],
-    //   data: { ...data },
-    // });
+    console.log ({
+      userId: userId,
+      decodedToken: decodedToken["email"],
+      data: { ...data },
+    });
     res.status(200).send({
       userId: userId,
       decodedToken: decodedToken["email"],

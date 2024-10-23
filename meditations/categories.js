@@ -164,6 +164,7 @@ const getOthers2 = async (req, res) => {
   const data = [];
   let abonament = "";
   try {
+    console.log("CHECEEEECKKK");
     const [decodedToken, userId, user] = await check(req);
     abonament = user.abonament;
   } catch (error) {

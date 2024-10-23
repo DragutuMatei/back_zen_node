@@ -74,11 +74,16 @@ const login = async (req, res) => {
         res.cookie("accessToken", idToken, {
           httpOnly: true,
         });
+        console.log("AICIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII", {
+          accessToken: idToken,
+          refreshToken: userCredential._tokenResponse.refreshToken,
+        });
         res.status(200).json({
           accessToken: idToken,
           refreshToken: userCredential._tokenResponse.refreshToken,
         });
       } else {
+        console.log("log error");
         res.status(500).json({ error: "Internal Server Error" });
       }
     })
@@ -124,7 +129,7 @@ const checkLogged = async (req, res) => {
   // res.status(200).json({ user });
   try {
     const [decodedToken, userId, data] = await check(req);
-    console.log ({
+    console.log({
       userId: userId,
       decodedToken: decodedToken["email"],
       data: { ...data },
@@ -230,8 +235,8 @@ const updateUserStats = async (req, res) => {
         user[key].length = length;
       }
       console.log(user[key]);
-    await updateDoc(user_ref, {lasts: user[key]});
-  }
+      await updateDoc(user_ref, { lasts: user[key] });
+    }
     await updateDoc(user_ref, user);
     res.status(200).json({ ok: true });
   } catch (error) {
@@ -256,9 +261,9 @@ const refreshToken = async (req, res) => {
       }
     );
 
-    if (!response.ok) {
-      throw new Error("Failed to refresh ID token");
-    }
+    // if (!response.ok) {
+    //   throw new Error("Failed to refresh ID token");
+    // }
 
     const data = await response.json();
 

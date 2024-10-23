@@ -72,6 +72,7 @@ const addMedToCat = async (req, res) => {
 
 const deleteMedFromCat = async (req, res) => {
   try {
+    console.log(req.body);
     const cat_ref = doc(db, "categorie_meditati", req.body.uid);
     const medcat = await getDoc(cat_ref);
     let cat = medcat.data();
@@ -84,7 +85,7 @@ const deleteMedFromCat = async (req, res) => {
     await updateDoc(cat_ref, cat);
     res.status(200).json({ ok: true });
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };

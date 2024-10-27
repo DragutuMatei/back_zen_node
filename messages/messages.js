@@ -29,7 +29,13 @@ const addMessage = async (req, res) => {
     res.status(500).json({ ok: false, error });
   }
 };
-
+function shuffleArray(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]]; // Swap elements
+  }
+  return array;
+}
 const getAllMessages = async (req, res) => {
   try {
     const data = [];
@@ -37,7 +43,7 @@ const getAllMessages = async (req, res) => {
     messages.forEach((mes) => {
       data.push({ ...mes.data(), id: mes.id });
     });
-    res.status(200).json({ data });
+    res.status(200).json({ data: shuffleArray(data) });
   } catch (error) {
     //console.log(error);
     res.status(500).json({ ok: false, error });

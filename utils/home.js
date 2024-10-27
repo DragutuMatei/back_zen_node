@@ -31,6 +31,7 @@ const getIt = async (req, colection, routines, title,link, isBig, isOrderd) => {
     } catch (error) {
       abonament = false;
     }
+    console.log(abonament)
     let items = [];
     let i = 0;
     cats.forEach((doc) => {

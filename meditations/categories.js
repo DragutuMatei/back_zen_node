@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
   where,
 } from "firebase/firestore";
@@ -22,6 +23,7 @@ const addMedCat = async (req, res) => {
   const data = {
     categoryTitle: req.body.categoryTitle,
     backgroundImage: "",
+    order: req.body.order,
     meditationRoutines: [],
   };
   //console.log(req.files["backgroundImage"]);
@@ -54,9 +56,19 @@ const addMedCat = async (req, res) => {
     res.status(500).json({ ok: false, error });
   }
 };
-
+function orderByField(array, field, ascending = true) {
+  return array.sort((a, b) => {
+    if (a[field] < b[field]) {
+      return ascending ? -1 : 1;
+    }
+    if (a[field] > b[field]) {
+      return ascending ? 1 : -1;
+    }
+    return 0;
+  });
+}
 const getAllMedCats = async (req, res) => {
-  const data = [];
+  let data = [];
   let abonament = "";
   try {
     const [decodedToken, userId, user] = await check(req);
@@ -65,22 +77,41 @@ const getAllMedCats = async (req, res) => {
     abonament = false;
   }
   try {
-    const medCats = await getDocs(collection(db, "categorie_meditati"));
+    const medCats = await getDocs(
+      collection(db, "categorie_meditati"),
+      orderBy("order", "desc")
+    );
     medCats.forEach((doc) => {
+      console.log(doc.data().order);
       data.push({ uid: doc.id, ...doc.data() });
     });
+
+    data = orderByField(data, "order", false);
 
     if (abonament != false && abonament != "") {
       for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].meditationRoutines.length; j++) {
           data[i].meditationRoutines[j].isLocked = false;
         }
+        data[i].meditationRoutines = orderByField(
+          data[i].meditationRoutines,
+          "time",
+          false
+        ); 
       }
     }
+    for (let i = 0; i < data.length; i++) {
+      data[i].meditationRoutines = orderByField(
+        data[i].meditationRoutines,
+        "time",
+        false
+      );
+    }
     //console.log(abonament);
-    // console.log(data);
+    console.log(data);
     res.status(200).json({ data });
   } catch (error) {
+    console.log(error)
     res.status(500).json({ ok: false, error });
   }
 };
@@ -194,7 +225,7 @@ const getOthers2 = async (req, res) => {
     //console.log(abonament);
     // console.log(data);
     console.log(final);
-    res.status(200).json({ data:{...final} });
+    res.status(200).json({ data: { ...final } });
   } catch (error) {
     console.log(error);
     res.status(500).json({ ok: false, error });

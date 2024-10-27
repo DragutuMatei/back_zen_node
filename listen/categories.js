@@ -6,6 +6,7 @@ import {
   doc,
   getDoc,
   getDocs,
+  orderBy,
   query,
   where,
 } from "firebase/firestore";
@@ -18,10 +19,22 @@ import {
 import { v4 as uuid } from "uuid";
 import { check } from "../auth/auth";
 
+function orderByField(array, field, ascending = true) {
+  return array.sort((a, b) => {
+    if (a[field] < b[field]) {
+      return ascending ? -1 : 1;
+    }
+    if (a[field] > b[field]) {
+      return ascending ? 1 : -1;
+    }
+    return 0;
+  });
+}
 const addListenCat = async (req, res) => {
   const data = {
     categoryTitle: req.body.categoryTitle,
     backgroundImage: "",
+    order: req.body.order,
     listenRoutines: [],
   };
 
@@ -55,7 +68,7 @@ const addListenCat = async (req, res) => {
 };
 
 const getAllListenCats = async (req, res) => {
-  const data = [];
+  let data = [];
   let abonament = "";
   try {
     const [decodedToken, userId, user] = await check(req);
@@ -64,10 +77,16 @@ const getAllListenCats = async (req, res) => {
     abonament = false;
   }
   try {
-    const listenCats = await getDocs(collection(db, "categorie_listen"));
+    const listenCats = await getDocs(
+      collection(db, "categorie_listen"),
+      orderBy("order", "desc")
+    );
     listenCats.forEach((doc) => {
       data.push({ uid: doc.id, ...doc.data() });
     });
+
+    data = orderByField(data, "order", false);
+
     if (abonament != false && abonament != "") {
       for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].listenRoutines.length; j++) {
@@ -75,9 +94,17 @@ const getAllListenCats = async (req, res) => {
         }
       }
     }
-    //console.log(abonament);
+    for (let i = 0; i < data.length; i++) {
+      data[i].listenRoutines = orderByField(
+        data[i].listenRoutines,
+        "time",
+        false
+      );
+      console.log(data[i].listenRoutines);
+    }
     res.status(200).json({ ok: true, data });
   } catch (error) {
+    console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };

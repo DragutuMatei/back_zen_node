@@ -4,7 +4,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth";
-import { auth, auth_admin, db, storage } from "../config_fire";
+import { auth, auth_admin, db, storage } from "../../config_fire";
 import {
   addDoc,
   collection,

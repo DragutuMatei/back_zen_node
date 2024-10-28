@@ -1,4 +1,4 @@
-import { db, storage } from "../config_fire";
+import { db, storage } from "../../config_fire";
 import {
   addDoc,
   collection,
@@ -7,7 +7,6 @@ import {
   getDoc,
   getDocs,
   query,
-  Timestamp,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -19,7 +18,7 @@ import {
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 
-const addMedToCat = async (req, res) => {
+const addListenToCat = async (req, res) => {
   const data = {
     time: new Date().getTime() / 1000,
     category: req.body.category,
@@ -27,17 +26,14 @@ const addMedToCat = async (req, res) => {
     title: req.body.title,
     isLocked: req.body.isLocked === "true",
     duration: req.body.duration,
-    meditationLink: "",
-    tags: JSON.parse(req.body.tags),
+    listenLink: "",
   };
-
-  console.log(req.body.tags);
   const uid = req.body.uid;
   //console.log(req.files["background"]);
   try {
     const storageRef = ref(
       storage,
-      `/meditations/med/${req.files["background"].name}`
+      `/listen/lis/${req.files["background"].name}`
     );
 
     await uploadBytes(storageRef, req.files["background"].data);
@@ -46,42 +42,22 @@ const addMedToCat = async (req, res) => {
 
     const storageRef2 = ref(
       storage,
-      `/meditations/med/${req.files["meditationLink"].name}`
+      `/listen/lis/${req.files["listenLink"].name}`
     );
 
-    await uploadBytes(storageRef2, req.files["meditationLink"].data);
+    await uploadBytes(storageRef2, req.files["listenLink"].data);
 
     const url2 = await getDownloadURL(storageRef2);
 
-    data["meditationLink"] = url2;
+    data["listenLink"] = url2;
     data["background"] = url;
     data["id"] = uuid();
 
-    const cat_ref = doc(db, "categorie_meditati", uid);
-    const medcat = await getDoc(cat_ref);
-    const cat = medcat.data();
-    cat.meditationRoutines.push(data);
+    const cat_ref = doc(db, "categorie_listen", uid);
+    const listencat = await getDoc(cat_ref);
+    const cat = listencat.data();
+    cat.listenRoutines.push(data);
 
-    await updateDoc(cat_ref, cat);
-    res.status(200).json({ ok: true });
-  } catch (error) {
-    //console.log(error);
-    res.status(500).json({ ok: false, error });
-  }
-};
-
-const deleteMedFromCat = async (req, res) => {
-  try {
-    console.log(req.body);
-    const cat_ref = doc(db, "categorie_meditati", req.body.uid);
-    const medcat = await getDoc(cat_ref);
-    let cat = medcat.data();
-    const id = req.body.id;
-    cat.meditationRoutines = cat.meditationRoutines.filter(
-      (obj) => obj.id !== id
-    );
-    // cat.meditationRoutines.push(data);
-    //console.log(cat);
     await updateDoc(cat_ref, cat);
     res.status(200).json({ ok: true });
   } catch (error) {
@@ -90,14 +66,30 @@ const deleteMedFromCat = async (req, res) => {
   }
 };
 
-const getMedFromCatById = async (req, res) => {
+const deleteListenFromCat = async (req, res) => {
+  try {
+    const cat_ref = doc(db, "categorie_listen", req.body.uid);
+    const listencat = await getDoc(cat_ref);
+    let cat = listencat.data();
+    const id = req.body.id;
+    cat.listenRoutines = cat.listenRoutines.filter((obj) => obj.id !== id);
+    //console.log(cat);
+    await updateDoc(cat_ref, cat);
+    res.status(200).json({ ok: true });
+  } catch (error) {
+    //console.log(error);
+    res.status(500).json({ ok: false, error });
+  }
+};
+
+const getListenFromCatById = async (req, res) => {
   try {
     //console.log(req.params.uid);
-    const cat_ref = doc(db, "categorie_meditati", req.params.uid);
-    const medcat = await getDoc(cat_ref);
-    let cat = medcat.data();
+    const cat_ref = doc(db, "categorie_listen", req.params.uid);
+    const listencat = await getDoc(cat_ref);
+    let cat = listencat.data();
     const id = req.params.id;
-    const rez = cat.meditationRoutines.filter((obj) => obj.id === id);
+    const rez = cat.listenRoutines.filter((obj) => obj.id === id);
     res.status(200).json({ ok: true, data: rez });
   } catch (error) {
     //console.log(error);
@@ -105,4 +97,4 @@ const getMedFromCatById = async (req, res) => {
   }
 };
 
-export { addMedToCat, deleteMedFromCat, getMedFromCatById };
+export { addListenToCat, deleteListenFromCat, getListenFromCatById };

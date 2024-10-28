@@ -7,64 +7,64 @@ import {
   deleteMedCatById,
   getOthers,
   getOthers2,
-} from "./meditations/categories";
+} from "./src/meditations/categories";
 import fileUpload from "express-fileupload";
 import bodyParser from "body-parser";
 import {
   addMedToCat,
   deleteMedFromCat,
   getMedFromCatById,
-} from "./meditations/meditations";
+} from "./src/meditations/meditations";
 import {
   addMessage,
   deleteMessage,
   getAllMessages,
   getMessageById,
-} from "./messages/messages";
+} from "./src/messages/messages";
 import {
   checkLogged,
   login,
   logout,
   register,
   updateUserStats,
-  refreshToken
-} from "./auth/auth";
+  refreshToken,
+} from "./src/auth/auth";
 import {
   addListenCat,
   deleteListenCatById,
   getAllListenCats,
   getbyid,
   getListenCatById,
-} from "./listen/categories";
+} from "./src/listen/categories";
 import {
   addListenToCat,
   deleteListenFromCat,
   getListenFromCatById,
-} from "./listen/listen";
+} from "./src/listen/listen";
 import {
   addpodcastCat,
   deletepodcastCatById,
   getAllpodcastCats,
   getpodcastCatById,
-} from "./podcast/categories";
+} from "./src/podcast/categories";
 import {
   addpodcastToCat,
   deletepodcastFromCat,
   getpodcastFromCatById,
-} from "./podcast/podcast";
+} from "./src/podcast/podcast";
 import {
   addyogaCat,
   deleteyogaCatById,
   getAllyogaCats,
   getyogaCatById,
-} from "./yoga/categories";
+} from "./src/yoga/categories";
 import {
   addyogaToCat,
   deleteyogaFromCat,
   getyogaFromCatById,
-} from "./yoga/yoga";
+} from "./src/yoga/yoga";
 
-import { getHome } from "./utils/home";
+import { getHome } from "./src/utils/home";
 
 const app = express();
 
@@ -91,7 +91,7 @@ app.use(json());
 
 app.use(function (req, res, next) {
   // Website you wish to allow to connect
-  res.setHeader("Access-Control-Allow-Origin", process.env.front_link);
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
 
   // Request methods you wish to allow
   res.setHeader(
@@ -165,6 +165,6 @@ app.post("/register", register);
 app.post("/logout", logout);
 app.post("/updateUserStats", updateUserStats);
 app.get("/user", checkLogged);
-app.post("/refreshToken", refreshToken)
+app.post("/refreshToken", refreshToken);
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

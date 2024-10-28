@@ -1,4 +1,4 @@
-import { db, storage } from "../config_fire";
+import { db, storage } from "../../config_fire";
 import {
   addDoc,
   collection,

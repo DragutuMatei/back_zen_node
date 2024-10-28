@@ -1,4 +1,4 @@
-import { db, storage } from "../config_fire";
+import { db, storage } from "../../config_fire";
 import {
   addDoc,
   collection,
@@ -18,18 +18,18 @@ import {
 import { v4 as uuid } from "uuid";
 import { check } from "../auth/auth";
 
-const addyogaCat = async (req, res) => {
+const addpodcastCat = async (req, res) => {
   const data = {
     categoryTitle: req.body.categoryTitle,
     backgroundImage: "",
-    yogaRoutines: [],
+    podcastRoutines: [],
   };
   //console.log(req.files["backgroundImage"]);
 
   try {
     const storageRef = ref(
       storage,
-      `/yoga/cat/${req.files["backgroundImage"].name}`
+      `/podcast/cat/${req.files["backgroundImage"].name}`
     );
     // var reader = new window.FileReader();
     // reader.onload = function () {
@@ -47,7 +47,7 @@ const addyogaCat = async (req, res) => {
     const url = await getDownloadURL(storageRef);
     data["backgroundImage"] = url;
     data["id"] = uuid();
-    const document = await addDoc(collection(db, "categorie_yoga"), data);
+    const document = await addDoc(collection(db, "categorie_podcast"), data);
     res.status(200).json({ ok: true, id: document.id });
   } catch (error) {
     //console.log(error);
@@ -55,7 +55,7 @@ const addyogaCat = async (req, res) => {
   }
 };
 
-const getAllyogaCats = async (req, res) => {
+const getAllpodcastCats = async (req, res) => {
   const data = [];
   let abonament = "";
   try {
@@ -65,33 +65,33 @@ const getAllyogaCats = async (req, res) => {
     abonament = false;
   }
   try {
-    const yogaCats = await getDocs(collection(db, "categorie_yoga"));
-    yogaCats.forEach((doc) => {
+    const podcastCats = await getDocs(collection(db, "categorie_podcast"));
+    podcastCats.forEach((doc) => {
       data.push({ uid: doc.id, ...doc.data() });
     });
-
     if (abonament != false && abonament != "") {
       for (let i = 0; i < data.length; i++) {
-        for (let j = 0; j < data[i].yogaRoutines.length; j++) {
-          data[i].yogaRoutines[j].isLocked = false;
+        for (let j = 0; j < data[i].podcastRoutines.length; j++) {
+          data[i].podcastRoutines[j].isLocked = false;
         }
       }
     }
     //console.log(abonament);
+
     res.status(200).json({ data });
   } catch (error) {
     res.status(500).json({ ok: false, error });
   }
 };
 
-const getyogaCatById = async (req, res) => {
+const getpodcastCatById = async (req, res) => {
   //console.log(req.params.id);
   try {
-    const ref = doc(db, "categorie_yoga", req.params.id);
-    const yogacat = await getDoc(ref);
+    const ref = doc(db, "categorie_podcast", req.params.id);
+    const podcastcat = await getDoc(ref);
     res.status(200).json({
       ok: true,
-      data: { uid: yogacat.id, ...yogacat.data() },
+      data: { uid: podcastcat.id, ...podcastcat.data() },
     });
   } catch (error) {
     //console.log(error);
@@ -99,10 +99,10 @@ const getyogaCatById = async (req, res) => {
   }
 };
 
-const deleteyogaCatById = async (req, res) => {
+const deletepodcastCatById = async (req, res) => {
   try {
     //console.log(req.body);
-    const ref = doc(db, "categorie_yoga", req.body.id);
+    const ref = doc(db, "categorie_podcast", req.body.id);
 
     deleteDoc(ref)
       .then((r) => {
@@ -117,4 +117,9 @@ const deleteyogaCatById = async (req, res) => {
   }
 };
 
-export { addyogaCat, getAllyogaCats, getyogaCatById, deleteyogaCatById };
+export {
+  addpodcastCat,
+  getAllpodcastCats,
+  getpodcastCatById,
+  deletepodcastCatById,
+};

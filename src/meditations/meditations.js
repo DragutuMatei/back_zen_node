@@ -1,4 +1,4 @@
-import { db, storage } from "../config_fire";
+import { db, storage } from "../../config_fire";
 import {
   addDoc,
   collection,
@@ -7,6 +7,7 @@ import {
   getDoc,
   getDocs,
   query,
+  Timestamp,
   updateDoc,
   where,
 } from "firebase/firestore";
@@ -18,41 +19,48 @@ import {
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 
-const addyogaToCat = async (req, res) => {
+const addMedToCat = async (req, res) => {
   const data = {
+    time: new Date().getTime() / 1000,
     category: req.body.category,
     background: "",
     title: req.body.title,
     isLocked: req.body.isLocked === "true",
     duration: req.body.duration,
-    yogaLink: "",
+    meditationLink: "",
+    tags: JSON.parse(req.body.tags),
   };
+
+  console.log(req.body.tags);
   const uid = req.body.uid;
   //console.log(req.files["background"]);
   try {
     const storageRef = ref(
       storage,
-      `/yoga/yog/${req.files["background"].name}`
+      `/meditations/med/${req.files["background"].name}`
     );
 
     await uploadBytes(storageRef, req.files["background"].data);
 
     const url = await getDownloadURL(storageRef);
 
-    const storageRef2 = ref(storage, `/yoga/yog/${req.files["yogaLink"].name}`);
+    const storageRef2 = ref(
+      storage,
+      `/meditations/med/${req.files["meditationLink"].name}`
+    );
 
-    await uploadBytes(storageRef2, req.files["yogaLink"].data);
+    await uploadBytes(storageRef2, req.files["meditationLink"].data);
 
     const url2 = await getDownloadURL(storageRef2);
 
-    data["yogaLink"] = url2;
+    data["meditationLink"] = url2;
     data["background"] = url;
     data["id"] = uuid();
 
-    const cat_ref = doc(db, "categorie_yoga", uid);
-    const yogacat = await getDoc(cat_ref);
-    const cat = yogacat.data();
-    cat.yogaRoutines.push(data);
+    const cat_ref = doc(db, "categorie_meditati", uid);
+    const medcat = await getDoc(cat_ref);
+    const cat = medcat.data();
+    cat.meditationRoutines.push(data);
 
     await updateDoc(cat_ref, cat);
     res.status(200).json({ ok: true });
@@ -62,30 +70,34 @@ const addyogaToCat = async (req, res) => {
   }
 };
 
-const deleteyogaFromCat = async (req, res) => {
+const deleteMedFromCat = async (req, res) => {
   try {
-    const cat_ref = doc(db, "categorie_yoga", req.body.uid);
-    const yogacat = await getDoc(cat_ref);
-    let cat = yogacat.data();
+    console.log(req.body);
+    const cat_ref = doc(db, "categorie_meditati", req.body.uid);
+    const medcat = await getDoc(cat_ref);
+    let cat = medcat.data();
     const id = req.body.id;
-    cat.yogaRoutines = cat.yogaRoutines.filter((obj) => obj.id !== id);
+    cat.meditationRoutines = cat.meditationRoutines.filter(
+      (obj) => obj.id !== id
+    );
+    // cat.meditationRoutines.push(data);
     //console.log(cat);
     await updateDoc(cat_ref, cat);
     res.status(200).json({ ok: true });
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };
 
-const getyogaFromCatById = async (req, res) => {
+const getMedFromCatById = async (req, res) => {
   try {
     //console.log(req.params.uid);
-    const cat_ref = doc(db, "categorie_yoga", req.params.uid);
-    const yogacat = await getDoc(cat_ref);
-    let cat = yogacat.data();
+    const cat_ref = doc(db, "categorie_meditati", req.params.uid);
+    const medcat = await getDoc(cat_ref);
+    let cat = medcat.data();
     const id = req.params.id;
-    const rez = cat.yogaRoutines.filter((obj) => obj.id === id);
+    const rez = cat.meditationRoutines.filter((obj) => obj.id === id);
     res.status(200).json({ ok: true, data: rez });
   } catch (error) {
     //console.log(error);
@@ -93,4 +105,4 @@ const getyogaFromCatById = async (req, res) => {
   }
 };
 
-export { addyogaToCat, deleteyogaFromCat, getyogaFromCatById };
+export { addMedToCat, deleteMedFromCat, getMedFromCatById };

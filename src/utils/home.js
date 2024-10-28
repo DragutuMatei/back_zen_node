@@ -1,4 +1,4 @@
-import { db, storage } from "../config_fire";
+import { db, storage } from "../../config_fire";
 import {
   addDoc,
   collection,
@@ -21,7 +21,15 @@ import {
 import { v4 as uuid } from "uuid";
 import { check } from "../auth/auth";
 
-const getIt = async (req, colection, routines, title,link, isBig, isOrderd) => {
+const getIt = async (
+  req,
+  colection,
+  routines,
+  title,
+  link,
+  isBig,
+  isOrderd
+) => {
   try {
     const cats = await getDocs(collection(db, colection));
     let abonament = "";
@@ -31,7 +39,7 @@ const getIt = async (req, colection, routines, title,link, isBig, isOrderd) => {
     } catch (error) {
       abonament = false;
     }
-    console.log(abonament)
+    console.log(abonament);
     let items = [];
     let i = 0;
     cats.forEach((doc) => {
@@ -67,7 +75,6 @@ const getIt = async (req, colection, routines, title,link, isBig, isOrderd) => {
     //   }
     // }
 
-
     return {
       title: title,
       isBig: isBig,
@@ -84,7 +91,7 @@ const getHome = async (req, res) => {
     "categorie_meditati",
     "meditationRoutines",
     "Colectii de meditatii",
-    'meditationLink',
+    "meditationLink",
     true,
     false
   );
@@ -93,7 +100,7 @@ const getHome = async (req, res) => {
     "categorie_listen",
     "listenRoutines",
     "Colectii de sunete",
-    'listenLink',
+    "listenLink",
     true,
     false
   );
@@ -102,7 +109,7 @@ const getHome = async (req, res) => {
     "categorie_meditati",
     "meditationRoutines",
     "Ultimile meditatii",
-    'meditationLink',
+    "meditationLink",
     false,
     true
   );
@@ -111,7 +118,7 @@ const getHome = async (req, res) => {
     "categorie_listen",
     "listenRoutines",
     "Ultimile sunete ascultate",
-    'listenLink',
+    "listenLink",
     false,
     true
   );
@@ -122,7 +129,6 @@ const getHome = async (req, res) => {
     listens_data != false && listens_data,
     last_listens != false && last_listens,
   ];
-  
 
   if (data.length > 0) {
     res.status(200).json({ data });

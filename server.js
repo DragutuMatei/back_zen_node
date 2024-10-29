@@ -69,10 +69,10 @@ import { getHome } from "./src/utils/home";
 const app = express();
 
 app.use(fileUpload());
-app.use(bodyParser.json({ limit: "50mb", extended: true }));
+app.use(bodyParser.json({ limit: "1000mb", extended: true }));
 app.use(
   bodyParser.urlencoded({
-    limit: "50mb",
+    limit: "1000mb",
     extended: true,
     parameterLimit: 500000,
   })

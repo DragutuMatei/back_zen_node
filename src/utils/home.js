@@ -108,7 +108,7 @@ const getHome = async (req, res) => {
     req,
     "categorie_meditati",
     "meditationRoutines",
-    "Ultimile meditatii",
+    "Recent adaugate",
     "meditationLink",
     false,
     true
@@ -117,7 +117,7 @@ const getHome = async (req, res) => {
     req,
     "categorie_listen",
     "listenRoutines",
-    "Ultimile sunete ascultate",
+    "Recent adaugate",
     "listenLink",
     false,
     true

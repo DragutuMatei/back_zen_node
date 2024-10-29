@@ -77,7 +77,7 @@ app.use(
     parameterLimit: 500000,
   })
 );
-app.use(bodyParser.text({ limit: "200mb" }));
+app.use(bodyParser.text({ limit: "1000mb" }));
 
 app.use(json());
 // app.use(

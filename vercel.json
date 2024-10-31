@@ -5,8 +5,7 @@
   "functions": {
     "api/*.js": {
       "maxDuration": 20,
-      "memory": 5120,
-      "maxBodySize": "1500mb"
+      "memory": 3009
     }
   }
 }

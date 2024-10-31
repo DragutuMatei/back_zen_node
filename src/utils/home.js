@@ -19,7 +19,7 @@ import {
   uploadBytes,
 } from "firebase/storage";
 import { v4 as uuid } from "uuid";
-import { check } from "../auth/auth";
+import { check } from "../auth/auth.js";
 
 const getIt = async (
   req,

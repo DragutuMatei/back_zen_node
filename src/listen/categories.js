@@ -98,7 +98,7 @@ const getAllListenCats = async (req, res) => {
       data[i].listenRoutines = orderByField(
         data[i].listenRoutines,
         "time",
-        false
+        true
       );
       console.log(data[i].listenRoutines);
     }

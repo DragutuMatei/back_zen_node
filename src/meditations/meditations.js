@@ -65,7 +65,7 @@ const addMedToCat = async (req, res) => {
     await updateDoc(cat_ref, cat);
     res.status(200).json({ ok: true });
   } catch (error) {
-    //console.log(error);
+    console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };

@@ -96,22 +96,22 @@ const getAllMedCats = async (req, res) => {
         data[i].meditationRoutines = orderByField(
           data[i].meditationRoutines,
           "time",
-          false
-        ); 
+          true
+        );
       }
     }
     for (let i = 0; i < data.length; i++) {
       data[i].meditationRoutines = orderByField(
         data[i].meditationRoutines,
         "time",
-        false
+        true
       );
     }
     //console.log(abonament);
     console.log(data);
     res.status(200).json({ data });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({ ok: false, error });
   }
 };

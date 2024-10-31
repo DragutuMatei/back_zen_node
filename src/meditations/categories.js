@@ -107,7 +107,6 @@ const getAllMedCats = async (req, res) => {
         true
       );
     }
-    //console.log(abonament);
     console.log(data);
     res.status(200).json({ data });
   } catch (error) {

@@ -9,7 +9,6 @@ import {
   getOthers2,
 } from "./src/meditations/categories";
 import fileUpload from "express-fileupload";
-import bodyParser from "body-parser";
 import {
   addMedToCat,
   deleteMedFromCat,
@@ -63,26 +62,29 @@ import {
   deleteyogaFromCat,
   getyogaFromCatById,
 } from "./src/yoga/yoga";
+// import bodyParser from "body-parser";
 
 import { getHome } from "./src/utils/home";
 
 const app = express();
 
+const bodyParser = require("body-parser");
+
 app.use(fileUpload());
-// app.use(bodyParser.json({ limit: "1500mb", extended: true }));
-// app.use(
-//   bodyParser.urlencoded({
-//     limit: "1500mb",
-//     extended: true,
-//     parameterLimit: 500000,
-//   })
-// );
-// app.use(bodyParser.text({ limit: "1500mb" }));
+app.use(bodyParser.json({ limit: "1500mb" }));
+app.use(
+  bodyParser.urlencoded({
+    limit: "1500mb",
+    extended: true,
+    parameterLimit: 500000,
+  })
+);
+app.use(bodyParser.text({ limit: "1500mb" }));
 
-app.use(express.json({ limit: "1500mb" }));
-app.use(express.urlencoded({ limit: "1500mb" }));
+// app.use(express.json({ limit: "1500mb" }));
+// app.use(express.urlencoded({ limit: "1500mb" }));
 
-app.use(json());
+app.use(express.json());
 
 app.use(function (req, res, next) {
   // Website you wish to allow to connect

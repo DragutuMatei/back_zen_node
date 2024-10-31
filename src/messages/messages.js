@@ -8,7 +8,7 @@ import {
   orderBy,
 } from "firebase/firestore";
 import { v4 as uuid } from "uuid";
-import { db } from "../../config_fire";
+import { db } from "../../config_fire.js";
 
 const addMessage = async (req, res) => {
   const data = {

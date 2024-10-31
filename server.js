@@ -7,19 +7,19 @@ import {
   deleteMedCatById,
   getOthers,
   getOthers2,
-} from "./src/meditations/categories";
+} from "./src/meditations/categories.js";
 import fileUpload from "express-fileupload";
 import {
   addMedToCat,
   deleteMedFromCat,
   getMedFromCatById,
-} from "./src/meditations/meditations";
+} from "./src/meditations/meditations.js";
 import {
   addMessage,
   deleteMessage,
   getAllMessages,
   getMessageById,
-} from "./src/messages/messages";
+} from "./src/messages/messages.js";
 import {
   checkLogged,
   login,
@@ -27,41 +27,41 @@ import {
   register,
   updateUserStats,
   refreshToken,
-} from "./src/auth/auth";
+} from "./src/auth/auth.js";
 import {
   addListenCat,
   deleteListenCatById,
   getAllListenCats,
   getbyid,
   getListenCatById,
-} from "./src/listen/categories";
+} from "./src/listen/categories.js";
 import {
   addListenToCat,
   deleteListenFromCat,
   getListenFromCatById,
-} from "./src/listen/listen";
+} from "./src/listen/listen.js";
 import {
   addpodcastCat,
   deletepodcastCatById,
   getAllpodcastCats,
   getpodcastCatById,
-} from "./src/podcast/categories";
+} from "./src/podcast/categories.js";
 import {
   addpodcastToCat,
   deletepodcastFromCat,
   getpodcastFromCatById,
-} from "./src/podcast/podcast";
+} from "./src/podcast/podcast.js";
 import {
   addyogaCat,
   deleteyogaCatById,
   getAllyogaCats,
   getyogaCatById,
-} from "./src/yoga/categories";
+} from "./src/yoga/categories.js";
 import {
   addyogaToCat,
   deleteyogaFromCat,
   getyogaFromCatById,
-} from "./src/yoga/yoga";
+} from "./src/yoga/yoga.js";
 // import bodyParser from "body-parser";
 
 import { getHome } from "./src/utils/home";

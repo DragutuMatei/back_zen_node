@@ -69,15 +69,18 @@ import { getHome } from "./src/utils/home";
 const app = express();
 
 app.use(fileUpload());
-app.use(bodyParser.json({ limit: "1500mb", extended: true }));
-app.use(
-  bodyParser.urlencoded({
-    limit: "1500mb",
-    extended: true,
-    parameterLimit: 500000,
-  })
-);
-app.use(bodyParser.text({ limit: "1500mb" }));
+// app.use(bodyParser.json({ limit: "1500mb", extended: true }));
+// app.use(
+//   bodyParser.urlencoded({
+//     limit: "1500mb",
+//     extended: true,
+//     parameterLimit: 500000,
+//   })
+// );
+// app.use(bodyParser.text({ limit: "1500mb" }));
+
+app.use(express.json({ limit: "1500mb" }));
+app.use(express.urlencoded({ limit: "1500mb" }));
 
 app.use(json());
 

@@ -64,7 +64,7 @@ import {
 } from "./src/yoga/yoga.js";
 // import bodyParser from "body-parser";
 
-import { getHome } from "./src/utils/home";
+import { getHome } from "./src/utils/home.js";
 
 const app = express();
 

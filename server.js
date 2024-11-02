@@ -62,13 +62,13 @@ import {
   deleteyogaFromCat,
   getyogaFromCatById,
 } from "./src/yoga/yoga.js";
-// import bodyParser from "body-parser";
+import bodyParser from "body-parser";
 
 import { getHome } from "./src/utils/home.js";
 
 const app = express();
 
-const bodyParser = require("body-parser");
+// const bodyParser = require("body-parser");
 
 app.use(fileUpload());
 app.use(bodyParser.json({ limit: "1500mb" }));

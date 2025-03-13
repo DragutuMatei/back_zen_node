@@ -69,12 +69,17 @@ const addListenCat = async (req, res) => {
 
 const getAllListenCats = async (req, res) => {
   let data = [];
+  let isAdmin = false;
   let abonament = "";
   try {
     const [decodedToken, userId, user] = await check(req);
     abonament = user.abonament;
+    isAdmin =
+      user.email == "pimpmyevents@yahoo.com" ||
+      user.email == "matei.dragutu@osfiir.ro";
   } catch (error) {
     abonament = false;
+    isAdmin = false;
   }
   try {
     const listenCats = await getDocs(
@@ -87,7 +92,7 @@ const getAllListenCats = async (req, res) => {
 
     data = orderByField(data, "order", false);
 
-    if (abonament != false && abonament != "") {
+    if (abonament != false && abonament != ""&& !isAdmin) {
       for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].listenRoutines.length; j++) {
           data[i].listenRoutines[j].isLocked = false;

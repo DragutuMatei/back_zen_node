@@ -70,11 +70,16 @@ function orderByField(array, field, ascending = true) {
 const getAllMedCats = async (req, res) => {
   let data = [];
   let abonament = "";
+  let isAdmin = false;
   try {
     const [decodedToken, userId, user] = await check(req);
     abonament = user.abonament;
+    isAdmin =
+      user.email == "pimpmyevents@yahoo.com" ||
+      user.email == "matei.dragutu@osfiir.ro";
   } catch (error) {
     abonament = false;
+    isAdmin = false;
   }
   try {
     const medCats = await getDocs(
@@ -88,7 +93,7 @@ const getAllMedCats = async (req, res) => {
 
     data = orderByField(data, "order", false);
 
-    if (abonament != false && abonament != "") {
+    if (abonament != false && abonament != "" && !isAdmin) {
       for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].meditationRoutines.length; j++) {
           data[i].meditationRoutines[j].isLocked = false;

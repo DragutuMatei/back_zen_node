@@ -174,8 +174,8 @@ const getHome = async (req, res) => {
     5
   );
 
-  const med_cat = await getCat("categorie_meditati", "Colecții Meditații");
-  const list_cat = await getCat("categorie_listen", "Colecții Sunete");
+  const med_cat = await getCat("categorie_meditati", "Colecții Meditații", true);
+  const list_cat = await getCat("categorie_listen", "Colecții Sunete", true);
 
 
   const data = [

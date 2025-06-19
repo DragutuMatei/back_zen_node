@@ -89,7 +89,6 @@ const getIt = async (
     // }
 
     return {
-      cat:items.length,
       title: title,
       isBig: isBig,
       items: items,
@@ -132,7 +131,6 @@ const getCat = async (cat, title, isBig) => {
     });
 
     return {
-      cat:data.length,
       title: title,
       isBig: isBig,
       data: data,

@@ -89,6 +89,7 @@ const getIt = async (
     // }
 
     return {
+      cat:items.length,
       title: title,
       isBig: isBig,
       items: items,
@@ -125,12 +126,13 @@ const getCat = async (cat, title, isBig) => {
         isLocked: false,
         // time:
       });
-      data.push({ uid: doc.id, ...doc.data() });
+      // data.push({ uid: doc.id, ...doc.data() });
       // } else return;
       index++;
     });
 
     return {
+      cat:data.length,
       title: title,
       isBig: isBig,
       data: data,

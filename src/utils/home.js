@@ -27,8 +27,10 @@ const getIt = async (
   routines,
   title,
   link,
+  free,
   isBig,
-  isOrderd
+  isOrderd,
+  limit = 0
 ) => {
   try {
     const cats = await getDocs(collection(db, colection));
@@ -39,26 +41,37 @@ const getIt = async (
     } catch (error) {
       abonament = false;
     }
-    console.log(abonament);
     let items = [];
     let i = 0;
     cats.forEach((doc) => {
       doc.data()[routines].map((e) => {
-        if (
-          i < 7
-          // todo: for production
-          // && !e.isLocked
-        ) {
-          items.push({
-            title: e.title,
-            background: e.background,
-            linkTo: e[link],
-            linkInfo: null,
-            totalTime: Number(e.duration),
-            isLocked:
-              abonament != false && abonament != "" ? false : e.isLocked,
-            time: e.time,
-          });
+        if (free) {
+          if (
+            // todo: for production
+            !e.isLocked
+          ) {
+            items.push({
+              title: e.title,
+              background: e.background,
+              linkTo: e[link],
+              linkInfo: null,
+              totalTime: Number(e.duration),
+              isLocked: false,
+              time: e.time,
+            });
+          }
+        } else {
+          if (i < limit)
+            items.push({
+              title: e.title,
+              background: e.background,
+              linkTo: e[link],
+              linkInfo: null,
+              totalTime: Number(e.duration),
+              isLocked:
+                abonament != false && abonament != "" ? false : e.isLocked,
+              time: e.time,
+            });
         }
         i++;
       });
@@ -85,33 +98,69 @@ const getIt = async (
   }
 };
 
+const getCat = async (cat, title, isBig) => {
+  try {
+    let data = [];
+
+    const medCats = await getDocs(
+      collection(db, cat),
+      orderBy("order", "desc")
+    );
+    let index = 0;
+    medCats.forEach((doc, index) => {
+      // if (index < limit) {
+      const el = doc.data();
+      data.push({
+        title: el.categoryTitle,
+        background: el.backgroundImage,
+        linkTo:
+          cat === "categorie_meditati" ? "/meditation/item" : "/listen/item",
+        linkInfo: null,
+        totalTime:
+          el[
+            cat === "categorie_meditati"
+              ? "meditationRoutines"
+              : "listenRoutines"
+          ].length,
+        isLocked: false,
+        // time:
+      });
+      data.push({ uid: doc.id, ...doc.data() });
+      // } else return;
+      index++;
+    });
+
+    return {
+      title: title,
+      isBig: isBig,
+      data: data,
+    };
+  } catch (error) {
+    return false;
+  }
+};
+
 const getHome = async (req, res) => {
-  const meditations_data = await getIt(
+  const free_meditations = await getIt(
     req,
     "categorie_meditati",
     "meditationRoutines",
-    "Colectii de meditatii",
+    "Ascultă gratuit",
     "meditationLink",
     true,
-    false
-  );
-  const listens_data = await getIt(
-    req,
-    "categorie_listen",
-    "listenRoutines",
-    "Colectii de sunete",
-    "listenLink",
-    true,
+    false,
     false
   );
   const last_meditations = await getIt(
     req,
     "categorie_meditati",
     "meditationRoutines",
-    "Recent adaugate",
+    "Recent adăugate",
     "meditationLink",
     false,
-    true
+    false,
+    true,
+    5
   );
   const last_listens = await getIt(
     req,
@@ -120,13 +169,20 @@ const getHome = async (req, res) => {
     "Recent adaugate",
     "listenLink",
     false,
-    true
+    false,
+    true,
+    5
   );
 
+  const med_cat = await getCat("categorie_meditati", "Colecții Meditații");
+  const list_cat = await getCat("categorie_listen", "Colecții Sunete");
+
+
   const data = [
-    meditations_data != false && meditations_data,
+    med_cat != false && med_cat,
+    free_meditations != false && free_meditations,
     last_meditations != false && last_meditations,
-    listens_data != false && listens_data,
+    list_cat != false && list_cat,
     last_listens != false && last_listens,
   ];
 

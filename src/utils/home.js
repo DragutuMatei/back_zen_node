@@ -133,7 +133,7 @@ const getCat = async (cat, title, isBig) => {
     return {
       title: title,
       isBig: isBig,
-      data: data,
+      items: data,
     };
   } catch (error) {
     return false;

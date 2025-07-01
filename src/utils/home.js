@@ -111,6 +111,7 @@ const getCat = async (cat, title, isBig) => {
       // if (index < limit) {
       const el = doc.data();
       data.push({
+        order:el.order,
         title: el.categoryTitle,
         background: el.backgroundImage,
         linkTo:
@@ -127,7 +128,7 @@ const getCat = async (cat, title, isBig) => {
       });
       index++;
     });
-    data = data.sort((a, b) => b.time - a.time);
+    data = data.sort((a, b) => b.order - a.order);
 
     return {
       title: title,

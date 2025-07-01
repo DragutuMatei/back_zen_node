@@ -125,10 +125,9 @@ const getCat = async (cat, title, isBig) => {
         isLocked: false,
         // time:
       });
-      // data.push({ uid: doc.id, ...doc.data() });
-      // } else return;
       index++;
     });
+    data = data.sort((a, b) => b.time - a.time);
 
     return {
       title: title,
@@ -174,9 +173,12 @@ const getHome = async (req, res) => {
     5
   );
 
-  const med_cat = await getCat("categorie_meditati", "Colecții Meditații", true);
+  const med_cat = await getCat(
+    "categorie_meditati",
+    "Colecții Meditații",
+    true
+  );
   const list_cat = await getCat("categorie_listen", "Colecții Sunete", true);
-
 
   const data = [
     med_cat != false && med_cat,

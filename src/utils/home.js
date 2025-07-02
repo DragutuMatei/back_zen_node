@@ -92,13 +92,15 @@ const getIt = async (
       title: title,
       isBig: isBig,
       items: items,
+      meditationCategories: null,
+      soundCategories: null,
     };
   } catch (error) {
     return false;
   }
 };
 
-const getCat = async (cat, title, isBig) => {
+const getCat = async (cat, title, isBig, type) => {
   try {
     let data = [];
 
@@ -111,7 +113,7 @@ const getCat = async (cat, title, isBig) => {
       // if (index < limit) {
       const el = doc.data();
       data.push({
-        order:el.order,
+        order: el.order,
         title: el.categoryTitle,
         background: el.backgroundImage,
         linkTo:
@@ -133,7 +135,9 @@ const getCat = async (cat, title, isBig) => {
     return {
       title: title,
       isBig: isBig,
-      items: data,
+      meditationCategories: cat === "categorie_meditati" ? data : null,
+      soundCategories: cat === "categorie_listen" ? data : null,
+      items: null,
     };
   } catch (error) {
     return false;

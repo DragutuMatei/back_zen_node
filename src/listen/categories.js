@@ -111,17 +111,21 @@ const getAllListenCats = async (req, res) => {
 };
 
 const getListenCatById = async (req, res) => {
-  //console.log(req.params.id);
+  const result = await getListenCatByIdRaw(req.params.id);
+  if (result.ok) {
+    res.status(200).json(result);
+  } else {
+    res.status(500).json(result);
+  }
+};
+
+const getListenCatByIdRaw = async (id) => {
   try {
-    const ref = doc(db, "categorie_listen", req.params.id);
+    const ref = doc(db, "categorie_listen", id);
     const listencat = await getDoc(ref);
-    res.status(200).json({
-      ok: true,
-      data: { uid: listencat.id, ...listencat.data() },
-    });
+    return { ok: true, data: { uid: listencat.id, ...listencat.data() } };
   } catch (error) {
-    //console.log(error);
-    res.status(500).json({ ok: false, error });
+    return { ok: false, error };
   }
 };
 
@@ -191,4 +195,5 @@ export {
   getListenCatById,
   deleteListenCatById,
   getbyid,
+  getListenCatByIdRaw,
 };

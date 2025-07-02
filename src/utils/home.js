@@ -1,25 +1,8 @@
-import { db, storage } from "../../config_fire.js";
-import {
-  addDoc,
-  collection,
-  deleteDoc,
-  doc,
-  getDoc,
-  getDocs,
-  limit,
-  orderBy,
-  query,
-  updateDoc,
-  where,
-} from "firebase/firestore";
-import {
-  ref,
-  getDownloadURL,
-  uploadBytesResumable,
-  uploadBytes,
-} from "firebase/storage";
-import { v4 as uuid } from "uuid";
+import { collection, getDocs, orderBy } from "firebase/firestore";
+import { db } from "../../config_fire.js";
 import { check } from "../auth/auth.js";
+import { getMedCatByIdRaw } from "../meditations/categories.js";
+import { getListenCatByIdRaw } from "../listen/categories.js";
 
 const getIt = async (
   req,
@@ -109,16 +92,58 @@ const getCat = async (cat, title, isBig, type) => {
       orderBy("order", "desc")
     );
     let index = 0;
-    medCats.forEach((doc, index) => {
+    // for (let i = 0; i < medCats.length; i++) {
+    //   const el = medCats[i].data();
+    //   console.log(el);
+
+    //   let linkInfo = null;
+    //   if (cat === "categorie_meditati") {
+    //     linkInfo = await getMedCatByIdRaw(medCats[i].id);
+    //     linkInfo = linkInfo.meditationRoutines;
+    //     } else {
+    //       linkInfo = await getListenCatByIdRaw(medCats[i].id);
+    //       linkInfo = linkInfo.listenRoutines;
+    //   }
+
+    //   console.log(linkInfo);
+    //   data.push({
+    //     order: el.order,
+    //     title: el.categoryTitle,
+    //     background: el.backgroundImage,
+    //     linkTo:
+    //       cat === "categorie_meditati" ? "/meditation/item" : "/listen/item",
+    //     linkInfo: linkInfo,
+    //     totalTime:
+    //       el[
+    //         cat === "categorie_meditati"
+    //           ? "meditationRoutines"
+    //           : "listenRoutines"
+    //       ].length,
+    //     isLocked: false,
+    //   });
+    // }
+
+    medCats.forEach(async (doc, index) => {
       // if (index < limit) {
       const el = doc.data();
+      const uid = doc.id;
+      let linkInfo = null;
+      if (cat === "categorie_meditati") {
+        linkInfo = await getMedCatByIdRaw(uid);
+        console.log("linkInfo: ", linkInfo);
+        linkInfo = linkInfo.data.meditationRoutines;
+      } else {
+        linkInfo = await getListenCatByIdRaw(uid);
+        linkInfo = linkInfo.data.listenRoutines;
+      }
+      // console.log(linkInfo);
       data.push({
         order: el.order,
         title: el.categoryTitle,
         background: el.backgroundImage,
         linkTo:
           cat === "categorie_meditati" ? "/meditation/item" : "/listen/item",
-        linkInfo: null,
+        linkInfo: linkInfo,
         totalTime:
           el[
             cat === "categorie_meditati"
@@ -140,6 +165,7 @@ const getCat = async (cat, title, isBig, type) => {
       items: null,
     };
   } catch (error) {
+    console.log(error);
     return false;
   }
 };

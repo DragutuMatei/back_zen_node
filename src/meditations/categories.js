@@ -88,7 +88,7 @@ const getAllMedCats = async (req, res) => {
 
     data = orderByField(data, "order", false);
     console.log(abonament);
-    if (abonament != false && abonament != "" ) {
+    if (abonament != false && abonament != "") {
       for (let i = 0; i < data.length; i++) {
         for (let j = 0; j < data[i].meditationRoutines.length; j++) {
           data[i].meditationRoutines[j].isLocked = false;
@@ -116,20 +116,22 @@ const getAllMedCats = async (req, res) => {
 };
 
 const getMedCatById = async (req, res) => {
-  //console.log(req.params.id);
-  try {
-    const ref = doc(db, "categorie_meditati", req.params.id);
-    const medcat = await getDoc(ref);
-    res.status(200).json({
-      ok: true,
-      data: { uid: medcat.id, ...medcat.data() },
-    });
-  } catch (error) {
-    //console.log(error);
-    res.status(500).json({ ok: false, error });
+  const result = await getMedCatByIdRaw(req.params.id);
+  if (result.ok) {
+    res.status(200).json(result);
+  } else {
+    res.status(500).json(result);
   }
 };
-
+const getMedCatByIdRaw = async (id) => {
+  try {
+    const ref = doc(db, "categorie_meditati", id);
+    const medcat = await getDoc(ref);
+    return { ok: true, data: { uid: medcat.id, ...medcat.data() } };
+  } catch (error) {
+    return { ok: false, error };
+  }
+};
 const deleteMedCatById = async (req, res) => {
   try {
     //console.log(req.body);
@@ -233,6 +235,7 @@ const getOthers2 = async (req, res) => {
 export {
   addMedCat,
   getAllMedCats,
+  getMedCatByIdRaw,
   getMedCatById,
   deleteMedCatById,
   getOthers,

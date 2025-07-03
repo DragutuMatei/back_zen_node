@@ -83,6 +83,20 @@ const getIt = async (
   }
 };
 
+const getInfos = (cat, uid) => {
+  let linkInfo = null;
+
+  if (cat === "categorie_meditati") {
+    linkInfo = getMedCatByIdRaw(uid);
+    linkInfo = linkInfo?.data?.meditationRoutines;
+  } else {
+    linkInfo = getListenCatByIdRaw(uid);
+    linkInfo = linkInfo?.data?.listenRoutines;
+  }
+
+  return linkInfo;
+};
+
 const getCat = async (cat, title, isBig, type) => {
   try {
     let data = [];
@@ -91,6 +105,7 @@ const getCat = async (cat, title, isBig, type) => {
       collection(db, cat),
       orderBy("order", "desc")
     );
+
     let index = 0;
     // for (let i = 0; i < medCats.length; i++) {
     //   const el = medCats[i].data();
@@ -124,19 +139,11 @@ const getCat = async (cat, title, isBig, type) => {
     // }
 
     medCats.forEach(async (doc, index) => {
-      // if (index < limit) {
       const el = doc.data();
       const uid = doc.id;
-      let linkInfo = null;
-      if (cat === "categorie_meditati") {
-        linkInfo = await getMedCatByIdRaw(uid);
-        console.log("linkInfo: ", linkInfo);
-        linkInfo = linkInfo.data.meditationRoutines;
-      } else {
-        linkInfo = await getListenCatByIdRaw(uid);
-        linkInfo = linkInfo.data.listenRoutines;
-      }
-      // console.log(linkInfo);
+
+      let linkInfo = getInfos(cat, uid);
+
       data.push({
         order: el.order,
         title: el.categoryTitle,
@@ -151,10 +158,9 @@ const getCat = async (cat, title, isBig, type) => {
               : "listenRoutines"
           ].length,
         isLocked: false,
-        // time:
       });
-      index++;
     });
+
     data = data.sort((a, b) => b.order - a.order);
 
     return {

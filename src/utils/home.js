@@ -83,14 +83,14 @@ const getIt = async (
   }
 };
 
-const getInfos = (cat, uid) => {
-  let linkInfo = null;
+const getInfos = async (cat, uid) => {
+  let linkInfo = "";
 
   if (cat === "categorie_meditati") {
-    linkInfo = getMedCatByIdRaw(uid);
+    linkInfo = await getMedCatByIdRaw(uid);
     linkInfo = linkInfo?.data?.meditationRoutines;
   } else {
-    linkInfo = getListenCatByIdRaw(uid);
+    linkInfo = await getListenCatByIdRaw(uid);
     linkInfo = linkInfo?.data?.listenRoutines;
   }
 
@@ -107,50 +107,19 @@ const getCat = async (cat, title, isBig, type) => {
     );
 
     let index = 0;
-    // for (let i = 0; i < medCats.length; i++) {
-    //   const el = medCats[i].data();
-    //   console.log(el);
-
-    //   let linkInfo = null;
-    //   if (cat === "categorie_meditati") {
-    //     linkInfo = await getMedCatByIdRaw(medCats[i].id);
-    //     linkInfo = linkInfo.meditationRoutines;
-    //     } else {
-    //       linkInfo = await getListenCatByIdRaw(medCats[i].id);
-    //       linkInfo = linkInfo.listenRoutines;
-    //   }
-
-    //   console.log(linkInfo);
-    //   data.push({
-    //     order: el.order,
-    //     title: el.categoryTitle,
-    //     background: el.backgroundImage,
-    //     linkTo:
-    //       cat === "categorie_meditati" ? "/meditation/item" : "/listen/item",
-    //     linkInfo: linkInfo,
-    //     totalTime:
-    //       el[
-    //         cat === "categorie_meditati"
-    //           ? "meditationRoutines"
-    //           : "listenRoutines"
-    //       ].length,
-    //     isLocked: false,
-    //   });
-    // }
 
     medCats.forEach(async (doc, index) => {
       const el = doc.data();
       const uid = doc.id;
 
-      let linkInfo = getInfos(cat, uid);
-
       data.push({
+        id: doc.id,
         order: el.order,
         title: el.categoryTitle,
         background: el.backgroundImage,
         linkTo:
           cat === "categorie_meditati" ? "/meditation/item" : "/listen/item",
-        linkInfo: linkInfo,
+        // linkInfo: await getInfos(cat, uid),
         totalTime:
           el[
             cat === "categorie_meditati"
@@ -162,6 +131,11 @@ const getCat = async (cat, title, isBig, type) => {
     });
 
     data = data.sort((a, b) => b.order - a.order);
+
+    for (const d of data) {
+      const infos = await getInfos(cat, d.id);
+      d.linkInfo = infos;
+    }
 
     return {
       title: title,
@@ -177,6 +151,12 @@ const getCat = async (cat, title, isBig, type) => {
 };
 
 const getHome = async (req, res) => {
+  const med_cat = await getCat(
+    "categorie_meditati",
+    "Colecții Meditații",
+    true
+  );
+  const list_cat = await getCat("categorie_listen", "Colecții Sunete", true);
   const free_meditations = await getIt(
     req,
     "categorie_meditati",
@@ -209,13 +189,6 @@ const getHome = async (req, res) => {
     true,
     5
   );
-
-  const med_cat = await getCat(
-    "categorie_meditati",
-    "Colecții Meditații",
-    true
-  );
-  const list_cat = await getCat("categorie_listen", "Colecții Sunete", true);
 
   const data = [
     med_cat != false && med_cat,

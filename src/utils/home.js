@@ -2,7 +2,7 @@ import { collection, getDocs, orderBy } from "firebase/firestore";
 import { db } from "../../config_fire.js";
 import { check } from "../auth/auth.js";
 import { getMedCatByIdRaw } from "../meditations/categories.js";
-import { getListenCatByIdRaw } from "../listen/categories.js";
+import { getListenCatByIdRaw, orderByField } from "../listen/categories.js";
 
 const getIt = async (
   req,
@@ -88,10 +88,10 @@ const getInfos = async (cat, uid) => {
 
   if (cat === "categorie_meditati") {
     linkInfo = await getMedCatByIdRaw(uid);
-    linkInfo = linkInfo?.data?.meditationRoutines;
+    linkInfo = orderByField(linkInfo?.data?.meditationRoutines, "time", true);
   } else {
     linkInfo = await getListenCatByIdRaw(uid);
-    linkInfo = linkInfo?.data?.listenRoutines;
+    linkInfo = orderByField(linkInfo?.data?.listenRoutines, "time", true);
   }
 
   return linkInfo;

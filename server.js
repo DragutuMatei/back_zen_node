@@ -65,6 +65,7 @@ import {
 import bodyParser from "body-parser";
 
 import { getHome } from "./src/utils/home.js";
+import { getinfos } from "./src/utils/infos.js";
 
 const app = express();
 
@@ -164,5 +165,8 @@ app.post("/logout", logout);
 app.post("/updateUserStats", updateUserStats);
 app.get("/user", checkLogged);
 app.post("/refreshToken", refreshToken);
+
+app.get("/getinfos/:id", getinfos)
+
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

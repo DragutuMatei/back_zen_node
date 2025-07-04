@@ -33,14 +33,12 @@ Vocea si instructiunile mele au rolul de a te ajuta in procesul de relaxare, det
 Atunci cand starea de meditatie se combina cu muzica de relaxare, puterea gandurilor si a imaginatiei, ajungi sa ai parte de experiente vii si profunde, vei explora mai bine interiorul fiintei tale si vei descoperi noi dimensiuni ale libertatii, inspiratiei, echilibrului si fericirii.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
 
 Acest tip de terapie minte-corp te va purta prin toate frecventele undelor cerebrale (starea beta, alpha, theta, delta) si poate stimula toate cele 5 simturi, (auz, vaz, miros, gust, simt tactil), implicand corpul fizic dar si trairile si senzatiile, de aici rezultand efectul de detoxifiere mentala si emotionala al acestei practici.
 </p>
-<br/>
 <br/>
 
 
@@ -199,7 +197,6 @@ In ultimii 40 de ani, oamenii de stiinta au studiat beneficiile meditatiei si vi
 Tehnicile de respiratie sunt fundamentale atunci cand vorbim despre inducerea starii de calm si reducerea anxietatii, pentru ca activeaza sistemul parasimpatic, cel care este responsabil pentru senzatia de relaxare, odihna si digestie.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
@@ -217,14 +214,12 @@ Poti sa-ti schimbi starea de spirit in mod constient, ajungand de la stres, anxi
 Respiratia abdominala reprezinta modul natural si eficient in care poti respira pentru a pastra un echilibru intre corpul, mintea si emotiile tale.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
 
 De cele mai multe ori uitam ca respiratia implica participarea a numerosi muschi, printre care diafragma, un muschi situat sub plamani, care poate solicita abdomenul. In acest fel, poti intelege mai bine de ce este esential si mai ales benefic sa inveti sa respiri cu ajutorul abdomenului.
 </p>
-<br/>
 <br/>
 
 
@@ -233,14 +228,12 @@ De cele mai multe ori uitam ca respiratia implica participarea a numerosi muschi
 Intr-o stare relaxata, abdomenul se dilata cand inspiri, deoarece plamanii se extind in jos. In schimb, in stare de stres, diafragma ramane fixa, impiedicand plamanii sa coboare. Rezultatul: respiratia este in acest caz toracica si incompleta, ducand in timp la cresterea presiunii arteriale, favorizand afectiunile cardiovasculare, anxietatea si depresia.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
 
 Nu poti evita intotdeauna sursele de stres din viata ta, dar poti dezvolta noi moduri de a face fata unor astfel de momente. Unul dintre aceste moduri este respiratia abdominala ritmica, prin care poti aduce in armonie sistemul circulator, respirator si digestiv.
 </p>
-<br/>
 <br/>
 
 
@@ -252,8 +245,7 @@ Respiratia abdominala ritmica ajuta la eliberarea toxinelor, imbunatateste siste
 <br/>
 <br/>
 
-
-<p style="fontWeight:600" >
+ 
 
 <b style="fontWeight:800" >De ce este important ritmul respiratiei?</b>
 <br/>
@@ -261,7 +253,6 @@ Respiratia abdominala ritmica ajuta la eliberarea toxinelor, imbunatateste siste
 <p style="fontWeight:600" >
 Incetinind sau accelerand in mod constient respiratia, vei dispune de un mijloc eficient si sigur care iti va permine sa modifici gradat modul de functionare al organismului.
 </p>
-<br/>
 <br/>
 
 
@@ -332,7 +323,6 @@ Practicand regulat aceste exercitii de respiratie, cate 10 minute dimineata si s
 M-am gandit ca este mai bine sa alegi chiar tu mesajul care sa te ghideze in fiecare zi, decat sa o fac eu pentru tine. Astfel, vei avea ocazia sa te conectezi si mai mult cu intuitia ta, folosindu-te de puterea intentiei si Legea Atractiei.
 </p>
 <br/>
-<br/>
 
 
 
@@ -345,7 +335,6 @@ M-am gandit ca este mai bine sa alegi chiar tu mesajul care sa te ghideze in fie
 Suma tuturor gandurilor si actiunilor tale emite o anumita vibratie, pe care Universul o primeste si careia iti raspunde in consecinta prin situatii, persoane, conjuncturi sau sincronicitati.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
@@ -353,14 +342,12 @@ Suma tuturor gandurilor si actiunilor tale emite o anumita vibratie, pe care Uni
 Prin urmare, ceea ce vibrezi vei atrage in viata ta. La fel se intampla si atunci cand alegi un mesaj. Vei atrage intotdeauna cardul care contine mesajul ce rezoneaza cel mai bine cu subconstientul si vibratia ta din acel moment. Astfel, ai puterea de a-ti slefui viata prin intentie, vointa, emotii si ganduri. 
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
 
 Lasa-te ghidat de intuitia ta inainte sa alegi un mesaj. Tot ce trebuie sa faci, este sa urmezi acesti pasi simpli:
 </p>
-<br/>
 <br/>
 
 
@@ -384,9 +371,8 @@ Lasa-te ghidat de intuitia ta inainte sa alegi un mesaj. Tot ce trebuie sa faci,
   },
   asculta: {
     title: "Info Asculta",
-    content: `<1><b style="fontWeight:800" >Calatorii audio 3D cu sunetele din natura</b>
+    content: `<b style="fontWeight:800" >Calatorii audio 3D cu sunetele din natura</b>
 <br/>
-</1>
 
 <p style="fontWeight:600" >
 Visezi sa ai parte de noi experiente care sa te poarte spre starea de relaxare si pace interioara? Iti doresti sa calatoresti prin intermediul simturilor tale in cele mai exotice si fantastice locuri din natura? 
@@ -418,7 +404,6 @@ Esti la un pas distanta de a te bucura de o selectie unica de sunete 3D din natu
 A petrece timp in natura iti poate aduce beneficii mentale, spirituale sau fizice, in moduri variate si surprinzatoare. 
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
@@ -426,14 +411,12 @@ A petrece timp in natura iti poate aduce beneficii mentale, spirituale sau fizic
 Timpul petrecut in natura duce la cresterea vitalitatii si a starii de relaxare, dar si la imbunatatirea functiilor cognitive si la dezvoltarea creativitatii. Te vei simti mai conectat atunci cand esti in armonie cu natura si de aici rezulta senzatia de calm si impamantare.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
 
 A petrece macar cateva minute in natura, fizic sau mental, iti poate schimba starea de spirit prin acel sentiment minunat de uimire in fata unei paduri inverzite, a unui cer plin de stele sau rasarit de soare. 
 </p>
-<br/>
 <br/>
 
 
@@ -453,7 +436,6 @@ Stiu ca nu poti ajunge in mijlocul naturii ori de cate ori iti doresti, dar prin
 Intuitia iti va ghida subconstientul catre locuri pline de semnificatie. Nu trebuie decat sa respiri, sa inchizi ochii si sa te lasi purtat intr-o calatorie a sunetelor si a senzatiilor de tot felul.  Vom incepe cu 5-10 minute de relaxare ghidata care te vor introduce in tema meditatiei si te vor ajuta sa depasesti granitele mintii constiente, pasind dincolo portile imaginatiei tale.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
@@ -461,14 +443,12 @@ Intuitia iti va ghida subconstientul catre locuri pline de semnificatie. Nu treb
 Apoi, vei ramane in compania muzicii si a naturii, in acest Univers personal in care simturile se trezesc la viata si unde stii ca totul este posibil.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
 
 Tonurile binaurale vor rezona la unison cu frecventele undelor cerebrale si te vor conduce spre o relaxare profunda, traversand pe rand starea beta, alpha, theta si delta.
 </p>
-<br/>
 <br/>
 
 
@@ -485,14 +465,12 @@ Sunetele naturii prelucrate prin tehnologia 3D vor crea senzatii cat mai autenti
 <h1><b style="fontWeight:800" >Vindecare prin vibratie si sunete</b>
 <br/>
 </h1>
-</p>
 <br/>
 <br/>
 
-
+<p>
 Frecventele sacre ale solfegiului reprezinta tonuri si sunete specifice care ajuta la restabilirea armoniei dintre minte, corp si spirit. Aceste frecvente se regasesc in istoria crestinismului, cantate de calugarii Georgieni, dar si in mantrele antice sanscrite.
 </p>
-<br/>
 <br/>
 
 
@@ -500,7 +478,6 @@ Frecventele sacre ale solfegiului reprezinta tonuri si sunete specifice care aju
 
 Tonalitatile muzicii creeaza vibratii care influenteaza mintea subconstienta, promovand cresterea energiei vitale si vindecarea fizica si emotionala.
 </p>
-<br/>
 <br/>
 
 
@@ -523,7 +500,6 @@ Tonalitatile muzicii creeaza vibratii care influenteaza mintea subconstienta, pr
 Echilibreaza chakra radacina (Muladhara) oferindu-ti sentimentul de impamantare si te ajuta sa eliberezi frica, vinovatia si anxietatea din mintea constienta si subconstienta, transformand suferinta in bucurie.
 </p>
 <br/>
-<br/>
 
 
 
@@ -539,7 +515,6 @@ Echilibreaza chakra radacina (Muladhara) oferindu-ti sentimentul de impamantare 
 <p style="fontWeight:600" >
 Echilibreaza chakra sacrala (Swadhisthana), elimina convingerile negative, traumele si blocajele emotionale, si te ajuta sa faci schimbari benefice in viata ta.
 </p>
-<br/>
 <br/>
 
 
@@ -557,7 +532,6 @@ Echilibreaza chakra sacrala (Swadhisthana), elimina convingerile negative, traum
 Calmeaza mintea si spiritul oferindu-ti sentimentul de pace si echilibru interior.
 </p>
 <br/>
-<br/>
 
 
 <ul>
@@ -572,7 +546,6 @@ Calmeaza mintea si spiritul oferindu-ti sentimentul de pace si echilibru interio
 <p style="fontWeight:600" >
 Echilibreaza chakra plexului solar (Manipura) si ajuta la vindecarea energetica a corpului. Aduce transformarea si miracolele in viata ta reparand AND-ul, reduce nivelul hormonilor de stres din corp si creste nivelul energie, incredere si stima de sine.
 </p>
-<br/>
 <br/>
 
 
@@ -590,7 +563,6 @@ Echilibreaza chakra plexului solar (Manipura) si ajuta la vindecarea energetica 
 Echilibreza chakra inimii (Anahata), imbunatateste relatiile, comunicarea si conexiunile spirituale, incurajand iubirea, toleranta si compasiunea.
 </p>
 <br/>
-<br/>
 
 
 
@@ -606,7 +578,6 @@ Echilibreza chakra inimii (Anahata), imbunatateste relatiile, comunicarea si con
 
 Echilibreaza chakra gatului (Vishuddha), curata celulele corpului de toxine si de radiatiile electromagnetice, te ajuta sa te exprimi autentic si sa gasesti solutii problemelor cu care te confrunti, promovand o viata sanatoasa si echilibrata.
 </p>
-<br/>
 <br/>
 
 
@@ -624,7 +595,6 @@ Echilibreaza chakra gatului (Vishuddha), curata celulele corpului de toxine si d
 Echilibreaza chakra celui de-al treilea ochi (Ajna), te ajuta sa te conectezi mai bine cu intuita ta si sa vezi adevarul din tot ce te inconjoara, readucand echilibrul spiritual in viata ta.
 </p>
 <br/>
-<br/>
 
 
 
@@ -641,14 +611,12 @@ Echilibreaza chakra celui de-al treilea ochi (Ajna), te ajuta sa te conectezi ma
 Echilibreza chakra coroana (Sahasrara), activeaza intuitia si glanda pineala, creste nivelul de energie si vibratie pozitiva si te ajuta sa te conectezi cu Sursa intregii creatii.
 </p>
 <br/>
-<br/>
 
 
 <p style="fontWeight:600" >
 
 Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti schimba viata.
 </p>
-<br/>
 <br/>
 
 

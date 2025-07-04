@@ -4,27 +4,39 @@ import { db } from "../../config_fire.js";
 const infos = {
   meditatii: {
     title: "Info Meditatii",
-    content: `In ritmul stresant al vietii cotidiene, practica meditatiei devine din ce in ce mai populara pe masura ce incearcam sa descoperim noi moduri de a ne relaxa, de a ne detasa de griji si stres, de a evolua in plan spiritual sau personal, ori de a ne imbunatati calitatea vietii.
-
+    content: `<p> In ritmul stresant al vietii cotidiene, practica meditatiei devine din ce in ce mai populara pe masura ce incearcam sa descoperim noi moduri de a ne relaxa, de a ne detasa de griji si stres, de a evolua in plan spiritual sau personal, ori de a ne imbunatati calitatea vietii.
+</p>
 
 <b>Ce este meditatia si vizualizarea ghidata?</b>
-
+<p>
 Meditatia si vizualizarea ghidata reprezinta o tehnica blanda, dar puternica si eficienta, de redirectionare a atentiei si a mintii asupra unor simturi, emotii sau imagini mentale, in moduri proactive si pozitive. Te poti elibera astfel mult mai usor de ganduri, tensiuni sau anxietate, reusind sa accesezi resurse interioare nebanuite.
 Vocea si instructiunile mele au rolul de a te ajuta in procesul de relaxare, detasare mentala sau eliberare emotionala, sustinandu-te pas cu pas pe tot parcursul calatoriei tale interioare.
+</p>
 
 <b>Care sunt efectele acestei practici?</b>
+</p>
 
+<p>
 Atunci cand starea de meditatie se combina cu muzica de relaxare, puterea gandurilor si a imaginatiei, ajungi sa ai parte de experiente vii si profunde, vei explora mai bine interiorul fiintei tale si vei descoperi noi dimensiuni ale libertatii, inspiratiei, echilibrului si fericirii.
+</p>
+
+<p>
 
 Acest tip de terapie minte-corp te va purta prin toate frecventele undelor cerebrale (starea beta, alpha, theta, delta) si poate stimula toate cele 5 simturi, (auz, vaz, miros, gust, simt tactil), implicand corpul fizic dar si trairile si senzatiile, de aici rezultand efectul de detoxifiere mentala si emotionala al acestei practici.
+</p>
+
+<p>
 
 Datorita structurilor creierului pe care le implica, meditatia ghidata deblocheaza emotiile, amplifica si sustine starea de bine, sensibilitatea la muzica, deschiderea catre spiritualitate, intuitie, gandire abstracta si empatie. Pentru ca mobilizeaza subconstientul in a sprijini gandurile si obiectivele constiente, ea creste puterea interioara si motivatia de a actiona pentru indeplinirea dorintelor si visurilor tale.
+</p>
+
 
 <b>Meditatia ghidata nu este doar o tehnica usoara si accesibila de relaxare si de reducere a anxietatii, dar reprezinta o unealta importanta in dezvoltarea personala.</b>
 
-
+<p>
 
 In ultimii 40 de ani, oamenii de stiinta au studiat beneficiile meditatiei si vizualizarii ghidate, demonstrand impactul pozitiv pe care il au asupra sanatatii mentale si fizice, creativitatii si performantei. In urma acestor studii, astazi putem afirma ca cel putin 10 minute de meditatie sau vizualizare ghidata pe zi, iti pot imbunatati viata pe mai multe planuri.
+</p>
 
 <b>Beneficii psihologice</b>
 
@@ -78,32 +90,59 @@ In ultimii 40 de ani, oamenii de stiinta au studiat beneficiile meditatiei si vi
   },
   respira: {
     title: "Info Respira",
-    content: `Ce ai spune daca ti-ai lua cateva minute de pauza pentru a te concentra asupra respiratiei? Ti-am pregatit cateva exercitii simple care te pot ajuta sa te relaxezi, eliberand treptat stresul si tensiunea cotidiana.
+    content: `<p>
+     Ce ai spune daca ti-ai lua cateva minute de pauza pentru a te concentra asupra respiratiei? Ti-am pregatit cateva exercitii simple care te pot ajuta sa te relaxezi, eliberand treptat stresul si tensiunea cotidiana.
+</p>
+
 
 <b>Respiratia este cea mai importanta functie a organismului si conditioneaza in mod complex intreaga activitate a fiintei tale.</b>
-
+<p>
 Tehnicile de respiratie sunt fundamentale atunci cand vorbim despre inducerea starii de calm si reducerea anxietatii, pentru ca activeaza sistemul parasimpatic, cel care este responsabil pentru senzatia de relaxare, odihna si digestie.
+</p>
+
+<p>
 
 Poti sa-ti schimbi starea de spirit in mod constient, ajungand de la stres, anxietate sau furie, la starea de calm si relaxare. Este nevoie doar sa modifici modul si ritmul in care respiri. 
+</p>
 
 <b>De ce este important sa respiri abdominal?</b>
-
+<p>
 Respiratia abdominala reprezinta modul natural si eficient in care poti respira pentru a pastra un echilibru intre corpul, mintea si emotiile tale.
+</p>
+
+<p>
 
 De cele mai multe ori uitam ca respiratia implica participarea a numerosi muschi, printre care diafragma, un muschi situat sub plamani, care poate solicita abdomenul. In acest fel, poti intelege mai bine de ce este esential si mai ales benefic sa inveti sa respiri cu ajutorul abdomenului.
+</p>
+
+<p>
 
 Intr-o stare relaxata, abdomenul se dilata cand inspiri, deoarece plamanii se extind in jos. In schimb, in stare de stres, diafragma ramane fixa, impiedicand plamanii sa coboare. Rezultatul: respiratia este in acest caz toracica si incompleta, ducand in timp la cresterea presiunii arteriale, favorizand afectiunile cardiovasculare, anxietatea si depresia.
+</p>
+
+<p>
 
 Nu poti evita intotdeauna sursele de stres din viata ta, dar poti dezvolta noi moduri de a face fata unor astfel de momente. Unul dintre aceste moduri este respiratia abdominala ritmica, prin care poti aduce in armonie sistemul circulator, respirator si digestiv.
+</p>
+
+<p>
 
 Acest tip de respiratie incurajeaza schimbul complet dintre oxigen si dioxid de carbon.
 Respiratia abdominala ritmica ajuta la eliberarea toxinelor, imbunatateste sistemul imunitar si te ajuta sa ajungi la acea stare de calm si relaxare profunda.
+</p>
+
+<p>
 
 <b>De ce este important ritmul respiratiei?</b>
-
+<p>
 Incetinind sau accelerand in mod constient respiratia, vei dispune de un mijloc eficient si sigur care iti va permine sa modifici gradat modul de functionare al organismului.
+</p>
+
+<p>
 
 Practicand regulat aceste exercitii de respiratie, cate 10 minute dimineata si seara, vei incepe sa observi efecte benefice asupra vitalitatii si a starii tale mentale si emotionale.
+</p>
+
 
 <b>Cele 8 tehnici de respiratie pe care le-am pregatit au urmatoarele beneficii:</b>
 
@@ -124,17 +163,33 @@ Practicand regulat aceste exercitii de respiratie, cate 10 minute dimineata si s
   },
   mesaje: {
     title: "Info Mesaje",
-    content: `Ti-am pregatit peste 50 de carduri cu citate si interpretarea lor, pentru dezvoltarea intuitiei si inspiratia ta zilnica.
+    content: `
+    <p>
+    Ti-am pregatit peste 50 de carduri cu citate si interpretarea lor, pentru dezvoltarea intuitiei si inspiratia ta zilnica.
+</p>
+
+<p>
 
 M-am gandit ca este mai bine sa alegi chiar tu mesajul care sa te ghideze in fiecare zi, decat sa o fac eu pentru tine. Astfel, vei avea ocazia sa te conectezi si mai mult cu intuitia ta, folosindu-te de puterea intentiei si Legea Atractiei.
+</p>
+
 
 <b>Cum functioneaza Legea Atractiei atunci cand alegi un mesaj?</b>
 
+<p>
+
 Suma tuturor gandurilor si actiunilor tale emite o anumita vibratie, pe care Universul o primeste si careia iti raspunde in consecinta prin situatii, persoane, conjuncturi sau sincronicitati.
+</p>
+
+<p>
 
 Prin urmare, ceea ce vibrezi vei atrage in viata ta. La fel se intampla si atunci cand alegi un mesaj. Vei atrage intotdeauna cardul care contine mesajul ce rezoneaza cel mai bine cu subconstientul si vibratia ta din acel moment. Astfel, ai puterea de a-ti slefui viata prin intentie, vointa, emotii si ganduri. 
+</p>
+
+<p>
 
 Lasa-te ghidat de intuitia ta inainte sa alegi un mesaj. Tot ce trebuie sa faci, este sa urmezi acesti pasi simpli:
+</p>
 
 <ul>
 <li>Acorda-ti un moment pentru a-ti linisti mintea, inainte de a alege un mesaj;</li>
@@ -146,38 +201,78 @@ Lasa-te ghidat de intuitia ta inainte sa alegi un mesaj. Tot ce trebuie sa faci,
   },
   asculta: {
     title: "Info Asculta",
-    content: `<h3><b>Calatorii audio 3D cu sunetele din natura</b></h3>
+    content: `<1><b>Calatorii audio 3D cu sunetele din natura</b></1>
+
+<p>
 Visezi sa ai parte de noi experiente care sa te poarte spre starea de relaxare si pace interioara? Iti doresti sa calatoresti prin intermediul simturilor tale in cele mai exotice si fantastice locuri din natura? 
+</p>
+
 
 <b>Prin noile tehnici audio 3D, visurile pot deveni mai reale decat iti imaginezi.</b>
 
+<p>
+
 Esti la un pas distanta de a te bucura de o selectie unica de sunete 3D din natura si muzica de relaxare. Aceasta tehnologie iti va transmite o frecventa binaurala specifica, pentru a te ajuta sa te relaxezi si sa te conectezi mai bine cu intuitia ta.
+</p>
+
 
 <b>Asculta natura</b>
 
+<p>
+
 A petrece timp in natura iti poate aduce beneficii mentale, spirituale sau fizice, in moduri variate si surprinzatoare. 
+</p>
+
+<p>
 
 Timpul petrecut in natura duce la cresterea vitalitatii si a starii de relaxare, dar si la imbunatatirea functiilor cognitive si la dezvoltarea creativitatii. Te vei simti mai conectat atunci cand esti in armonie cu natura si de aici rezulta senzatia de calm si impamantare.
+</p>
+
+<p>
 
 A petrece macar cateva minute in natura, fizic sau mental, iti poate schimba starea de spirit prin acel sentiment minunat de uimire in fata unei paduri inverzite, a unui cer plin de stele sau rasarit de soare. 
+</p>
+
+<p>
 
 Stiu ca nu poti ajunge in mijlocul naturii ori de cate ori iti doresti, dar prin intermediul acestor calatorii audio, ai oportunitatea de a experimenta sentimentul de conexiune cu tot ceea ce te inconjoara. 
+</p>
 
 <b>In spatele pleoapelor inchise, tehnologia va transforma sunetele 3D intr-un Univers viu si fascinant.</b>
 
+<p>
 Intuitia iti va ghida subconstientul catre locuri pline de semnificatie. Nu trebuie decat sa respiri, sa inchizi ochii si sa te lasi purtat intr-o calatorie a sunetelor si a senzatiilor de tot felul.  Vom incepe cu 5-10 minute de relaxare ghidata care te vor introduce in tema meditatiei si te vor ajuta sa depasesti granitele mintii constiente, pasind dincolo portile imaginatiei tale.
+</p>
+
+<p>
 
 Apoi, vei ramane in compania muzicii si a naturii, in acest Univers personal in care simturile se trezesc la viata si unde stii ca totul este posibil.
+</p>
+
+<p>
 
 Tonurile binaurale vor rezona la unison cu frecventele undelor cerebrale si te vor conduce spre o relaxare profunda, traversand pe rand starea beta, alpha, theta si delta.
+</p>
+
+<p>
 
 Sunetele naturii prelucrate prin tehnologia 3D vor crea senzatii cat mai autentice si te vor transpune intr-o lume fascinanta, departe de freamatul vietii cotidiene, acolo unde te poti relaxa in voie. Te vei conecta astfel mai bine cu intuitia ta si vei gasi, usor, raspuns la toate intrebarile care iti macina viata. 
+</p>
 
 
-<h3><b>Vindecare prin vibratie si sunete</b></h3>
+
+<h1><b>Vindecare prin vibratie si sunete</b></h1>
+</p>
+
 Frecventele sacre ale solfegiului reprezinta tonuri si sunete specifice care ajuta la restabilirea armoniei dintre minte, corp si spirit. Aceste frecvente se regasesc in istoria crestinismului, cantate de calugarii Georgieni, dar si in mantrele antice sanscrite.
+</p>
+
+<p>
 
 Tonalitatile muzicii creeaza vibratii care influenteaza mintea subconstienta, promovand cresterea energiei vitale si vindecarea fizica si emotionala.
+</p>
+
+<p>
 
 <b>Care sunt frecventele sacre</b>
 
@@ -185,51 +280,86 @@ Tonalitatile muzicii creeaza vibratii care influenteaza mintea subconstienta, pr
 <li><b>396 Hz – elibereaza frica si vinovatia</b></li>
 </ul>
 
+
+<p>
 Echilibreaza chakra radacina (Muladhara) oferindu-ti sentimentul de impamantare si te ajuta sa eliberezi frica, vinovatia si anxietatea din mintea constienta si subconstienta, transformand suferinta in bucurie.
+</p>
+
 
 <ul>
 <li><b>417 Hz – elimina negativitatea si blocajele</b></li>
 </ul>
 
+
+<p>
 Echilibreaza chakra sacrala (Swadhisthana), elimina convingerile negative, traumele si blocajele emotionale, si te ajuta sa faci schimbari benefice in viata ta.
+</p>
+
 
 <ul>
 <li><b>432 Hz – calmeaza mintea si spiritul</b></li>
 </ul>
 
+
+<p>
 Calmeaza mintea si spiritul oferindu-ti sentimentul de pace si echilibru interior.
+</p>
 
 <ul>
 <li><b>528 Hz – aduce transformare si miracole</b></li>
 </ul>
 
+
+<p>
 Echilibreaza chakra plexului solar (Manipura) si ajuta la vindecarea energetica a corpului. Aduce transformarea si miracolele in viata ta reparand AND-ul, reduce nivelul hormonilor de stres din corp si creste nivelul energie, incredere si stima de sine.
+</p>
+
 
 <ul>
 <li><b>639 Hz – imbunatateste relatiile si comunicarea</b></li>
 </ul>
 
+<p>
+
 Echilibreza chakra inimii (Anahata), imbunatateste relatiile, comunicarea si conexiunile spirituale, incurajand iubirea, toleranta si compasiunea.
+</p>
+
 
 <ul>
 <li><b>741 Hz – elimina toxinele si radiatiile</b></li>
 </ul>
 
+<p>
+
 Echilibreaza chakra gatului (Vishuddha), curata celulele corpului de toxine si de radiatiile electromagnetice, te ajuta sa te exprimi autentic si sa gasesti solutii problemelor cu care te confrunti, promovand o viata sanatoasa si echilibrata.
+</p>
+
 
 <ul>
 <li><b>852 Hz – trezeste intuitia</b></li>
 </ul>
 
+<p>
+
 Echilibreaza chakra celui de-al treilea ochi (Ajna), te ajuta sa te conectezi mai bine cu intuita ta si sa vezi adevarul din tot ce te inconjoara, readucand echilibrul spiritual in viata ta.
+</p>
+
 
 <ul>
 <li><b>963 Hz – conexiunea cu Universul</b></li>
 </ul>
 
-Echilibreza chakra coroana (Sahasrara), activeaza intuitia si glanda pineala, creste nivelul de energie si vibratie pozitiva si te ajuta sa te conectezi cu Sursa intregii creatii.
+<p>
 
-Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti schimba viata.`,
+Echilibreza chakra coroana (Sahasrara), activeaza intuitia si glanda pineala, creste nivelul de energie si vibratie pozitiva si te ajuta sa te conectezi cu Sursa intregii creatii.
+</p>
+
+<p>
+
+Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti schimba viata.
+</p>
+
+`,
   },
 };
 

@@ -1,3 +1,4 @@
+import config from "./config.js";
 import {
   createUserWithEmailAndPassword,
   sendEmailVerification,
@@ -340,36 +341,39 @@ const verifyApple = async (receiptData) => {
   };
 };
 
-const verifyGoogle = async (packageName, subscriptionId, purchaseToken) => {
-  const auth = new google.auth.GoogleAuth({
-    keyFile: GOOGLE_KEYFILE,
+async function validateGooglePurchase(productId, purchaseToken) {
+  const auth = new google.auth.JWT({
+    email: config.google.clientEmail,
+    key: config.google.privateKey,
     scopes: ["https://www.googleapis.com/auth/androidpublisher"],
   });
 
-  const authClient = await auth.getClient();
-  const androidpublisher = google.androidpublisher({
+  const androidPublisher = google.androidpublisher({
     version: "v3",
-    auth: authClient,
+    auth,
   });
 
-  const res = await androidpublisher.purchases.subscriptions.get({
-    packageName,
-    subscriptionId,
-    token: purchaseToken,
-  });
+  try {
+    const res = await androidPublisher.purchases.subscriptions.get({
+      packageName: config.google.packageName,
+      subscriptionId: productId,
+      token: purchaseToken,
+    });
 
-  const data = res.data;
-  const isActive =
-    data.expiryTimeMillis && Number(data.expiryTimeMillis) > Date.now();
+    // ✅ Răspunsul conține statusul abonamentului
+    const { expiryTimeMillis, autoRenewing, paymentState } = res.data;
 
-  return {
-    active: isActive,
-    expiresAt: new Date(Number(data.expiryTimeMillis)),
-    autoRenewing: data.autoRenewing,
-    orderId: data.orderId,
-  };
-};
-
+    return {
+      active: Number(expiryTimeMillis) > Date.now(),
+      expiryDate: new Date(Number(expiryTimeMillis)),
+      autoRenewing,
+      paymentState,
+    };
+  } catch (err) {
+    console.error("Google validation error:", err.message);
+    return { active: false, error: err.message };
+  }
+}
 export {
   check,
   getUserByEmail,

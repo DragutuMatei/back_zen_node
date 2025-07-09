@@ -195,53 +195,56 @@ function getBase64ImageExtension(base64Image) {
   return null; // Return null if format is unrecognized
 }
 
+const inside_user_stats = async (key, value, id) => {
+  const user_ref = doc(db, "users", id);
+  let user = await getDoc(user_ref);
+  user = user.data();
+  if (key === "med_time" || key === "carduri_alese" || key === "resp_time") {
+    user[key] += Number(value);
+    // value reprezinta minutele ascultate / cardurile alese
+  } else if (key === "abonament") {
+    user[key] = value;
+  } else if (key === "imgUrl") {
+    try {
+      const byteString = atob(value);
+      const arrayBuffer = new ArrayBuffer(byteString.length);
+      const uint8Array = new Uint8Array(arrayBuffer);
+      for (let i = 0; i < byteString.length; i++) {
+        uint8Array[i] = byteString.charCodeAt(i);
+      }
+      const blob = new Blob([uint8Array], {
+        type: `image/${getBase64ImageExtension(value)}`,
+      });
+      const storageRef = ref(
+        storage,
+        `/users/${id}-${user.email}.${getBase64ImageExtension(value)}`
+      );
+
+      await uploadBytes(storageRef, blob);
+
+      const url = await getDownloadURL(storageRef);
+      user["imgUrl"] = url;
+    } catch (error) {
+      console.log(error);
+      return { ok: false, error: "pula mea coaie" };
+    }
+  } else if (key === "lasts") {
+    console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
+    user[key].unshift(value);
+    const length = 3;
+    if (user[key].length > length) {
+      user[key].length = length;
+    }
+    console.log(user[key]);
+    await updateDoc(user_ref, { lasts: user[key] });
+  }
+  await updateDoc(user_ref, user);
+  return { ok: true };
+};
 const updateUserStats = async (req, res) => {
   const { key, value, id } = req.body;
-  console.log(key);
   try {
-    const user_ref = doc(db, "users", id);
-    let user = await getDoc(user_ref);
-    user = user.data();
-    if (key === "med_time" || key === "carduri_alese" || key === "resp_time") {
-      user[key] += Number(value);
-      // value reprezinta minutele ascultate / cardurile alese
-    } else if (key === "abonament") {
-      user[key] = value;
-    } else if (key === "imgUrl") {
-      try {
-        const byteString = atob(value);
-        const arrayBuffer = new ArrayBuffer(byteString.length);
-        const uint8Array = new Uint8Array(arrayBuffer);
-        for (let i = 0; i < byteString.length; i++) {
-          uint8Array[i] = byteString.charCodeAt(i);
-        }
-        const blob = new Blob([uint8Array], {
-          type: `image/${getBase64ImageExtension(value)}`,
-        });
-        const storageRef = ref(
-          storage,
-          `/users/${id}-${user.email}.${getBase64ImageExtension(value)}`
-        );
-
-        await uploadBytes(storageRef, blob);
-
-        const url = await getDownloadURL(storageRef);
-        user["imgUrl"] = url;
-      } catch (error) {
-        console.log(error);
-        res.status(500).json({ ok: false, error: "pula mea coaie" });
-      }
-    } else if (key === "lasts") {
-      console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
-      user[key].unshift(value);
-      const length = 3;
-      if (user[key].length > length) {
-        user[key].length = length;
-      }
-      console.log(user[key]);
-      await updateDoc(user_ref, { lasts: user[key] });
-    }
-    await updateDoc(user_ref, user);
+    await inside_user_stats(key, value, id);
     res.status(200).json({ ok: true });
   } catch (error) {
     console.log(error);
@@ -283,13 +286,11 @@ const refreshToken = async (req, res) => {
   }
 };
 
-const getUserByEmail = async (req, res) => {
-  const { email } = req.body;
-
+const getUserByEmail = async (email) => {
   try {
     const userRecord = await auth_admin.getUserByEmail(email);
     console.log(`Înregistrare Auth utilizator găsită: ${userRecord.uid}`);
-    return { uid: userRecord.uid };
+    return { ...userRecord };
   } catch (error) {
     if (error.code === "auth/user-not-found") {
       console.log(`Niciun utilizator Auth găsit cu emailul: ${email}`);
@@ -366,9 +367,12 @@ const verifyGoogle = async (packageName, subscriptionId, purchaseToken) => {
 
 export {
   check,
-  getUserByEmail,verifyApple,
-  login,verifyGoogle,
+  getUserByEmail,
+  verifyApple,
+  login,
+  verifyGoogle,
   logout,
+  inside_user_stats,
   register,
   updateUserStats,
   checkLogged,

@@ -29,6 +29,7 @@ import {
   refreshToken,
   verifyApple,
   verifyGoogle,
+  inside_user_stats,
 } from "./src/auth/auth.js";
 import {
   addListenCat,
@@ -168,43 +169,54 @@ app.post("/updateUserStats", updateUserStats);
 app.get("/user", checkLogged);
 app.post("/refreshToken", refreshToken);
 
-app.get("/getinfos/:id", getinfos)
+app.get("/getinfos/:id", getinfos);
 
-
-app.post('/api/verifica-abonament', async (req, res) => {
+app.post("/api/verifica-abonament", async (req, res) => {
   const { platform, email } = req.body;
 
   try {
     let result;
 
-    if (platform === 'ios') {
+    if (platform === "ios") {
       const { receiptData } = req.body;
-      if (!receiptData) throw new Error('Lipsește receiptData pentru iOS');
+      if (!receiptData) throw new Error("Lipsește receiptData pentru iOS");
       result = await verifyApple(receiptData);
-    } else if (platform === 'android') {
+    } else if (platform === "android") {
       const { purchaseToken, subscriptionId, packageName } = req.body;
       if (!purchaseToken || !subscriptionId || !packageName) {
-        throw new Error('Lipsesc datele necesare pentru Android');
+        throw new Error("Lipsesc datele necesare pentru Android");
       }
       result = await verifyGoogle(packageName, subscriptionId, purchaseToken);
     } else {
-      return res.status(400).json({ error: 'Platformă necunoscută' });
+      return res.status(400).json({ error: "Platformă necunoscută" });
     }
 
     // TODO: Update user în DB în funcție de `email` și `result`
 
-    // const 
+    // const
     console.log("result:", result);
 
-    return res.json({
-      email,
-      ...result,
-    });
+    if (result.active) {
+      let user = await getUserByEmail(email);
+      let rasp = await inside_user_stats("abonament", email, user.uid);
+      if (rasp.ok) {
+        res.json({
+          ok: true,
+          email,
+          ...result,
+        });
+      } else {
+        res.json({
+          ok: false,
+          error: "nu e ok rasp de la inside",
+        });
+      }
+    } else {
+      res.status(200).json({ ok: false, error: "nu e activ" });
+    }
   } catch (error) {
-    return res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message });
   }
 });
-
-
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

@@ -193,6 +193,9 @@ app.post('/api/verifica-abonament', async (req, res) => {
 
     // TODO: Update user în DB în funcție de `email` și `result`
 
+    // const 
+    console.log("result:", result);
+
     return res.json({
       email,
       ...result,

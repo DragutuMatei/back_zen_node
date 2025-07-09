@@ -287,18 +287,23 @@ const refreshToken = async (req, res) => {
 };
 
 const getUserByEmail = async (email) => {
-  try {
-    const userRecord = await auth_admin.getUserByEmail(email);
-    console.log(`Înregistrare Auth utilizator găsită: ${userRecord.uid}`);
-    return { ...userRecord };
-  } catch (error) {
-    if (error.code === "auth/user-not-found") {
-      console.log(`Niciun utilizator Auth găsit cu emailul: ${email}`);
-      return null;
-    }
-    console.error("Eroare la recuperarea înregistrării Auth:", error);
-    throw error;
-  }
+  // try {
+  //   const userRecord = await auth_admin.getUserByEmail(email);
+  //   console.log(`Înregistrare Auth utilizator găsită: ${userRecord.uid}`);
+  //   return { ...userRecord };
+  // } catch (error) {
+  //   if (error.code === "auth/user-not-found") {
+  //     console.log(`Niciun utilizator Auth găsit cu emailul: ${email}`);
+  //     return null;
+  //   }
+  //   console.error("Eroare la recuperarea înregistrării Auth:", error);
+  //   throw error;
+  // }
+
+  const user_ref = collection(db, "users");
+  const q = query(user_ref, where("email", "==", email));
+  var querySnapshot = await getDocs(q);
+  return { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() };
 };
 
 const __filename = fileURLToPath(import.meta.url);

@@ -30,6 +30,7 @@ import {
   verifyApple,
   verifyGoogle,
   inside_user_stats,
+  getUserByEmail,
 } from "./src/auth/auth.js";
 import {
   addListenCat,
@@ -191,14 +192,11 @@ app.post("/api/verifica-abonament", async (req, res) => {
       return res.status(400).json({ error: "Platformă necunoscută" });
     }
 
-    // TODO: Update user în DB în funcție de `email` și `result`
-
-    // const
     console.log("result:", result);
 
     if (result.active) {
       let user = await getUserByEmail(email);
-      let rasp = await inside_user_stats("abonament", email, user.uid);
+      let rasp = await inside_user_stats("abonament", email, user.id);
       if (rasp.ok) {
         res.json({
           ok: true,
@@ -217,6 +215,12 @@ app.post("/api/verifica-abonament", async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
+});
+
+app.get("/getUserByEmail/:email", async (req, res) => {
+  let rasp = await getUserByEmail(req.params.email);
+  console.log(rasp);
+  console.log(req.params.email);
 });
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

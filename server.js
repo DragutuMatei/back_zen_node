@@ -27,6 +27,8 @@ import {
   register,
   updateUserStats,
   refreshToken,
+  verifyApple,
+  verifyGoogle,
 } from "./src/auth/auth.js";
 import {
   addListenCat,
@@ -167,6 +169,39 @@ app.get("/user", checkLogged);
 app.post("/refreshToken", refreshToken);
 
 app.get("/getinfos/:id", getinfos)
+
+
+app.post('/api/verifica-abonament', async (req, res) => {
+  const { platform, email } = req.body;
+
+  try {
+    let result;
+
+    if (platform === 'ios') {
+      const { receiptData } = req.body;
+      if (!receiptData) throw new Error('Lipsește receiptData pentru iOS');
+      result = await verifyApple(receiptData);
+    } else if (platform === 'android') {
+      const { purchaseToken, subscriptionId, packageName } = req.body;
+      if (!purchaseToken || !subscriptionId || !packageName) {
+        throw new Error('Lipsesc datele necesare pentru Android');
+      }
+      result = await verifyGoogle(packageName, subscriptionId, purchaseToken);
+    } else {
+      return res.status(400).json({ error: 'Platformă necunoscută' });
+    }
+
+    // TODO: Update user în DB în funcție de `email` și `result`
+
+    return res.json({
+      email,
+      ...result,
+    });
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+});
+
 
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

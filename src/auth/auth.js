@@ -16,6 +16,10 @@ import {
   where,
 } from "firebase/firestore";
 import { getDownloadURL, ref, uploadBytes } from "firebase/storage";
+import axios from "axios";
+import { google } from "googleapis";
+import path from "path";
+import { fileURLToPath } from "url";
 
 const register = async (req, res) => {
   const { email, password, platform } = req.body;
@@ -279,9 +283,91 @@ const refreshToken = async (req, res) => {
   }
 };
 
+const getUserByEmail = async (req, res) => {
+  const { email } = req.body;
+
+  try {
+    const userRecord = await auth_admin.getUserByEmail(email);
+    console.log(`Înregistrare Auth utilizator găsită: ${userRecord.uid}`);
+    return { uid: userRecord.uid };
+  } catch (error) {
+    if (error.code === "auth/user-not-found") {
+      console.log(`Niciun utilizator Auth găsit cu emailul: ${email}`);
+      return null;
+    }
+    console.error("Eroare la recuperarea înregistrării Auth:", error);
+    throw error;
+  }
+};
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// ⚙️ Config (înlocuiește cu ce ai nevoie)
+const APPLE_SHARED_SECRET = "59acf87f515e4b5888714af93584ed07";
+const GOOGLE_KEYFILE = path.join(__dirname, "django-2546a-047c18bcd59d.json");
+
+const verifyApple = async (receiptData) => {
+  const url = "https://buy.itunes.apple.com/verifyReceipt"; // sau sandbox
+  const response = await axios.post(url, {
+    "receipt-data": receiptData,
+    password: APPLE_SHARED_SECRET,
+    "exclude-old-transactions": true,
+  });
+
+  const data = response.data;
+
+  if (data.status !== 0) {
+    throw new Error(`Receipt invalid Apple (status ${data.status})`);
+  }
+
+  const latest = data.latest_receipt_info?.sort(
+    (a, b) => Number(b.expires_date_ms) - Number(a.expires_date_ms)
+  )[0];
+
+  const isActive = latest && Number(latest.expires_date_ms) > Date.now();
+
+  return {
+    active: isActive,
+    expiresAt: new Date(Number(latest.expires_date_ms)),
+    transactionId: latest.original_transaction_id,
+  };
+};
+
+const verifyGoogle = async (packageName, subscriptionId, purchaseToken) => {
+  const auth = new google.auth.GoogleAuth({
+    keyFile: GOOGLE_KEYFILE,
+    scopes: ["https://www.googleapis.com/auth/androidpublisher"],
+  });
+
+  const authClient = await auth.getClient();
+  const androidpublisher = google.androidpublisher({
+    version: "v3",
+    auth: authClient,
+  });
+
+  const res = await androidpublisher.purchases.subscriptions.get({
+    packageName,
+    subscriptionId,
+    token: purchaseToken,
+  });
+
+  const data = res.data;
+  const isActive =
+    data.expiryTimeMillis && Number(data.expiryTimeMillis) > Date.now();
+
+  return {
+    active: isActive,
+    expiresAt: new Date(Number(data.expiryTimeMillis)),
+    autoRenewing: data.autoRenewing,
+    orderId: data.orderId,
+  };
+};
+
 export {
   check,
-  login,
+  getUserByEmail,verifyApple,
+  login,verifyGoogle,
   logout,
   register,
   updateUserStats,

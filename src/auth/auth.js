@@ -376,10 +376,9 @@ async function validateGooglePurchase(productId, purchaseToken) {
 }
 export {
   check,
-  getUserByEmail,
+  getUserByEmail,validateGooglePurchase,
   verifyApple,
   login,
-  verifyGoogle,
   logout,
   inside_user_stats,
   register,

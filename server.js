@@ -28,9 +28,9 @@ import {
   updateUserStats,
   refreshToken,
   verifyApple,
-  verifyGoogle,
   inside_user_stats,
   getUserByEmail,
+  validateGooglePurchase,
 } from "./src/auth/auth.js";
 import {
   addListenCat,
@@ -187,7 +187,7 @@ app.post("/api/verifica-abonament", async (req, res) => {
       if (!purchaseToken || !subscriptionId || !packageName) {
         throw new Error("Lipsesc datele necesare pentru Android");
       }
-      result = await verifyGoogle(packageName, subscriptionId, purchaseToken);
+      result = await validateGooglePurchase(packageName, subscriptionId, purchaseToken);
     } else {
       return res.status(400).json({ error: "Platformă necunoscută" });
     }

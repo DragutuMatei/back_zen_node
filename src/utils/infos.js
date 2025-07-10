@@ -623,10 +623,20 @@ Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti 
 `,
   },
   termeni: {
-    title: "IN ATENTIA UTILIZATORILOR!",
-    content: `<p style="fontWeight:800; fontSize:30px">
+    title: "Termeni si conditii",
+    content: `
+    <h1>IN ATENTIA UTILIZATORILOR!</h1>
+    <p style="fontWeight:900; fontSize:35px">
         Pentru a achiziționa un abonament sau pentru a beneficia de unul deja activ, utilizatorii trebuie să își creeze un cont în aplicație (prin butonul de profil situat în colțul din dreapta sus al paginii de start), această condiție fiind necesară pentru accesul complet la toate materialele audio disponibile în aplicație.
-    </p>`,
+    </p>
+    <br/>
+    <br/>
+
+    <p>
+    Acești termeni și condiții de utilizare constituie un contract între dvs. și editorul aplicației ZEN App, denumită în cele ce urmează ”Aplicația„. Vă rugăm să îi citiți. Acești termeni sunt valabili pentru aplicațiile pe care le descărcați din Google Play si Apple Store, inclusiv pentru actualizările sau suplimentele pentru aplicație.
+    </p>
+    
+    `,
   },
 };
 

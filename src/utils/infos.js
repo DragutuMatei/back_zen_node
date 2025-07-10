@@ -737,44 +737,74 @@ Aplicația nu oferă sfaturi medicale. Conținutul este doar în scop informativ
      <li>
 MIJLOACE    
     <p>
+    Așteptările terapiei: fiecare persoană răspunde diferit, așa că planificăm și adaptăm terapia dvs. pentru a se potrivi cel mai bine nevoilor dvs., cerințelor individuale și tipului de personalitate. Folosim o abordare multimodală a terapiei bazată pe nevoile dumneavoastră individuale.
+Nu există garanții că oricare dintre aceste direcții de acțiune vă va rezolva problemele. Intenția noastră este de a vă ajuta să vă ajutați, facilitând o conștientizare profundă a ceea ce vă deranjează de fapt și ajutându-vă să vă determinați să faceți schimbările adecvate. Nu vă putem promite că vă putem ajuta, cu toate acestea, vă putem promite că vom face tot posibilul pentru a vă ajuta.
+Ceea ce plătiți este timpul nostru profesional și nu neapărat un remediu.
+Există posibilitatea să vi se ceară să faceți exerciții între ședințe și depinde de dvs. să întreprindeți aceste sarcini pentru a obține beneficii pozitive și progresie în tratamentul și recuperarea dumneavoastră.
+Orice material, procedeu sau informație detaliată în această aplicație nu este destinată diagnosticării, tratamentului, vindecării sau protejării împotriva oricărei boli sau a unei boli, solicitați întotdeauna sfatul unui medic calificat.
+APLICAȚIA NU ESTE RECOMANDATĂ PERSOANELOR CARE SE CONFRUNTĂ CU TULBURĂRI MENTALE SAU BOLI.
+Nu ascultați și nu redați niciodată piese sau sunete în timp ce conduceți sau folosiți echipamente, selectați întotdeauna un mediu sigur. Produsele audio au fost dezvoltate pentru a vă oferi asistență și nu vă oferă nicio garanție; tu însuți poți fi singura persoană care poate oferi o garanție pentru propriul succes.
+
+    </p>
+    </li>
+     <li>
+ LIMITAREA MĂSURILOR REPARATORII ȘI A DAUNELOR    
+    <p>
     
+a. Editorul aplicației nu este responsabil pentru niciun conținut al utilizatorilor sau pentru alte materiale terță parte, inclusiv linkuri către site-uri terțe și activități furnizate de utilizatori. Astfel de conținut și activități nu pot fi atribuite editorului aplicației și nici nu reprezintă punctul de vedere al acestuia.
+<br/><br/>
+b. Editorul aplicației va fi responsabil doar dacă au fost încălcate obligații importante prevăzute în acești termeni ai licenței.
+<br/><br/>
+
+c. Editorul aplicației, agenții săi delegați și/sau reprezentanții săi legali nu vor fi responsabili pentru niciun fel de daune imprevizibile și/sau pierderi financiare legate de orice daune indirecte, inclusiv pierderi de profit, cu excepția cazului în care editorul aplicației, agenții săi delegați și/sau reprezentanții săi legali au acționat cel puțin cu neglijență gravă sau prin abateri săvârșite cu intenție.
+    </p>
+    </li>
+     <li>
+LINK-URI PE SITE-URILE UNEI TERTE PARTI.    
+    <p>
+    Aplicația poate contine link-uri catre alte aplicații/site-uri aflate in proprietatea sau operate de alte parti decit Zen Records S.R.L.. Astfel de link-uri va sunt furnizate pentru a le folosi numai daca veti dori aceasta. Zen Records S.R.L. nu controleaza, si nu este raspunzatoare pentru continutul si conditiile de confidentialitate sau securitate si de functionalitatea acestor aplicații/site-uri. Fara a se limita la cele mai sus mentionate, Zen Records S.R.L. isi declina in mod special orice raspundere daca aceste site-uri:
+<br/>
+    a. Incalca drepturile de proprietate intelectuala ale unei terte parti;
+<br/>
+<br/>
+
+    b. Sunt inexacte, incomplete sau contin informatii inselatoare;
+<br/>
+<br/>
+c. Nu au caracter comercial sau nu raspund indeplinirii unui anumit scop;
+<br/>
+<br/>
+d. Nu ofera o securitate adecvata;
+<br/>
+<br/>
+e. Contin virusi sau alte elemente cu caracter distructiv; sau
+<br/>
+<br/>
+f. Sunt licentioase sau calomnioase.
+<br/>
+<br/>
+De asemenea, Zen Records S.R.L. nu autorizeaza continutul sau orice alte produse si servicii prevazute pe astfel de site-uri. Daca intrati printr-un link pe astfel de aplicații/site-uri, va asumati personal riscul, fara a exista in acest sens permisiunea Zen Records S.R.L..
+
     </p>
     </li>
      <li>
     
+REVIZUIRI ALE ACESTOR CONDITII DE UTILIZARE    <p>
+    Zen Records S.R.L. poate, in orice moment si fara notificare prealabila, sa revizuiasca acești Termeni și Conditii de Utilizare prin actualizarea acestora. Sunteti obligat sa respectati oricare si toate astfel de revizuiri ce vor face obiectul actualizarilor periodice.
+    </p>
+    <p>    
+    UTILIZATI ACEASTĂ APLICAȚIE PE PROPRIA RĂSPUNDERE. NICI ZEN RECORDS S.R.L., NICI DIRECTORII SAU MANAGERII, NICI AGENTII SAI SAU TERTII IMPLICATI IN CREAREA, PRODUCEREA SAU LIVRAREA APLICAȚIEI NU SUNT RESPONSABILI PENTRU DAUNELE DIRECTE, INDIRECTE, PUNITIVE, INCIDENTALE, SPECIALE, LOGICE SAU ALTE DAUNE LEGATE DE UTILIZAREA ACESTEI APLICAȚII SAU A CONTINUTULUI, INDIFERENT DACA SE REALIZEAZA PE BAZA UNUI CONTRACT, RESPONSABILITATE STRICTA SAU ALTA MODALITATE, CHIAR CU AVERTIZAREA PRIVIND POSIBILITATEA UNOR ASTFEL DE DAUNE.
+</p>
+    </li>
+     <li>
+    LEGISLATIE APLICABILA SI JURISDICTIE
     <p>
-    
+    Aceste Conditii de Utilizare si utilizarea acestei aplicații sunt guvernate de legile din Romania. Instantele competente din Romania vor avea jurisdictie exclusiva asupra oricaror si tuturor disputelor ce vor aparea din sau se vor referi la sau vor fi in legatura cu prevederile Conditiilor de Utilizare si/sau Continutul aplicației sau in cazul disputelor in care aceste Conditii de Utilizare si/sau această aplicație vor fi considerate fapte relevante pentru astfel de dispute.
+
     </p>
     </li>
      <li>
-    
-    <p>
-    
-    </p>
-    </li>
-     <li>
-    
-    <p>
-    
-    </p>
-    </li>
-     <li>
-    
-    <p>
-    
-    </p>
-    </li>
-     <li>
-    
-    <p>
-    
-    </p>
-    </li>
-     <li>
-    
-    <p>
-    
-    </p>
+Daca ai întrebări despre Termeni si Conditii sau vrei sa ne spui parerea ta, te rugam sa contactezi Zen Records S.R.L. la social@zenapp.ro.    
     </li>
 </ol>
     `,

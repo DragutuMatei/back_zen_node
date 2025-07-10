@@ -635,7 +635,27 @@ Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti 
     <p>
     Acești termeni și condiții de utilizare constituie un contract între dvs. și editorul aplicației ZEN App, denumită în cele ce urmează ”Aplicația„. Vă rugăm să îi citiți. Acești termeni sunt valabili pentru aplicațiile pe care le descărcați din Google Play si Apple Store, inclusiv pentru actualizările sau suplimentele pentru aplicație.
     </p>
+    <br/>
+    <p>
     
+Aplicația este construită exclusiv in scopuri recreationale și de suport si nu are ca obiectiv oferirea de sfaturi medicale, recomandari legale sau servicii profesionale. Daca simtiti ca aveti o problema medicala, ar trebui sa va adresati de urgenta unui medic.
+    </p>
+    <br/>
+    <p>
+Folosirea acestei aplicații implica acceptarea termenilor si conditiilor de mai jos. Recomandam citirea cu atentie a acestora. Zen Records SRL isi asuma dreptul de a modifica aceste prevederi fara o alta notificare.
+    </p>
+    <br/>
+    <p>
+    
+Accesul/folosirea acestei aplicații de catre dumneavoastra se supune Termenilor si conditiilor de utilizare, si implica acceptul explicit al dumneavoastra cu privire la acestea si reprezinta intelegerea dintre parti.
+Relatia dintre parti este guvernata de urmatoarele acte normative:
+
+    </p>
+    <ul>
+      <li></li>
+    </ul>
+    <br/>
+
     `,
   },
 };

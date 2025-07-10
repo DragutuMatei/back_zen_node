@@ -629,7 +629,7 @@ Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti 
     <h2>
        <b>
         Pentru a achiziționa un abonament sau pentru a beneficia de unul deja activ, utilizatorii trebuie să își creeze un cont în aplicație (prin butonul de profil situat în colțul din dreapta sus al paginii de start), această condiție fiind necesară pentru accesul complet la toate materialele audio disponibile în aplicație.
-    </p>
+    </h2>
     <br/>
 
     <p>
@@ -700,11 +700,82 @@ f. să transferați aplicația sau contractul unei terțe părți.
     <p>Aplicația si tot ceea ce cuprinde acesta, incluzind fara limitare toate textele si imaginile (“Continut”) sunt in proprietatea si sub dreptul de autor (copyright) al Zen Records S.R.L.. Este strict interzisa utilizarea oricarui Continut, cu exceptia celor prevazute in Conditiile de Utilizare, fara permisiunea in scris a proprietarului “Continutului”. De asemenea, va informăm ca Aplicația și Conținutul beneficiază de recunoasterea și apărarea drepturilor de proprietate intelectuala in conformitate cu legile in vigoare, ajungind daca este cazul la actionarea celor vinovati de incalcarea dreptului de proprietate intelectuala in judecata prin instantele civile/penale.</p></li>
     <li>UTILIZAREA APLICAȚIEI. VÂRSTA LIMITĂ.
       <p>
+      Poti cumpăra/folosi aplicația doar dacă ai 18 ani. Este permisă cumpărarea/folosirea aplicației de către persoanele între 16 și 18 ani, numai cu permisiunea unui adult sau tutore legal.
+</p>
+      <p>
+      Înţelegeţi şi sunteţi de acord că serviciile şi orice alte informaţii pe care le invatati din această aplicație nu sunt destinate, proiectate, sau recomandate implicit pentru a diagnostica, a preveni sau trata orice afecţiune sau boală, sau pentru a evalua starea dumneavoastră de sănătate, sau sa substituie îngrijirea medicală profesională. Nu utilizaţi Aplicația în timpul conducerii autovehiculului, operarii utilajelor grele sau efectuarii altor sarcini care necesită o atenţie şi concentrare sporite. Înţelegeţi şi sunteţi de acord că sunteţi singurul responsabil pentru utilizarea Aplicației.
+</p>
+      <p>
+      Zen Records S.R.L. acorda permisiunea de a utiliza Aplicația in urmatoarele conditii:
       </p>
-    
+      <p>
+      Puteti folosi Continutul, insa doar pentru folosul personal si ne-comercial si cu conditia de a va conforma cu informatiile referitoare la dreptul de autor (copyright) si alte drepturi de proprietate intelectuala cuprinse in Continut;
+Nu aveti permisiunea sa distribuiti, sa modificati, sa copiati (cu exceptia celor mai sus mentionate), sa transmiteti, sa expuneti, sa refolositi, sa reproduceti, sa publicati, sa autorizati, sa acordati o licenta de folosire, sa creati lucrari derivate din, sau sa transferati, sa vindeti sau sa folositi Continutul in alt mod, fara acordul in scris al Zen Records S.R.L.;
+Este interzis sa folositi Aplicația în sens amenintator, fals, inselator, abuziv, de hartuire, licentios, calomniator, vulgar, obscen, scandalos, instigator, pornografic sau profanator, sau în orice alt fel care poate constitui sau incuraja un comportament ce va putea da nastere unei infractiuni, sau ar putea conduce la raspundere civila, sau ar incalca in alt mod legea. Zen Records S.R.L. va coopera cu oricare dintre autoritatile desemnate sa aplice legea si se va conforma cu orice sentinta judecatoreasca prin care se cere sau se ordona Zen Records S.R.L. sa dezvaluie identitatea oricarei persoane care ar folosi sau manifesta în orice fel vreun comportament descris mai sus și de care are cunoștință; 
+Este interzis sa utilizati Aplicația in scop de publicitate sau pentru orice fel de cerere/oferta cu caracter comercial.
+      </p>  
     </li>
-    <li></li>
-    <li></li>
+    <li>
+    CONFIDENTIALITATE
+    <p>
+    Orice date cu caracter personal precum: numele, adresa, numarul de telefon sau adresa de e-mail a dumneavoastra pe care o transmiteti prin Aplicație, Terți sau posta electronica, ori prin alta modalitate, vor fi folosite in conformitate cu Politica de Confidentialitate. Orice fel de comunicari pe care le transmiteti Editorilor Aplicației, precum intrebari, comentarii, sugestii sau alte mesaje de acest fel vor fi considerate ca neconfidentiale si neprotejate de drepturi de proprietate intelectuala determinate.
+    </p>
+    </li>
+    <li>LIPSA GARANTIILOR
+    <p>
+    INTREG CONTINUTUL ACESTE APLICAȚII POATE FI MODIFICAT SI VA ESTE OFERIT “CA ATARE”, ”CU TOATE DEFECTELE” ȘI „AȘA CUM ESTE DISPONIBILĂ” FARA A SE OFERI NICI O GARANTIE DE NICI UN FEL, FIE ACEASTA EXPRESA SAU IMPLICITA.
+    </p>
+    </li>
+    <li>
+    EXONERAREA DE RASPUNDERE
+    <p>
+    UTILIZAREA ACESTEI APLICAȚII ESTE IN TOTALITATE PE CONTUL DUMNEAVOASTRA. ZEN RECORDS S.R.L. SAU ORICE ALTA PARTE IMPLICATA IN CONCEPEREA, PRODUCEREA SAU OFERIREA APLICAȚIEI NU SUNT RASPUNZATOARE PENTRU DAUNE DIRECTE SAU INDIRECTE, DE ORICE NATURA, CE AR REZULTA DIN SAU IN LEGATURA CU UTILIZAREA ACESTEI APLICAȚII SAU A CONTINUTULUI SAU. ZEN RECORDS S.R.L. NU ISI ASUMA NICI O RESPONSABILITATE SI NU VA FI RASPUNZATOARE PENTRU NICI O DAUNA SAU VIRUSI CARE AR PUTEA SA VA INFECTEZE COMPUTERUL SAU ALTE BUNURI IN URMA ACCESARII SAU UTILIZARII ACESTEI APLICAȚII, SAU DESCARCARII ORICARUI MATERIAL, INFORMATII, TEXT, IMAGINI VIDEO SAU AUDIO DE PE/PRIN INTERMEDIUL APLICAȚIEI.NU OFERIM NICIO GARANTIE CU PRIVIRE LA ACURATETEA, CALITATEA, COMPLEXITATEA, SERIOZITATEA, VERIDICITATEA, ACTUALITATEA CONTINUTULUI APLICAȚIEI.
+Aplicația nu oferă sfaturi medicale. Conținutul este doar în scop informativ. Consultați-vă medicului (medicul general) cu privire la toate problemele medicale referitoare la starea dumneavoastră și la tratamentul acesteia. Conținutul nu este destinat să înlocuiască sfatul medical, diagnosticul sau tratamentul medical. Nu înlocuiește un examen medical și nici nu înlocuiește necesitatea serviciilor furnizate de profesioniștii din domeniul medical. Solicitați întotdeauna sfatul medicului dumneavoastră înainte de a face orice modificare a tratamentului dumneavoastră. Orice întrebare medicală trebuie adresată medicului dumneavoastră personal.
+
+    </p>
+    </li>
+     <li>
+MIJLOACE    
+    <p>
+    
+    </p>
+    </li>
+     <li>
+    
+    <p>
+    
+    </p>
+    </li>
+     <li>
+    
+    <p>
+    
+    </p>
+    </li>
+     <li>
+    
+    <p>
+    
+    </p>
+    </li>
+     <li>
+    
+    <p>
+    
+    </p>
+    </li>
+     <li>
+    
+    <p>
+    
+    </p>
+    </li>
+     <li>
+    
+    <p>
+    
+    </p>
+    </li>
 </ol>
     `,
   },

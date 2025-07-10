@@ -622,6 +622,12 @@ Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti 
 
 `,
   },
+  termeni: {
+    title: "IN ATENTIA UTILIZATORILOR!",
+    content: `<p style="fontWeight:800; fontSize:30px">
+        Pentru a achiziționa un abonament sau pentru a beneficia de unul deja activ, utilizatorii trebuie să își creeze un cont în aplicație (prin butonul de profil situat în colțul din dreapta sus al paginii de start), această condiție fiind necesară pentru accesul complet la toate materialele audio disponibile în aplicație.
+    </p>`,
+  },
 };
 
 const getinfos = async (req, res) => {

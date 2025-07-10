@@ -228,13 +228,5 @@ app.get("/getUserByEmail/:email", async (req, res) => {
   console.log(req.params.email);
 });
 
-app.get("/getInfos/termeni", async (req, res) => {
-  res.status(200).json({
-    title: "IN ATENTIA UTILIZATORILOR!",
-    content: `<p style="fontWeight:800; fontSize:30px">
-        Pentru a achiziționa un abonament sau pentru a beneficia de unul deja activ, utilizatorii trebuie să își creeze un cont în aplicație (prin butonul de profil situat în colțul din dreapta sus al paginii de start), această condiție fiind necesară pentru accesul complet la toate materialele audio disponibile în aplicație.
-    </p>`,
-  });
-});
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

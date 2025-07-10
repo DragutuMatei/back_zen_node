@@ -626,7 +626,7 @@ Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti 
     title: "Termeni si conditii",
     content: `
     <h1>IN ATENTIA UTILIZATORILOR!</h1>
-    <h3 style="fontWeight:800; fontSize:35px">
+    <h2>
        <b>
         Pentru a achiziționa un abonament sau pentru a beneficia de unul deja activ, utilizatorii trebuie să își creeze un cont în aplicație (prin butonul de profil situat în colțul din dreapta sus al paginii de start), această condiție fiind necesară pentru accesul complet la toate materialele audio disponibile în aplicație.
     </p>
@@ -663,9 +663,13 @@ Relatia dintre parti este guvernata de urmatoarele acte normative:
     <p>
 Odată cu achiziționarea aplicației sunteți de acord cu toți termenii și condițiile de utilizare, beneficiind de drepturile descrise și toate obligațiile corespunzătoare.</p>
 <ol>
-    <li> DREPTURI DE INSTALARE ȘI UTILIZARE. Aveți dreptul să instalați și să utilizați aplicația pe dispozitive mobile, în conformitate cu prezentele condiții și termeni. Zen Records SRL își rezervă dreptul de a modifica Regulile de utilizare în orice moment.</li>
+    <li> DREPTURI DE INSTALARE ȘI UTILIZARE.
+    <p>Aveți dreptul să instalați și să utilizați aplicația pe dispozitive mobile, în conformitate cu prezentele condiții și termeni. Zen Records SRL își rezervă dreptul de a modifica Regulile de utilizare în orice moment.
+    </p>
+    </li>
     <li>SERVICII BAZATE PE INTERNET.
         <p>a. Consimțământ pentru serviciile bazate pe internet sau wireless. În cazul în care aplicația se conectează la sistemele informatice prin internet, inclusiv prin intermediul unei rețele wireless, utilizarea aplicației reprezintă consimțământul dvs. pentru transmiterea unor informații standard despre dispozitive (inclusiv, fără limitare, informații tehnice despre dispozitiv, sistem și aplicație, precum și despre periferice) pentru serviciile prin internet sau wireless. În cazul în care sunt furnizați alți termeni în legătură cu utilizarea de către dvs. a serviciilor accesate utilizând aplicația, se aplică și termenii respectivi.
+<br/>
 <br/>
 b. Abuzurile legate de serviciile prin internet. Nu aveți dreptul să utilizați niciun serviciu prin internet într-un mod care l-ar putea pune în pericol sau care ar putea afecta utilizarea sa ori a rețelei wireless de către orice persoană. Nu aveți dreptul să utilizați serviciul în încercarea de a obține, în orice fel, acces neautorizat la servicii, date, conturi sau rețele
 
@@ -673,10 +677,33 @@ b. Abuzurile legate de serviciile prin internet. Nu aveți dreptul să utilizaț
     </li>
     <li>LIMITAREA DREPTURILOR DE UTILIZARE A APLICAȚIEI. Principiu: trebuie să respectați toate limitările de natură tehnică ale aplicației, care vă permit să o utilizați numai în anumite moduri. <br/>
       <p>
-      
-      
+      Utilizarea acestei aplicații este supusă urmatoarelor conditii de utilizare si tuturor legilor si regulamentelor aplicabile. Accesand si utilizand aplicația, acceptati, fara limitari sau calificari, aceste conditii si luati la cunostinta ca orice alte acorduri intre Dumneavoastra si Zen Records S.R.L. sunt inlocuite prin prevederile prezentelor Conditii de Utilizare. Daca nu sunteti de acord sau nu acceptati, fara limitari sau calificari, Conditiile de Utilizare ale acestei aplicații, va rugam sa nu o downlodați/cumpărați.
+<br/>
+      Nu aveți dreptul:
+<br/>
+
+a. să încălcați nicio limitare de natură tehnică a aplicației;
+<br/>
+b. să refaceți codul sursă, să decompilați sau să dezasamblați aplicația, cu excepția și numai în limita permisă în mod expres de dispozițiile legii drepturilor de autor în vigoare pentru programe de calculator;
+<br/>
+c. să faceți mai multe copii ale aplicației decât numărul specificat în acest contract sau permis de legea aplicabilă, în ciuda acestei limitări;
+<br/>
+d. să publicați sau să puneți la dispoziție în alt mod aplicația pentru ca alții să o poată copia;
+<br/>
+e. să închiriați, să dați în leasing sau să împrumutați aplicația;
+<br/>
+f. să transferați aplicația sau contractul unei terțe părți.      
       </p>
     </li>
+    <li>SERVICII DE ASISTENȚĂ. Contactați editorul aplicației pentru a stabili dacă sunt disponibile servicii de asistență.</li>
+    <li>PROPRIETATEA APLICAȚIEI ȘI CONTINUTULUI.
+    <p>Aplicația si tot ceea ce cuprinde acesta, incluzind fara limitare toate textele si imaginile (“Continut”) sunt in proprietatea si sub dreptul de autor (copyright) al Zen Records S.R.L.. Este strict interzisa utilizarea oricarui Continut, cu exceptia celor prevazute in Conditiile de Utilizare, fara permisiunea in scris a proprietarului “Continutului”. De asemenea, va informăm ca Aplicația și Conținutul beneficiază de recunoasterea și apărarea drepturilor de proprietate intelectuala in conformitate cu legile in vigoare, ajungind daca este cazul la actionarea celor vinovati de incalcarea dreptului de proprietate intelectuala in judecata prin instantele civile/penale.</p></li>
+    <li>UTILIZAREA APLICAȚIEI. VÂRSTA LIMITĂ.
+      <p>
+      </p>
+    
+    </li>
+    <li></li>
     <li></li>
 </ol>
     `,

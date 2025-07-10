@@ -195,7 +195,11 @@ function getBase64ImageExtension(base64Image) {
 
   return null; // Return null if format is unrecognized
 }
-
+const a = {
+  key: "abonament",
+  value: packageId,
+  id: user.id
+};
 const inside_user_stats = async (key, value, id) => {
   const user_ref = doc(db, "users", id);
   let user = await getDoc(user_ref);
@@ -376,7 +380,8 @@ async function validateGooglePurchase(productId, purchaseToken) {
 }
 export {
   check,
-  getUserByEmail,validateGooglePurchase,
+  getUserByEmail,
+  validateGooglePurchase,
   verifyApple,
   login,
   logout,

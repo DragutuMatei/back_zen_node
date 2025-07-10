@@ -70,6 +70,7 @@ import bodyParser from "body-parser";
 
 import { getHome } from "./src/utils/home.js";
 import { getinfos } from "./src/utils/infos.js";
+import { content } from "googleapis/build/src/apis/content/index.js";
 
 const app = express();
 
@@ -187,7 +188,11 @@ app.post("/api/verifica-abonament", async (req, res) => {
       if (!purchaseToken || !subscriptionId || !packageName) {
         throw new Error("Lipsesc datele necesare pentru Android");
       }
-      result = await validateGooglePurchase(packageName, subscriptionId, purchaseToken);
+      result = await validateGooglePurchase(
+        packageName,
+        subscriptionId,
+        purchaseToken
+      );
     } else {
       return res.status(400).json({ error: "Platformă necunoscută" });
     }
@@ -221,6 +226,15 @@ app.get("/getUserByEmail/:email", async (req, res) => {
   let rasp = await getUserByEmail(req.params.email);
   console.log(rasp);
   console.log(req.params.email);
+});
+
+app.get("/getInfos/termeni", async (req, res) => {
+  res.status(200).json({
+    title: "Atentionare!",
+    content: `<p style=''>
+        Pentru a achiziționa un abonament sau pentru a beneficia de unul deja activ, utilizatorii trebuie să își creeze un cont în aplicație (prin butonul de profil situat în colțul din dreapta sus al paginii de start), această condiție fiind necesară pentru accesul complet la toate materialele audio disponibile în aplicație.
+    </p>`,
+  });
 });
 
 app.listen(PORT, () => console.log(`App listening at port ${PORT}`));

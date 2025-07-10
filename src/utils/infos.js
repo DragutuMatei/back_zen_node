@@ -631,13 +631,7 @@ Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti 
 };
 
 const getinfos = async (req, res) => {
-  res
-    .status(200)
-    .json(
-      req.params.id === "termeni"
-        ? { ...infos[req.params.id] }
-        : { data: infos[req.params.id] }
-    );
+  res.status(200).json({ data: infos[req.params.id] });
 };
 
 export { getinfos };

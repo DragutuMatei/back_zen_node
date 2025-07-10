@@ -626,10 +626,10 @@ Incepe aceasta calatorie chiar astazi prin ZEN, aplicatia revolutionara care-ti 
     title: "Termeni si conditii",
     content: `
     <h1>IN ATENTIA UTILIZATORILOR!</h1>
-    <p style="fontWeight:900; fontSize:35px">
+    <h3 style="fontWeight:800; fontSize:35px">
+       <b>
         Pentru a achiziționa un abonament sau pentru a beneficia de unul deja activ, utilizatorii trebuie să își creeze un cont în aplicație (prin butonul de profil situat în colțul din dreapta sus al paginii de start), această condiție fiind necesară pentru accesul complet la toate materialele audio disponibile în aplicație.
     </p>
-    <br/>
     <br/>
 
     <p>
@@ -652,10 +652,33 @@ Relatia dintre parti este guvernata de urmatoarele acte normative:
 
     </p>
     <ul>
-      <li></li>
+      <li>OG nr. 21/1992 privind protectia consumatorilor</li>
+      <li>OUG nr. 34/2014 privind drepturile consumatorilor in cadrul contractelor incheiate cu profesionistii</li>
+      <li>Legea nr. 363/2007 privind combaterea practicilor incorecte ale comerciantilor in relatia cu consumatorii si armonizarea reglementarilor cu legislatia europeana privind protectia consumatorilor
+</li>
+      <li>Legea 365/2002 privind comertul electronic</li>
+      <li>Legea 8/1996 privind dreptul de autor și drepturile conexe</li>
     </ul>
     <br/>
+    <p>
+Odată cu achiziționarea aplicației sunteți de acord cu toți termenii și condițiile de utilizare, beneficiind de drepturile descrise și toate obligațiile corespunzătoare.</p>
+<ol>
+    <li> DREPTURI DE INSTALARE ȘI UTILIZARE. Aveți dreptul să instalați și să utilizați aplicația pe dispozitive mobile, în conformitate cu prezentele condiții și termeni. Zen Records SRL își rezervă dreptul de a modifica Regulile de utilizare în orice moment.</li>
+    <li>SERVICII BAZATE PE INTERNET.
+        <p>a. Consimțământ pentru serviciile bazate pe internet sau wireless. În cazul în care aplicația se conectează la sistemele informatice prin internet, inclusiv prin intermediul unei rețele wireless, utilizarea aplicației reprezintă consimțământul dvs. pentru transmiterea unor informații standard despre dispozitive (inclusiv, fără limitare, informații tehnice despre dispozitiv, sistem și aplicație, precum și despre periferice) pentru serviciile prin internet sau wireless. În cazul în care sunt furnizați alți termeni în legătură cu utilizarea de către dvs. a serviciilor accesate utilizând aplicația, se aplică și termenii respectivi.
+<br/>
+b. Abuzurile legate de serviciile prin internet. Nu aveți dreptul să utilizați niciun serviciu prin internet într-un mod care l-ar putea pune în pericol sau care ar putea afecta utilizarea sa ori a rețelei wireless de către orice persoană. Nu aveți dreptul să utilizați serviciul în încercarea de a obține, în orice fel, acces neautorizat la servicii, date, conturi sau rețele
 
+</p>
+    </li>
+    <li>LIMITAREA DREPTURILOR DE UTILIZARE A APLICAȚIEI. Principiu: trebuie să respectați toate limitările de natură tehnică ale aplicației, care vă permit să o utilizați numai în anumite moduri. <br/>
+      <p>
+      
+      
+      </p>
+    </li>
+    <li></li>
+</ol>
     `,
   },
 };

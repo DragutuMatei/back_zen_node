@@ -83,21 +83,42 @@ const getIt = async (
   }
 };
 
-const getInfos = async (cat, uid) => {
+const getInfos = async (req, cat, uid) => {
   let linkInfo = "";
-
+  let items = [];
+  let abonament = "";
+  try {
+    const [decodedToken, userId, user] = await check(req);
+    abonament = user.abonament;
+  } catch (error) {
+    abonament = false;
+  }
   if (cat === "categorie_meditati") {
     linkInfo = await getMedCatByIdRaw(uid);
     linkInfo = orderByField(linkInfo?.data?.meditationRoutines, "time", true);
+
+    // linkInfo.forEach((e) => {
+    //   items.push({
+    //     title: e.title,
+    //     background: e.background,
+    //     linkTo: e[link],
+    //     linkInfo: null,
+    //     totalTime: Number(e.duration),
+    //     isLocked: abonament != false && abonament != "" ? false : e.isLocked,
+    //     time: e.time,
+    //   });
+    // });
   } else {
     linkInfo = await getListenCatByIdRaw(uid);
     linkInfo = orderByField(linkInfo?.data?.listenRoutines, "time", true);
   }
+console.log("abonament de pe home de la getInfos:", abonament);
+  console.log("linkInfo:", Object.keys(linkInfo[0]), linkInfo[0]);
 
   return linkInfo;
 };
 
-const getCat = async (cat, title, isBig, type) => {
+const getCat = async (req, cat, title, isBig, type) => {
   try {
     let data = [];
 
@@ -133,7 +154,7 @@ const getCat = async (cat, title, isBig, type) => {
     data = data.sort((a, b) => b.order - a.order);
 
     for (const d of data) {
-      const infos = await getInfos(cat, d.id);
+      const infos = await getInfos(req, cat, d.id);
       d.linkInfo = infos;
     }
 
@@ -151,12 +172,12 @@ const getCat = async (cat, title, isBig, type) => {
 };
 
 const getHome = async (req, res) => {
-  const med_cat = await getCat(
+  const med_cat = await getCat(req, 
     "categorie_meditati",
     "Colecții Meditații",
     true
   );
-  const list_cat = await getCat("categorie_listen", "Colecții Sunete", true);
+  const list_cat = await getCat(req, "categorie_listen", "Colecții Sunete", true);
   const free_meditations = await getIt(
     req,
     "categorie_meditati",

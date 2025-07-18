@@ -97,22 +97,38 @@ const getInfos = async (req, cat, uid) => {
     linkInfo = await getMedCatByIdRaw(uid);
     linkInfo = orderByField(linkInfo?.data?.meditationRoutines, "time", true);
 
-    // linkInfo.forEach((e) => {
-    //   items.push({
-    //     title: e.title,
-    //     background: e.background,
-    //     linkTo: e[link],
-    //     linkInfo: null,
-    //     totalTime: Number(e.duration),
-    //     isLocked: abonament != false && abonament != "" ? false : e.isLocked,
-    //     time: e.time,
-    //   });
-    // });
+    linkInfo.forEach((e) => {
+      items.push({
+        id: e.id,
+        meditationLink: e.meditationLink,
+        title: e.title,
+        category: e.category,
+        tags: e.tags,
+        background: e.background,
+        duration: Number(e.duration),
+        isLocked: abonament != false && abonament != "" ? false : e.isLocked,
+        time: e.time,
+      });
+    });
   } else {
     linkInfo = await getListenCatByIdRaw(uid);
     linkInfo = orderByField(linkInfo?.data?.listenRoutines, "time", true);
+    
+    linkInfo.forEach((e) => {
+      items.push({
+        id: e.id,
+        listenLink: e.listenLink,
+        title: e.title,
+        category: e.category,
+        background: e.background,
+        duration: Number(e.duration),
+        isLocked: abonament != false && abonament != "" ? false : e.isLocked,
+        time: e.time,
+      });
+    });
+
   }
-console.log("abonament de pe home de la getInfos:", abonament);
+  console.log("abonament de pe home de la getInfos:", abonament);
   console.log("linkInfo:", Object.keys(linkInfo[0]), linkInfo[0]);
 
   return linkInfo;
@@ -172,12 +188,18 @@ const getCat = async (req, cat, title, isBig, type) => {
 };
 
 const getHome = async (req, res) => {
-  const med_cat = await getCat(req, 
+  const med_cat = await getCat(
+    req,
     "categorie_meditati",
     "Colecții Meditații",
     true
   );
-  const list_cat = await getCat(req, "categorie_listen", "Colecții Sunete", true);
+  const list_cat = await getCat(
+    req,
+    "categorie_listen",
+    "Colecții Sunete",
+    true
+  );
   const free_meditations = await getIt(
     req,
     "categorie_meditati",

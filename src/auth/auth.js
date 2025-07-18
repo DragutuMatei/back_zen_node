@@ -116,11 +116,11 @@ async function check(req) {
     const user_ref = collection(db, "users");
     const q = query(user_ref, where("email", "==", email));
     var querySnapshot = await getDocs(q);
-    console.log("decode, userid, {id si  restul }: ", [
-      decodedToken,
-      userId,
-      { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
-    ]);
+    // console.log("decode, userid, {id si  restul }: ", [
+    //   decodedToken,
+    //   userId,
+    //   { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
+    // ]);
     return [
       decodedToken,
       userId,
@@ -139,11 +139,11 @@ const checkLogged = async (req, res) => {
   // res.status(200).json({ user });
   try {
     const [decodedToken, userId, data] = await check(req);
-    console.log({
-      userId: userId,
-      decodedToken: decodedToken["email"],
-      data: { ...data },
-    });
+    // console.log({
+    //   userId: userId,
+    //   decodedToken: decodedToken["email"],
+    //   data: { ...data },
+    // });
     res.status(200).send({
       userId: userId,
       decodedToken: decodedToken["email"],

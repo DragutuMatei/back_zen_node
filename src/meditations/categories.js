@@ -109,7 +109,7 @@ const getAllMedCats = async (req, res) => {
         true
       );
     }
-    console.log("data: ", JSON.stringify(data));
+    // console.log("data: ", JSON.stringify(data));
     res.status(200).json({ data });
   } catch (error) {
     console.log(error);

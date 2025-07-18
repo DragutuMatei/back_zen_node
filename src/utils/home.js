@@ -113,7 +113,7 @@ const getInfos = async (req, cat, uid) => {
   } else {
     linkInfo = await getListenCatByIdRaw(uid);
     linkInfo = orderByField(linkInfo?.data?.listenRoutines, "time", true);
-    
+
     linkInfo.forEach((e) => {
       items.push({
         id: e.id,
@@ -126,12 +126,10 @@ const getInfos = async (req, cat, uid) => {
         time: e.time,
       });
     });
-
   }
   console.log("abonament de pe home de la getInfos:", abonament);
-  console.log("linkInfo:", Object.keys(linkInfo[0]), linkInfo[0]);
-
-  return linkInfo;
+  console.log("items:", items);
+  return items;
 };
 
 const getCat = async (req, cat, title, isBig, type) => {

@@ -73,8 +73,10 @@ const getAllMedCats = async (req, res) => {
   try {
     const [decodedToken, userId, user] = await check(req);
     abonament = user.abonament;
+    console.log("Abonament1:", abonament);
   } catch (error) {
     abonament = false;
+    console.log("Abonament2:", abonament);
   }
   try {
     const medCats = await getDocs(
@@ -107,7 +109,7 @@ const getAllMedCats = async (req, res) => {
         true
       );
     }
-    console.log(data);
+    console.log("data: ", JSON.stringify(data));
     res.status(200).json({ data });
   } catch (error) {
     console.log(error);

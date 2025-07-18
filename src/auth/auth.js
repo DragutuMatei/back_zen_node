@@ -197,6 +197,7 @@ function getBase64ImageExtension(base64Image) {
 }
 
 const inside_user_stats = async (key, value, id) => {
+  console.log("inside_user_stats", key, value, id);
   const user_ref = doc(db, "users", id);
   let user = await getDoc(user_ref);
   user = user.data();

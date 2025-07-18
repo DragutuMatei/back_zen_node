@@ -101,7 +101,7 @@ const login = async (req, res) => {
 };
 async function check(req) {
   const authHeader = req.headers.authorization;
-  console.log("Auth Header:", authHeader);
+  // console.log("Auth Header:", authHeader);
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).send({ error: "Unauthorized" });
   }

@@ -129,7 +129,8 @@ const getInfos = async (req, cat, uid) => {
   }
   console.log("abonament de pe home de la getInfos:", abonament);
   console.log("items:", items);
-  return items;
+  console.log("linkInfo:", linkInfo);
+  return linkInfo;
 };
 
 const getCat = async (req, cat, title, isBig, type) => {

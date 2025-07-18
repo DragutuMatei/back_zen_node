@@ -101,7 +101,7 @@ const login = async (req, res) => {
 };
 async function check(req) {
   const authHeader = req.headers.authorization;
-
+  console.log("Auth Header:", authHeader);
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return res.status(401).send({ error: "Unauthorized" });
   }
@@ -116,13 +116,18 @@ async function check(req) {
     const user_ref = collection(db, "users");
     const q = query(user_ref, where("email", "==", email));
     var querySnapshot = await getDocs(q);
+    console.log("decode, userid, {id si  restul }: ", [
+      decodedToken,
+      userId,
+      { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
+    ]);
     return [
       decodedToken,
       userId,
       { id: querySnapshot.docs[0].id, ...querySnapshot.docs[0].data() },
     ];
   } catch (error) {
-    // console.error("data:", error);
+    console.error("error:", error);
     return false;
     // res.status(500).send({ error: "Internal Server Error" });
   }

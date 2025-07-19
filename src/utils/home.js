@@ -99,15 +99,16 @@ const getInfos = async (req, cat, uid) => {
 
     linkInfo.forEach((e) => {
       items.push({
-        id: e.id,
-        meditationLink: e.meditationLink,
-        title: e.title,
         category: e.category,
+        id: e.id,
         tags: e.tags,
-        background: e.background,
-        duration: Number(e.duration),
         isLocked: abonament != false && abonament != "" ? false : e.isLocked,
+        title: e.title,
         time: e.time,
+        duration: e.duration.toString(),
+        meditationLink: e.meditationLink,
+        background: e.background,
+
       });
     });
   } else {
@@ -116,21 +117,21 @@ const getInfos = async (req, cat, uid) => {
 
     linkInfo.forEach((e) => {
       items.push({
-        id: e.id,
-        listenLink: e.listenLink,
-        title: e.title,
-        category: e.category,
         background: e.background,
-        duration: Number(e.duration),
+        id: e.id,
+        category: e.category,
         isLocked: abonament != false && abonament != "" ? false : e.isLocked,
         time: e.time,
+        title: e.title,
+        listenLink: e.listenLink,
+        duration: e.duration.toString(),
       });
     });
   }
   console.log("abonament de pe home de la getInfos:", abonament);
   console.log("items:", items);
   console.log("linkInfo:", linkInfo);
-  return linkInfo;
+  return items;
 };
 
 const getCat = async (req, cat, title, isBig, type) => {

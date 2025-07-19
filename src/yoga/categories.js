@@ -58,26 +58,27 @@ const addyogaCat = async (req, res) => {
 const getAllyogaCats = async (req, res) => {
   const data = [];
   let abonament = "";
+  let user = null;
   try {
-    const [decodedToken, userId, user] = await check(req);
-    abonament = user.abonament;
+    const [decodedToken, userId, userObj] = await check(req);
+    abonament = userObj.abonament;
+    user = userObj;
+    if (!abonament || abonament === "") {
+      return res.status(403).json({ error: "Premium required" });
+    }
   } catch (error) {
-    abonament = false;
+    return res.status(401).json({ error: "Unauthorized" });
   }
   try {
     const yogaCats = await getDocs(collection(db, "categorie_yoga"));
     yogaCats.forEach((doc) => {
       data.push({ uid: doc.id, ...doc.data() });
     });
-
-    if (abonament != false && abonament != "") {
-      for (let i = 0; i < data.length; i++) {
-        for (let j = 0; j < data[i].yogaRoutines.length; j++) {
-          data[i].yogaRoutines[j].isLocked = false;
-        }
+    for (let i = 0; i < data.length; i++) {
+      for (let j = 0; j < data[i].yogaRoutines.length; j++) {
+        data[i].yogaRoutines[j].isLocked = false;
       }
     }
-    //console.log(abonament);
     res.status(200).json({ data });
   } catch (error) {
     res.status(500).json({ ok: false, error });

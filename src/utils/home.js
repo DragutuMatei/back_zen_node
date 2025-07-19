@@ -18,13 +18,15 @@ const getIt = async (
   try {
     const cats = await getDocs(collection(db, colection));
     let abonament = "";
-
+    console.log("home:", req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer "));
     if (
       req.headers.authorization &&
       req.headers.authorization.startsWith("Bearer ")
     ) {
       try {
         const [decodedToken, userId, userObj] = await check(req);
+        console.log("decodedToken:", userId, userObj);
         abonament = userObj.abonament;
         user = userObj;
       } catch (error) {

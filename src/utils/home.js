@@ -18,11 +18,14 @@ const getIt = async (
   try {
     const cats = await getDocs(collection(db, colection));
     let abonament = "";
-    console.log("home:", req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer "));
-    if (
+    console.log(
+      "home:",
       req.headers.authorization &&
-      req.headers.authorization.startsWith("Bearer ")
+        req.headers.authorization.startsWith("Bearer ")
+    );
+    if (
+      req.headers.authorization != undefined &&
+      req.headers.authorization.startsWith("Bearer ") != undefined
     ) {
       try {
         const [decodedToken, userId, userObj] = await check(req);

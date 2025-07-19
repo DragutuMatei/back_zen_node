@@ -59,15 +59,20 @@ const getAllyogaCats = async (req, res) => {
   const data = [];
   let abonament = "";
   let user = null;
-  try {
-    const [decodedToken, userId, userObj] = await check(req);
-    abonament = userObj.abonament;
-    user = userObj;
-    if (!abonament || abonament === "") {
-      return res.status(403).json({ error: "Premium required" });
+  if (
+    req.headers.authorization != undefined &&
+    req.headers.authorization.startsWith("Bearer ") != undefined
+  ) {
+    try {
+      const [decodedToken, userId, userObj] = await check(req);
+      console.log("decodedToken:", userId, userObj);
+      abonament = userObj.abonament;
+      user = userObj;
+    } catch (error) {
+      abonament = "";
     }
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorized" });
+  } else {
+    abonament = ""; // user anonim
   }
   try {
     const yogaCats = await getDocs(collection(db, "categorie_yoga"));

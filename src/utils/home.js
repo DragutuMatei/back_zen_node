@@ -18,12 +18,22 @@ const getIt = async (
   try {
     const cats = await getDocs(collection(db, colection));
     let abonament = "";
-    try {
-      const [decodedToken, userId, user] = await check(req);
-      abonament = user.abonament;
-    } catch (error) {
-      abonament = false;
+
+    if (
+      req.headers.authorization &&
+      req.headers.authorization.startsWith("Bearer ")
+    ) {
+      try {
+        const [decodedToken, userId, userObj] = await check(req);
+        abonament = userObj.abonament;
+        user = userObj;
+      } catch (error) {
+        abonament = "";
+      }
+    } else {
+      abonament = ""; // user anonim
     }
+
     let items = [];
     let i = 0;
     cats.forEach((doc) => {
@@ -87,12 +97,21 @@ const getInfos = async (req, cat, uid) => {
   let linkInfo = "";
   let items = [];
   let abonament = "";
-  try {
-    const [decodedToken, userId, user] = await check(req);
-    abonament = user.abonament;
-  } catch (error) {
-    abonament = false;
+  if (
+    req.headers.authorization &&
+    req.headers.authorization.startsWith("Bearer ")
+  ) {
+    try {
+      const [decodedToken, userId, userObj] = await check(req);
+      abonament = userObj.abonament;
+      user = userObj;
+    } catch (error) {
+      abonament = "";
+    }
+  } else {
+    abonament = ""; // user anonim
   }
+
   if (cat === "categorie_meditati") {
     linkInfo = await getMedCatByIdRaw(uid);
     linkInfo = orderByField(linkInfo?.data?.meditationRoutines, "time", true);
@@ -108,7 +127,6 @@ const getInfos = async (req, cat, uid) => {
         duration: e.duration.toString(),
         meditationLink: e.meditationLink,
         background: e.background,
-
       });
     });
   } else {

@@ -327,11 +327,15 @@ const getAllMedCats = async (req, res) => {
   let data = [];
   let abonament = "";
   let user = null;
-  try {
-    const [decodedToken, userId, userObj] = await check(req);
-    abonament = userObj.abonament;
-    user = userObj;
-  } catch (error) {
+  if (req.headers.authorization && req.headers.authorization.startsWith("Bearer ")) {
+    try {
+      const [decodedToken, userId, userObj] = await check(req);
+      abonament = userObj.abonament;
+      user = userObj;
+    } catch (error) {
+      abonament = "";
+    }
+  } else {
     abonament = ""; // user anonim
   }
   try {

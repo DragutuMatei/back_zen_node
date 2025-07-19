@@ -498,7 +498,8 @@ async function check(req) {
   const authHeader = req.headers.authorization;
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     console.log("[AUTH] Missing or malformed Authorization header");
-    return res.status(401).send({ error: "Unauthorized" });
+    // return res.status(401).send({ error: "Unauthorized" });
+    return false;
   }
 
   const token = authHeader.split("Bearer ")[1]; // Extract the token

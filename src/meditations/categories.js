@@ -331,11 +331,8 @@ const getAllMedCats = async (req, res) => {
     const [decodedToken, userId, userObj] = await check(req);
     abonament = userObj.abonament;
     user = userObj;
-    if (!abonament || abonament === "") {
-      return res.status(403).json({ error: "Premium required" });
-    }
   } catch (error) {
-    return res.status(401).json({ error: "Unauthorized" });
+    abonament = ""; // user anonim
   }
   try {
     const medCats = await getDocs(
@@ -348,7 +345,9 @@ const getAllMedCats = async (req, res) => {
     data = orderByField(data, "order", false);
     for (let i = 0; i < data.length; i++) {
       for (let j = 0; j < data[i].meditationRoutines.length; j++) {
-        data[i].meditationRoutines[j].isLocked = false;
+        data[i].meditationRoutines[j].isLocked = abonament
+          ? false
+          : data[i].meditationRoutines[j].isLocked;
       }
       data[i].meditationRoutines = orderByField(
         data[i].meditationRoutines,

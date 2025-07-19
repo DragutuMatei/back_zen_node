@@ -31,7 +31,7 @@ const getIt = async (
         const [decodedToken, userId, userObj] = await check(req);
         console.log("decodedToken:", userId, userObj);
         abonament = userObj.abonament;
-        user = userObj;
+        // user = userObj;
       } catch (error) {
         abonament = "";
       }
@@ -109,7 +109,7 @@ const getInfos = async (req, cat, uid) => {
     try {
       const [decodedToken, userId, userObj] = await check(req);
       abonament = userObj.abonament;
-      user = userObj;
+      // user = userObj;
     } catch (error) {
       abonament = "";
     }

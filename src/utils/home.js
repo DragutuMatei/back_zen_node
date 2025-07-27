@@ -263,10 +263,20 @@ const getHome = async (req, res) => {
     list_cat != false && list_cat,
     last_listens != false && last_listens,
   ];
+  console.log(data);
+  try {
+    
+    const [decodedToken, userId, userObj] = await check(req);
+    console.log("pt userul", userObj.email);
+  } catch (e) {
+    console.log("err la catch:", e);
+  }
 
   if (data.length > 0) {
+    console.log("e ok: ");
     res.status(200).json({ data });
   } else {
+    console.log("nu e ok!");
     res.status(500).json({ ok: false });
   }
 };

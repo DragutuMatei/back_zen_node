@@ -1019,14 +1019,14 @@ const inside_user_stats = async (key, value, id) => {
     }
   } else if (key === "lasts") {
     console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
-    console.log(user[key]);
+    // console.log(user[key]);
     const [primul, second, third] = user[key].map(
       (obj) => Object.values(obj)[0]
     );
 
-    console.log("primul: ", primul);
-    console.log("second: ", second);
-    console.log("third: ", third);
+    console.log("primul: ", primul.id);
+    console.log("second: ", second.id);
+    console.log("third: ", third.id);
 
     const isTheSame = (p, s) => {
       console.log(p["id"] == s["id"], p["id"], s["id"]);
@@ -1039,14 +1039,14 @@ const inside_user_stats = async (key, value, id) => {
 
     console.log(
       "exista?: ",
-      isTheSame(Object.values(value)[0], primul) &&
-        isTheSame(Object.values(value)[0], second) &&
+      isTheSame(Object.values(value)[0], primul) ||
+        isTheSame(Object.values(value)[0], second) ||
         isTheSame(Object.values(value)[0], third)
     );
 
     if (
-      isTheSame(Object.values(value)[0], primul) &&
-      isTheSame(Object.values(value)[0], second) &&
+      isTheSame(Object.values(value)[0], primul) ||
+      isTheSame(Object.values(value)[0], second) ||
       isTheSame(Object.values(value)[0], third)
     ) {
       return { ok: true };

@@ -475,7 +475,7 @@ const getCat = async (req, cat, title, isBig, type) => {
       items: null,
     };
   } catch (error) {
-    console.log(error);
+    console.log(error); 
     return false;
   }
 };

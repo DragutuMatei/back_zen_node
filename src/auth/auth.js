@@ -1020,22 +1020,33 @@ const inside_user_stats = async (key, value, id) => {
   } else if (key === "lasts") {
     console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
 
-    const primul = Object.values(user[key][0]);
+    const inner = Object.values(user[key])[0];
+
+    const primul = Object.values(user[key])[0];
+    const second = Object.values(user[key])[1];
+    const third = Object.values(user[key])[2];
 
     const isTheSame = (p, s) => {
-      const keys = ["title", "background", "link", "id"];
-
-      for (key in keys) {
-        console.log(p[key] == s[key], p[key], s[key]);
-        if (p[key] == s[key]) {
-          return true;
-        }
+      console.log(p["id"] == s["id"], p["id"], s["id"]);
+      if (p["id"] == s["id"]) {
+        return true;
       }
       console.log("se schimba");
       return false;
     };
 
-    if (isTheSame(Object.values(value), primul)) {
+    console.log(
+      "exista?: ",
+      isTheSame(Object.values(value), primul) &&
+        isTheSame(Object.values(value), second) &&
+        isTheSame(Object.values(value), third)
+    );
+
+    if (
+      isTheSame(Object.values(value), primul) &&
+      isTheSame(Object.values(value), second) &&
+      isTheSame(Object.values(value), third)
+    ) {
       return { ok: true };
     }
 

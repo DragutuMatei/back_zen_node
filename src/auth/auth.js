@@ -1025,6 +1025,7 @@ const inside_user_stats = async (key, value, id) => {
       user[key].length = length;
     }
     console.log(user[key]);
+    
     await updateDoc(user_ref, { lasts: user[key] });
   }
   await updateDoc(user_ref, user);
@@ -1103,13 +1104,13 @@ const __dirname = path.dirname(__filename);
 
 // ⚙️ Config (înlocuiește cu ce ai nevoie)
 const APPLE_SHARED_SECRET = "59acf87f515e4b5888714af93584ed07";
-const GOOGLE_KEYFILE = path.join(__dirname, "django-2546a-047c18bcd59d.json");
+// const GOOGLE_KEYFILE = path.join(__dirname, "django-2546a-047c18bcd59d.json");
 
 const verifyApple = async (receiptData) => {
-  const url = "https://buy.itunes.apple.com/verifyReceipt"; // sau sandbox
+  const url = "https://sandbox.itunes.apple.com/verifyReceipt"; // sau sandbox
   const response = await axios.post(url, {
     "receipt-data": receiptData,
-    password: APPLE_SHARED_SECRET,
+    password: "9d602485207548f7b4571bffb28aedea",
     "exclude-old-transactions": true,
   });
 

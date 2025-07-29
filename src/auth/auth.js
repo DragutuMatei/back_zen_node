@@ -1026,10 +1026,12 @@ const inside_user_stats = async (key, value, id) => {
       const keys = ["title", "background", "link", "id"];
 
       for (key in keys) {
+        console.log(p[key] == s[key], p[key], s[key]);
         if (p[key] == s[key]) {
           return true;
         }
       }
+      console.log("se schimba");
       return false;
     };
 

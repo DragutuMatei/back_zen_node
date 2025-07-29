@@ -1020,9 +1020,9 @@ const inside_user_stats = async (key, value, id) => {
   } else if (key === "lasts") {
     console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
     console.log(user[key]);
-    const primul = Object.values(user[key])[0];
-    const second = Object.values(user[key])[1];
-    const third = Object.values(user[key])[2];
+    const primul = Object.values(user[key])[0][0];
+    const second = Object.values(user[key])[0][1];
+    const third = Object.values(user[key])[0][2];
 
     console.log("primul: ", primul);
     console.log("second: ", second);

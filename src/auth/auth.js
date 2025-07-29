@@ -1020,7 +1020,6 @@ const inside_user_stats = async (key, value, id) => {
   } else if (key === "lasts") {
     console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
 
-    const inner = Object.values(user[key])[0];
 
     const primul = Object.values(user[key])[0];
     const second = Object.values(user[key])[1];
@@ -1037,15 +1036,15 @@ const inside_user_stats = async (key, value, id) => {
 
     console.log(
       "exista?: ",
-      isTheSame(Object.values(value), primul) &&
-        isTheSame(Object.values(value), second) &&
-        isTheSame(Object.values(value), third)
+      isTheSame(Object.values(value)[0], primul) &&
+        isTheSame(Object.values(value)[0], second) &&
+        isTheSame(Object.values(value)[0], third)
     );
 
     if (
-      isTheSame(Object.values(value), primul) &&
-      isTheSame(Object.values(value), second) &&
-      isTheSame(Object.values(value), third)
+      isTheSame(Object.values(value)[0], primul) &&
+      isTheSame(Object.values(value)[0], second) &&
+      isTheSame(Object.values(value)[0], third)
     ) {
       return { ok: true };
     }

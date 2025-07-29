@@ -1019,13 +1019,31 @@ const inside_user_stats = async (key, value, id) => {
     }
   } else if (key === "lasts") {
     console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
+
+    const primul = Object.values(user[0]);
+
+    const isTheSame = (p, s) => {
+      const keys = ["title", "background", "link", "id"];
+
+      for (key in keys) {
+        if (p[key] == s[key]) {
+          return true;
+        }
+      }
+      return false;
+    };
+
+    if (isTheSame(Object.values(value), primul)) {
+      return { ok: true };
+    }
+
     user[key].unshift(value);
     const length = 3;
     if (user[key].length > length) {
       user[key].length = length;
     }
     console.log(user[key]);
-    
+
     await updateDoc(user_ref, { lasts: user[key] });
   }
   await updateDoc(user_ref, user);

@@ -1020,7 +1020,7 @@ const inside_user_stats = async (key, value, id) => {
   } else if (key === "lasts") {
     console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
 
-    const primul = Object.values(user[0]);
+    const primul = Object.values(user[key][0]);
 
     const isTheSame = (p, s) => {
       const keys = ["title", "background", "link", "id"];

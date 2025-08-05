@@ -265,7 +265,7 @@
 //   ];
 //   console.log(data);
 //   try {
-    
+
 //     const [decodedToken, userId, userObj] = await check(req);
 //     console.log("pt userul", userObj.email);
 //   } catch (e) {
@@ -326,6 +326,7 @@ const getIt = async (
               title: e.title,
               background: e.background,
               linkTo: e[link],
+              slug: routines == "routines" ? "Meditation" : "Audio",
               linkInfo: null,
               totalTime: Number(e.duration),
               isLocked: false,
@@ -475,7 +476,7 @@ const getCat = async (req, cat, title, isBig, type) => {
       items: null,
     };
   } catch (error) {
-    console.log(error); 
+    console.log(error);
     return false;
   }
 };

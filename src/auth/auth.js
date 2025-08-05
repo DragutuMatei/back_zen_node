@@ -887,8 +887,10 @@ const login = async (req, res) => {
       res.status(500).json({ error: errorMessage });
     });
 };
+
 async function check(req) {
   const authHeader = req.headers.authorization;
+  console.log(authHeader, req.headers.authorization);
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     // Nu loga, nu trimite răspuns HTTP, doar returnează false pentru user anonim
     return false;

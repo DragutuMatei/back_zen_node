@@ -326,7 +326,7 @@ const getIt = async (
               title: e.title,
               background: e.background,
               linkTo: e[link],
-              slug: routines == "routines" ? "Meditation" : "Audio",
+              slug: routines == "meditationRoutines" ? "Meditation" : "Audio",
               linkInfo: null,
               totalTime: Number(e.duration),
               isLocked: false,

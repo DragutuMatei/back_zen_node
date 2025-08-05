@@ -327,6 +327,7 @@ const getIt = async (
               background: e.background,
               linkTo: e[link],
               slug: routines == "meditationRoutines" ? "Meditation" : "Audio",
+              id: e.id,
               linkInfo: null,
               totalTime: Number(e.duration),
               isLocked: false,
@@ -338,6 +339,8 @@ const getIt = async (
             items.push({
               title: e.title,
               background: e.background,
+              slug: routines == "meditationRoutines" ? "Meditation" : "Audio",
+              id: e.id,
               linkTo: e[link],
               linkInfo: null,
               totalTime: Number(e.duration),

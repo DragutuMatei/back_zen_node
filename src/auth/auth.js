@@ -890,7 +890,7 @@ const login = async (req, res) => {
 
 async function check(req) {
   const authHeader = req.headers.authorization;
-  console.log(authHeader, req.headers.authorization);
+  // console.log(authHeader, req.headers.authorization);
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     // Nu loga, nu trimite răspuns HTTP, doar returnează false pentru user anonim
     return false;
@@ -1022,9 +1022,11 @@ const inside_user_stats = async (key, value, id) => {
   } else if (key === "lasts") {
     console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
     // console.log(user[key]);
-    const [primul, second, third] = user[key].map(
-      (obj) => Object.values(obj)[0]
-    );
+    const primul = Object.values(user[key][0])[0];
+
+    const second = Object.values(user[key][0])[0];
+
+    const third = Object.values(user[key][0])[0];
 
     console.log("primul: ", primul.id);
     console.log("second: ", second.id);
@@ -1039,17 +1041,16 @@ const inside_user_stats = async (key, value, id) => {
       return false;
     };
 
-    console.log(
-      "exista?: ",
-      isTheSame(Object.values(value)[0], primul) ||
-        isTheSame(Object.values(value)[0], second) ||
-        isTheSame(Object.values(value)[0], third)
-    );
-
     if (
-      isTheSame(Object.values(value)[0], primul) ||
-      isTheSame(Object.values(value)[0], second) ||
-      isTheSame(Object.values(value)[0], third)
+      (primul.id != undefined || primul.id != ""
+        ? isTheSame(Object.values(value)[0], primul)
+        : false) ||
+      (second.id != undefined || second.id != ""
+        ? isTheSame(Object.values(value)[0], second)
+        : false) ||
+      (third.id != undefined || third.id != ""
+        ? isTheSame(Object.values(value)[0], third)
+        : false)
     ) {
       return { ok: true };
     }

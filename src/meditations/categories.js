@@ -689,16 +689,16 @@ const getOthers2 = async (req, res) => {
   const { id } = req.params;
   let final;
   const data = [];
-  let abonament = "";
-  try {
-    const [decodedToken, userId, userObj] = await check(req);
-    abonament = userObj.abonament;
-    if (!abonament || abonament === "") {
-      return res.status(403).json({ error: "Premium required" });
-    }
-  } catch (error) {
-    return res.status(401).json({ error: "Unauthorized" });
-  }
+  // let abonament = "";
+  // try {
+  //   const [decodedToken, userId, userObj] = await check(req);
+  //   abonament = userObj.abonament;
+  //   if (!abonament || abonament === "") {
+  //     return res.status(403).json({ error: "Premium required" });
+  //   }
+  // } catch (error) {
+  //   return res.status(401).json({ error: "Unauthorized" });
+  // }
   try {
     const medCats = await getDocs(collection(db, "categorie_meditati"));
     medCats.forEach((doc) => {

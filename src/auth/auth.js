@@ -1020,47 +1020,39 @@ const inside_user_stats = async (key, value, id) => {
       return { ok: false, error: "pula mea coaie" };
     }
   } else if (key === "lasts") {
-    console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
-    // console.log(user[key]);
-    const primul = Object.values(user[key][0])[0] || null;
+    console.log("📌 Adăugare în 'lasts'");
 
-    const second = Object.values(user[key][0])[0] || null;
-
-    const third = Object.values(user[key][0])[0] || null;
-
-    const isTheSame = (p, s) => {
-      try {
-        if (p["id"] == s["id"]) {
-          return true;
-        }
-        console.log("se schimba");
-        return false;
-      } catch (error) {
-        return false;
-      }
-    };
-
-    try {
-      if (
-        (primul.id != undefined || primul.id != ""
-          ? isTheSame(Object.values(value)[0], primul)
-          : false) ||
-        (second.id != undefined || second.id != ""
-          ? isTheSame(Object.values(value)[0], second)
-          : false) ||
-        (third.id != undefined || third.id != ""
-          ? isTheSame(Object.values(value)[0], third)
-          : false)
-      ) {
-        return { ok: true };
-      }
-    } catch (error) {}
-    user[key].unshift(value);
-    const length = 3;
-    if (user[key].length > length) {
-      user[key].length = length;
+    // Inițializare în caz că nu există
+    if (!Array.isArray(user[key])) {
+      user[key] = [];
     }
-    console.log(user[key]);
+
+    const newItem = Object.values(value || {})[0] || null;
+
+    // Dacă item-ul este invalid sau nu are id, îl ignorăm
+    if (!newItem || !newItem.id) {
+      console.warn("⚠️ Item invalid sau fără ID, nu adaug în lasts.");
+      return { ok: false, reason: "invalid_item" };
+    }
+
+    // Verificăm dacă există deja un element cu același ID
+    const alreadyExists = user[key].some((item) => {
+      const obj = Object.values(item || {})[0] || {};
+      return obj.id === newItem.id;
+    });
+
+    if (alreadyExists) {
+      console.log("⚠️ Item cu acest ID există deja în lasts.");
+      return { ok: true, reason: "duplicate" };
+    }
+
+    // Adăugăm elementul la început
+    user[key].unshift(value);
+
+    // Limităm la maxim 3 elemente
+    if (user[key].length > 3) {
+      user[key] = user[key].slice(0, 3);
+    }
 
     await updateDoc(user_ref, { lasts: user[key] });
   }

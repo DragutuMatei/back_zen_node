@@ -1022,39 +1022,39 @@ const inside_user_stats = async (key, value, id) => {
   } else if (key === "lasts") {
     console.log("pullllllllllllllllllllllllaaaaaaaaaaaa");
     // console.log(user[key]);
-    const primul = Object.values(user[key][0])[0];
+    const primul = Object.values(user[key][0])[0] || null;
 
-    const second = Object.values(user[key][0])[0];
+    const second = Object.values(user[key][0])[0] || null;
 
-    const third = Object.values(user[key][0])[0];
-
-    console.log("primul: ", primul.id);
-    console.log("second: ", second.id);
-    console.log("third: ", third.id);
+    const third = Object.values(user[key][0])[0] || null;
 
     const isTheSame = (p, s) => {
-      console.log(p["id"] == s["id"], p["id"], s["id"]);
-      if (p["id"] == s["id"]) {
-        return true;
+      try {
+        if (p["id"] == s["id"]) {
+          return true;
+        }
+        console.log("se schimba");
+        return false;
+      } catch (error) {
+        return false;
       }
-      console.log("se schimba");
-      return false;
     };
 
-    if (
-      (primul.id != undefined || primul.id != ""
-        ? isTheSame(Object.values(value)[0], primul)
-        : false) ||
-      (second.id != undefined || second.id != ""
-        ? isTheSame(Object.values(value)[0], second)
-        : false) ||
-      (third.id != undefined || third.id != ""
-        ? isTheSame(Object.values(value)[0], third)
-        : false)
-    ) {
-      return { ok: true };
-    }
-
+    try {
+      if (
+        (primul.id != undefined || primul.id != ""
+          ? isTheSame(Object.values(value)[0], primul)
+          : false) ||
+        (second.id != undefined || second.id != ""
+          ? isTheSame(Object.values(value)[0], second)
+          : false) ||
+        (third.id != undefined || third.id != ""
+          ? isTheSame(Object.values(value)[0], third)
+          : false)
+      ) {
+        return { ok: true };
+      }
+    } catch (error) {}
     user[key].unshift(value);
     const length = 3;
     if (user[key].length > length) {

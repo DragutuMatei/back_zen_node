@@ -71,6 +71,14 @@ import bodyParser from "body-parser";
 import { getHome } from "./src/utils/home.js";
 import { getinfos } from "./src/utils/infos.js";
 import { content } from "googleapis/build/src/apis/content/index.js";
+import {
+  addPromoCode,
+  getAllPromoCodes,
+  updatePromoCode,
+  deletePromoCode,
+  verifyPromoCode,
+  trackPromoCodeActivation
+} from "./src/promo_codes/promo_codes.js";
 
 const app = express();
 
@@ -172,6 +180,13 @@ app.get("/user", checkLogged);
 app.post("/refreshToken", refreshToken);
 
 app.get("/getinfos/:id", getinfos);
+
+app.post("/addPromoCode", addPromoCode);
+app.get("/getAllPromoCodes", getAllPromoCodes);
+app.post("/updatePromoCode", updatePromoCode);
+app.post("/deletePromoCode", deletePromoCode);
+app.post("/verifyPromoCode", verifyPromoCode);
+app.post("/trackPromoCodeActivation", trackPromoCodeActivation);
 
 app.post("/api/verifica-abonament", async (req, res) => {
   const { platform, email } = req.body;

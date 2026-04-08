@@ -54,12 +54,12 @@ const getStoreCodesStats = async (req, res) => {
     
     snapshot.forEach((doc) => {
       const data = doc.data();
-      const key = `${data.alias}_${data.platform}`;
+      const key = data.alias;
       
       if (!stats[key]) {
         stats[key] = {
           alias: data.alias,
-          platform: data.platform,
+          platforms: new Set(),
           total: 0,
           used: 0,
           expiresAt: data.expiresAt,
@@ -68,16 +68,26 @@ const getStoreCodesStats = async (req, res) => {
       }
       
       stats[key].total += 1;
+      stats[key].platforms.add(data.platform);
       if (data.isUsed) {
         stats[key].used += 1;
       }
-      // Păstrăm cea mai recentă dată (aproximativ)
       if (new Date(data.createdAt) > new Date(stats[key].createdAt)) {
         stats[key].createdAt = data.createdAt;
       }
+      // Preluăm expiresAt
+      if (data.expiresAt) {
+         stats[key].expiresAt = data.expiresAt;
+      }
     });
 
-    const dataArray = Object.values(stats);
+    const dataArray = Object.values(stats).map(item => {
+      return {
+        ...item,
+         platforms: Array.from(item.platforms).join(', ')
+      };
+    });
+    
     dataArray.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
 
     res.status(200).json({ ok: true, data: dataArray });
@@ -86,7 +96,61 @@ const getStoreCodesStats = async (req, res) => {
   }
 };
 
+const deleteStoreCodes = async (req, res) => {
+  try {
+    const { alias } = req.body;
+    if (!alias) {
+      return res.status(400).json({ ok: false, error: "Date invalide" });
+    }
+
+    const q = query(
+      collection(db, "store_promo_codes"),
+      where("alias", "==", alias)
+    );
+    
+    const snapshot = await getDocs(q);
+    const batch = writeBatch(db);
+    
+    snapshot.forEach((docSnap) => {
+      batch.delete(docSnap.ref);
+    });
+    
+    await batch.commit();
+
+    res.status(200).json({ ok: true, message: "Campania a fost ștearsă cu succes." });
+  } catch (error) {
+    console.error("Eroare la ștergerea codurilor:", error);
+    res.status(500).json({ ok: false, error: error.message });
+  }
+};
+
+const updateStoreCodes = async (req, res) => {
+  try {
+    const { alias, expiresAt } = req.body;
+    if (!alias) {
+      return res.status(400).json({ ok: false, error: "Lipseste alias" });
+    }
+
+    const q = query(collection(db, "store_promo_codes"), where("alias", "==", alias));
+    const snapshot = await getDocs(q);
+    const batch = writeBatch(db);
+
+    const expiresIso = expiresAt ? new Date(expiresAt).toISOString() : null;
+
+    snapshot.forEach((docSnap) => {
+      batch.update(docSnap.ref, { expiresAt: expiresIso });
+    });
+
+    await batch.commit();
+    res.status(200).json({ ok: true, message: "Campanie actualizata cu succes." });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: error.message });
+  }
+};
+
 export {
   addStoreCodes,
-  getStoreCodesStats
+  getStoreCodesStats,
+  deleteStoreCodes,
+  updateStoreCodes
 };

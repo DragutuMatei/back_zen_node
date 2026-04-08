@@ -6,7 +6,8 @@ import {
   query,
   where,
   writeBatch,
-  doc
+  doc,
+  deleteDoc
 } from "firebase/firestore";
 
 const addStoreCodes = async (req, res) => {
@@ -148,9 +149,50 @@ const updateStoreCodes = async (req, res) => {
   }
 };
 
+const getRawStoreCodes = async (req, res) => {
+  try {
+    const { alias } = req.body;
+    if (!alias) {
+      return res.status(400).json({ ok: false, error: "Lipseste alias" });
+    }
+    const q = query(
+      collection(db, "store_promo_codes"),
+      where("alias", "==", alias)
+    );
+    const snapshot = await getDocs(q);
+    const data = [];
+    snapshot.forEach((docSnap) => {
+      data.push({ id: docSnap.id, ...docSnap.data() });
+    });
+    
+    // Sortate newest to oldest in UI if needed, we'll sort here descending by created at
+    data.sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+    
+    res.status(200).json({ ok: true, data });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: error.message });
+  }
+};
+
+const deleteSingleStoreCode = async (req, res) => {
+  try {
+    const { docId } = req.body;
+    if (!docId) {
+      return res.status(400).json({ ok: false, error: "Lipseste id-ul" });
+    }
+    const docRef = doc(db, "store_promo_codes", docId);
+    await deleteDoc(docRef);
+    res.status(200).json({ ok: true, message: "Codul a fost șters." });
+  } catch (error) {
+    res.status(500).json({ ok: false, error: error.message });
+  }
+};
+
 export {
   addStoreCodes,
   getStoreCodesStats,
   deleteStoreCodes,
-  updateStoreCodes
+  updateStoreCodes,
+  getRawStoreCodes,
+  deleteSingleStoreCode
 };

@@ -83,7 +83,9 @@ import {
   addStoreCodes,
   getStoreCodesStats,
   deleteStoreCodes,
-  updateStoreCodes
+  updateStoreCodes,
+  getRawStoreCodes,
+  deleteSingleStoreCode
 } from "./src/promo_codes/store_codes.js";
 
 const app = express();
@@ -198,6 +200,8 @@ app.post("/addStoreCodes", addStoreCodes);
 app.get("/getStoreCodesStats", getStoreCodesStats);
 app.post("/deleteStoreCodes", deleteStoreCodes);
 app.post("/updateStoreCodes", updateStoreCodes);
+app.post("/getRawStoreCodes", getRawStoreCodes);
+app.post("/deleteSingleStoreCode", deleteSingleStoreCode);
 
 app.post("/api/verifica-abonament", async (req, res) => {
   const { platform, email } = req.body;

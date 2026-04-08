@@ -79,6 +79,10 @@ import {
   verifyPromoCode,
   trackPromoCodeActivation
 } from "./src/promo_codes/promo_codes.js";
+import {
+  addStoreCodes,
+  getStoreCodesStats
+} from "./src/promo_codes/store_codes.js";
 
 const app = express();
 
@@ -187,6 +191,9 @@ app.post("/updatePromoCode", updatePromoCode);
 app.post("/deletePromoCode", deletePromoCode);
 app.post("/verifyPromoCode", verifyPromoCode);
 app.post("/trackPromoCodeActivation", trackPromoCodeActivation);
+
+app.post("/addStoreCodes", addStoreCodes);
+app.get("/getStoreCodesStats", getStoreCodesStats);
 
 app.post("/api/verifica-abonament", async (req, res) => {
   const { platform, email } = req.body;

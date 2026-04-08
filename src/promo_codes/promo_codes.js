@@ -76,33 +76,66 @@ const deletePromoCode = async (req, res) => {
 
 const verifyPromoCode = async (req, res) => {
   try {
-    const { code } = req.body;
+    const { code, platform, email } = req.body;
     if (!code) {
       return res.status(200).json({ ok: false, error: "Introdu un cod invalid" });
     }
-    const q = query(collection(db, "discount_codes"), where("code", "==", code.toLowerCase().trim()));
-    const snapshot = await getDocs(q);
     
-    if(snapshot.empty) {
+    // 1. Verificam intai in discount_codes
+    const q1 = query(collection(db, "discount_codes"), where("code", "==", code.toLowerCase().trim()));
+    const snapshot1 = await getDocs(q1);
+    
+    if(!snapshot1.empty) {
+      let promo = snapshot1.docs[0].data();
+      if(promo.active === false) {
+        return res.status(200).json({ ok: false, error: "Cod inactiv" });
+      }
+      const today = new Date();
+      today.setHours(0,0,0,0);
+      const fromDate = new Date(promo.validFrom);
+      const toDate = new Date(promo.validTo);
+      if(today < fromDate || today > toDate) {
+        return res.status(200).json({ ok: false, error: "Cod expirat" });
+      }
+      return res.status(200).json({ ok: true, discountPercentage: promo.discountPercentage });
+    }
+
+    // 2. Daca nu gasim procent, cautam in store_promo_codes
+    if (!platform) {
       return res.status(200).json({ ok: false, error: "Cod invalid" });
     }
-    
-    let promo = snapshot.docs[0].data();
-    
-    if(promo.active === false) {
-      return res.status(200).json({ ok: false, error: "Cod inactiv" });
+
+    const q2 = query(
+      collection(db, "store_promo_codes"), 
+      where("alias", "==", code.toLowerCase().trim()),
+      where("platform", "==", platform.toLowerCase().trim()),
+      where("isUsed", "==", false)
+    );
+    const snapshot2 = await getDocs(q2);
+
+    if (snapshot2.empty) {
+        return res.status(200).json({ ok: false, error: "Cod invalid sau epuizat" });
     }
-    
-    const today = new Date();
-    today.setHours(0,0,0,0);
-    const fromDate = new Date(promo.validFrom);
-    const toDate = new Date(promo.validTo);
-    
-    if(today < fromDate || today > toDate) {
-      return res.status(200).json({ ok: false, error: "Cod expirat" });
-    }
-    
-    res.status(200).json({ ok: true, discountPercentage: promo.discountPercentage });
+
+    // Luam primul document disponibil
+    const docSnap = snapshot2.docs[0];
+    const storeCodeData = docSnap.data();
+
+    // Il marcam direct ca folosit
+    const ref = docSnap.ref;
+    await updateDoc(ref, {
+      isUsed: true,
+      usedByEmail: email || "necunoscut",
+      usedAt: new Date().toISOString()
+    });
+
+    return res.status(200).json({ 
+      ok: true, 
+      isStoreCode: true, 
+      platform: storeCodeData.platform,
+      storeCode: storeCodeData.code 
+    });
+
   } catch (error) {
     res.status(500).json({ ok: false, error });
   }

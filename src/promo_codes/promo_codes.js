@@ -117,12 +117,32 @@ const verifyPromoCode = async (req, res) => {
         return res.status(200).json({ ok: false, error: "Cod invalid sau epuizat" });
     }
 
-    // Luam primul document disponibil
-    const docSnap = snapshot2.docs[0];
-    const storeCodeData = docSnap.data();
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    
+    // Gasim primul document valabil
+    let validDoc = null;
+    let storeCodeData = null;
+    
+    for (const d of snapshot2.docs) {
+      const data = d.data();
+      if (data.expiresAt) {
+         const expDate = new Date(data.expiresAt);
+         if (today > expDate) {
+           continue; // Acest cod a expirat (timestamp-ul limită e depășit)
+         }
+      }
+      validDoc = d;
+      storeCodeData = data;
+      break;
+    }
+
+    if (!validDoc) {
+      return res.status(200).json({ ok: false, error: "Campanie expirată" });
+    }
 
     // Il marcam direct ca folosit
-    const ref = docSnap.ref;
+    const ref = validDoc.ref;
     await updateDoc(ref, {
       isUsed: true,
       usedByEmail: email || "necunoscut",

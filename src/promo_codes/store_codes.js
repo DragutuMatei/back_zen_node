@@ -11,7 +11,7 @@ import {
 
 const addStoreCodes = async (req, res) => {
   try {
-    const { alias, platform, codes } = req.body;
+    const { alias, platform, codes, expiresAt } = req.body;
     
     if (!alias || !platform || !codes || !Array.isArray(codes) || codes.length === 0) {
       return res.status(400).json({ ok: false, error: "Date invalide" });
@@ -30,6 +30,7 @@ const addStoreCodes = async (req, res) => {
           isUsed: false,
           usedByEmail: null,
           usedAt: null,
+          expiresAt: expiresAt ? new Date(expiresAt).toISOString() : null,
           createdAt: new Date().toISOString()
         });
       }
@@ -61,6 +62,7 @@ const getStoreCodesStats = async (req, res) => {
           platform: data.platform,
           total: 0,
           used: 0,
+          expiresAt: data.expiresAt,
           createdAt: data.createdAt
         };
       }
